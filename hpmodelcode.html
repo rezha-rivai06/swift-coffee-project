@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Cafe Bunda | Artisanal Digital Brew</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f4f3f1",
+                    "surface-tint": "#685c56",
+                    "primary-fixed-dim": "#d3c3bc",
+                    "outline-variant": "#d1c4be",
+                    "surface-container-high": "#e9e8e5",
+                    "inverse-primary": "#d3c3bc",
+                    "on-secondary-container": "#67645d",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dbdad7",
+                    "on-surface-variant": "#4e4540",
+                    "inverse-on-surface": "#f2f1ee",
+                    "surface-bright": "#faf9f6",
+                    "secondary-container": "#e7e2d9",
+                    "primary": "#160e0a",
+                    "outline": "#807570",
+                    "surface-variant": "#e3e2e0",
+                    "surface": "#faf9f6",
+                    "secondary": "#615e57",
+                    "on-secondary-fixed": "#1d1b16",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#221a15",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdcc2",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#978982",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#494640",
+                    "primary-fixed": "#f0dfd7",
+                    "secondary-fixed": "#e7e2d9",
+                    "on-tertiary-fixed-variant": "#683c11",
+                    "on-surface": "#1a1c1a",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#fab983",
+                    "tertiary": "#1d0b00",
+                    "on-tertiary-fixed": "#2e1500",
+                    "inverse-surface": "#2f312f",
+                    "primary-container": "#2c231e",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#3c1d00",
+                    "surface-container-highest": "#e3e2e0",
+                    "on-background": "#1a1c1a",
+                    "secondary-fixed-dim": "#cbc6bd",
+                    "on-primary-fixed-variant": "#4f453f",
+                    "surface-container": "#efeeeb",
+                    "on-tertiary-container": "#b9804f",
+                    "background": "#faf9f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-lg": "32px",
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-padding-mobile": "24px",
+                    "container-padding-desktop": "64px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .premium-shadow {
+            box-shadow: 0 4px 12px rgba(44, 35, 30, 0.08);
+        }
+        
+        .floating-cta {
+            animation: bounce 2s infinite ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md text-primary dark:text-primary-fixed-dim docked full-width top-0 sticky z-50 shadow-sm flex justify-between items-center w-full px-container-padding-mobile h-16">
+<button class="p-2 active:scale-95 transition-transform" id="menu-toggle">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img alt="Swift Coffee Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/AP1WRLtajO-pd5sjW07SHS5u5A1qG4Rix5MNHrHCmMGf8Y1kzcEkZunvUDpplcUVnzwMivfEPiHHQuX7tdcQmzPgG9zQU0zeMiCAQyavKITZdnQ6CSgNJmxY0E6pPTfXpon86WMcH2Rerg_swYMSkQ49KiaUUIZEMyQjPsIepgQzFo_XVHEEjT9tUOM1CecwvIUP0UhDbyq8w4aBxY3-rw7TtRvsO72QO_P9324tI1JAXUrpGEHD9Xtm5gFZFh4"/>
+<button class="p-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Navigation Drawer (Overlay) -->
+<div class="fixed inset-0 z-[70] hidden" id="drawer">
+<div class="absolute inset-0 bg-primary-container/40 backdrop-blur-sm" id="drawer-scrim"></div>
+<nav class="bg-surface dark:bg-surface-container h-full w-80 rounded-r-xl shadow-lg fixed inset-y-0 left-0 z-[60] flex flex-col p-6 transition-transform -translate-x-full duration-300 ease-in-out" id="drawer-content">
+<div class="flex justify-between items-center mb-8">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Cafe Bunda</span>
+<button class="p-2" id="close-drawer">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<ul class="flex flex-col gap-2">
+<li><a class="flex items-center gap-4 p-4 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all" href="#"><span class="material-symbols-outlined">restaurant_menu</span>Menu Explorer</a></li>
+<li><a class="flex items-center gap-4 p-4 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#"><span class="material-symbols-outlined">photo_library</span>Gallery</a></li>
+<li><a class="flex items-center gap-4 p-4 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#"><span class="material-symbols-outlined">info</span>About Us</a></li>
+<li><a class="flex items-center gap-4 p-4 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#"><span class="material-symbols-outlined">contact_support</span>Contact</a></li>
+<li><a class="flex items-center gap-4 p-4 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#"><span class="material-symbols-outlined">admin_panel_settings</span>Admin Login</a></li>
+</ul>
+</nav>
+</div>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="relative px-container-padding-mobile pt-stack-md pb-stack-lg flex flex-col gap-stack-md fade-in">
+<div class="rounded-2xl overflow-hidden aspect-[4/5] relative premium-shadow">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/60 to-transparent z-10"></div>
+<img class="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[3000ms]" data-alt="A cinematic, close-up shot of a steaming cup of artisanal latte with intricate leaf latte art. The setting is a warm, sun-drenched wooden table in a premium modern cafe with soft golden hour lighting. The atmosphere is sophisticated and inviting, featuring rich textures of roasted beans and polished wood, following a soft minimalist aesthetic with warm coffee tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfCUvm12TfomDkOTR7_Wd3RgASuHS3tls903cLUQZp1uWtRxNzXldELLRil859QagRh_4G_CPUVAthdrJXnrjzSwruWPQOlIxr89D9qine79YsDdhtqlJ8ZAiKDYuzqGvWr6JpR4Bze-0aHatEVkN6s9yIPoH8xRbMY2JuWPqXY2N0JwyiaID4NgE7b973A5_ioCh0shgH1chLEiDU0T4qUnN0J7Cxo0uvCH-Ilvw1Dpz5tTp8R9Ov_A"/>
+<div class="absolute bottom-0 left-0 p-6 z-20 text-white">
+<span class="font-label-sm uppercase tracking-widest text-primary-fixed-dim">Est. 2024</span>
+<h1 class="font-display-lg text-4xl mt-2 leading-tight">Artisanal Digital Brew.</h1>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-body-lg text-on-surface-variant leading-relaxed">Experience the perfect blend of sensory warmth and digital precision. Our boutique beans are roasted with obsession and served with digital-age refinement.</p>
+<div class="flex flex-col gap-3 mt-2">
+<button class="bg-primary text-white h-14 rounded-full font-label-md flex items-center justify-center gap-2 premium-shadow active:scale-95 transition-transform">
+                        Explore Full Menu <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-primary-container/20 text-primary h-14 rounded-full font-label-md flex items-center justify-center hover:bg-surface-container-low transition-colors">
+                        Reserve a Table
+                    </button>
+</div>
+</div>
+</section>
+<!-- Our Story Section -->
+<section class="bg-surface-container-low py-stack-lg px-container-padding-mobile">
+<div class="max-w-md mx-auto flex flex-col items-center text-center gap-4">
+<span class="material-symbols-outlined text-primary scale-150 mb-2">coffee_maker</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">The Bunda Ritual</h2>
+<div class="w-12 h-px bg-primary/20"></div>
+<p class="font-body-md text-on-surface-variant italic leading-loose">
+                    "We believe coffee is a tactile dialogue between the roaster and the enthusiast. At Cafe Bunda, every pour is a curated performance, every sip a moment of calm indulgence."
+                </p>
+<img class="w-full h-48 object-cover rounded-2xl mt-4 opacity-90" data-alt="A minimalist black and white photograph of hands carefully pouring water into a ceramic coffee dripper. The image captures the focus and precision of manual brewing. The lighting is soft and natural, emphasizing textures of ceramic, water droplets, and the gentle rise of coffee bloom. High-end, editorial photography style for a premium cafe brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-2mSBrWr4kM4pAD38NwSYcbV-kar9tjIIoS95G8f7QP4bMdhi5MRCilm4pV0aGQWVn4Yl2JMwm_XzlXGJI_Tcj5He02PaAEjRhmjGEjQ6ELTEwwa26fHCGsqjfgEOvdL0GWMrmPSfmIkeZVsVmiAuZWLD_Jb7f9suKrbrMbLlMqsOpYuTPiS-2kgojqmMAlgmkKVjYIhqhtnCrr4RcXj4xa548o3eXdyxQoWv1KxHa78gGMDm1XR2Ig"/>
+</div>
+</section>
+<!-- Explore Our Menu Section -->
+<section class="py-stack-lg">
+<div class="px-container-padding-mobile mb-6">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-6">Signature Selection</h2>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar -mx-6 px-6">
+<button class="px-6 py-2 rounded-full bg-primary text-white font-label-sm whitespace-nowrap">All Brews</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-sm whitespace-nowrap hover:bg-surface-container transition-colors">Specialty Coffee</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-sm whitespace-nowrap hover:bg-surface-container transition-colors">Artisanal Food</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-sm whitespace-nowrap hover:bg-surface-container transition-colors">Pastries</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 px-container-padding-mobile">
+<!-- Product Card 1 -->
+<div class="flex flex-col group">
+<div class="rounded-2xl overflow-hidden aspect-square mb-3 relative premium-shadow">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant specialty coffee drink with layered colors, served in a sleek glass on a minimalist stone surface. The drink features a deep espresso base and a velvety milk top. The surrounding environment is bright and airy with subtle shadows of indoor plants. High-quality product photography with a professional light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB3KrXeTcqIbGPlJHziXN2Ogs81WD_596JI_6CN-CTCW3r7W4bvVTxruXu1vtsYSsBt-qP-ZoylovTroAqwXM-KXBRxdv0QeIDGy74sjk15wdPQQJXGNoCdcXo8pokhFDdBm0XaObMLXbcTHpOMydLACu8QEyhiopjNpsS0EcenEBbzhqy7kBujeMKgzoEfW6V_Fm229-IlkX3yOU8sc7rKo1GtSwePKSWl5WRMCEA4g8r5GwK4OzKJA"/>
+<button class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur h-10 w-10 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary scale-90">add</span>
+</button>
+</div>
+<h3 class="font-label-md text-primary">Velvet Nitro Cold</h3>
+<p class="font-label-sm text-on-surface-variant">$6.50</p>
+</div>
+<!-- Product Card 2 -->
+<div class="flex flex-col group">
+<div class="rounded-2xl overflow-hidden aspect-square mb-3 relative premium-shadow">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A gourmet avocado toast on sourdough bread, topped with a perfectly poached egg and micro-greens. Served on a minimalist ceramic plate in a bright cafe setting. The aesthetic is clean, modern, and high-end, emphasizing fresh ingredients and sophisticated plating. Soft natural daylight illuminates the textures of the food." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANyrbfe2mHheSZAfw6Ngqqhsg_o4m6WIP9BOvCG3p2W7zfXy4UnzZNWSVCPRC_qbYOEZIZJbZcxc09_7PvysvNCDpmQbQ3YpHvuapjbai_HQVpr6JAYjAZW_uZPLbEWIxcM9LmsrSeM5sSRwFRZUFxDcMYDvQYa9iB93sn0CXIfUAIm-OwwXTo1IP9AnvDeRamhCJwHGS6JHiVEjcLbA5zBqxAdt-z6o-ZdETO4g61P6PnSk8mt1qC0w"/>
+<button class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur h-10 w-10 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary scale-90">add</span>
+</button>
+</div>
+<h3 class="font-label-md text-primary">Bunda Sourdough</h3>
+<p class="font-label-sm text-on-surface-variant">$12.00</p>
+</div>
+<!-- Product Card 3 -->
+<div class="flex flex-col group">
+<div class="rounded-2xl overflow-hidden aspect-square mb-3 relative premium-shadow">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A flaky, golden brown almond croissant dusted with powdered sugar, sitting on a designer napkin. The background is a soft-focus cafe interior with light wood and cream-colored accents. The image conveys a sense of morning freshness and artisanal quality. High-end food photography for a boutique cafe brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT2fFFYbSmyfSE6DkL8fzKgIcxP_3GKNv3Rt-1uwP7aRvob5UqAHzX5lLZPgBpX_U5hlGsMF8x5nQJAnSOAsEI-bzFqw7sr8ueUQZ1YTza_K0KB2SWKc6TvYQMxWT52tR6DsKWAtfjVHXxsqndU2AYw_yhgpctjokZ3cSROYD0FBvi3aevoHU9brQ-Y7SVgYV08eLgksCNk8E2E4t6n5eyS5GPKQmwP6oIh1R20v7Ced3tDDDFwKdLfg"/>
+<button class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur h-10 w-10 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary scale-90">add</span>
+</button>
+</div>
+<h3 class="font-label-md text-primary">Signature Croissant</h3>
+<p class="font-label-sm text-on-surface-variant">$4.75</p>
+</div>
+<!-- Product Card 4 -->
+<div class="flex flex-col group">
+<div class="rounded-2xl overflow-hidden aspect-square mb-3 relative premium-shadow">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A refreshing iced matcha latte with visible swirl patterns of deep green and creamy white milk. Served in a minimalist ribbed glass on a pristine white marble coaster. The mood is calm and rejuvenating. Soft lighting highlights the vibrant matcha color and the condensation on the glass. Sophisticated modern cafe aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaws3ZXYcGV807OUV7s9FYSE80vOHtCo1JGlqygDtmBH4QLlaKX8iP_LAUXGD2ec4OEIBm-PF9kyoCIxSbtj4_X4E7P9ysQwx3h7etenGejgJ3wG5dUiio_YPW2joULlJ73aq1cYAgZ3MByUVk3cnCNBiFBE2Ru3PMUhU73afcSaV8IGq4mzd6sN-Gjm-AHPPur9bOgWR0ET9k_iKxOyoe7VKnENgpD2EErQ7-7sZ7BxL9KY6LW-FqhQ"/>
+<button class="absolute bottom-2 right-2 bg-surface/90 backdrop-blur h-10 w-10 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary scale-90">add</span>
+</button>
+</div>
+<h3 class="font-label-md text-primary">Iced Ceremonial Matcha</h3>
+<p class="font-label-sm text-on-surface-variant">$6.25</p>
+</div>
+</div>
+</section>
+<!-- Gallery Section -->
+<section class="py-stack-lg bg-surface-container-lowest">
+<div class="px-container-padding-mobile mb-6">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Capture the Moment</h2>
+<p class="font-label-sm text-on-surface-variant mt-1 uppercase tracking-wider">Gallery &amp; Vibes</p>
+</div>
+<div class="flex gap-4 overflow-x-auto px-container-padding-mobile hide-scrollbar">
+<div class="flex-none w-64 aspect-[3/4] rounded-2xl overflow-hidden premium-shadow">
+<img class="w-full h-full object-cover" data-alt="Interior of a modern premium cafe with high ceilings, large windows, and minimalist furniture. The color palette is composed of soft creams, light woods, and deep coffee accents. Customers are seen enjoying their time in a serene, spacious environment. Atmospheric lighting creates a warm and luxurious 'calm indulgence' feeling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGIJVNeZ0vjcevw6oEbRWm4EagjxVMEfUzwjalXTLb0u0_rb04mI0hCMHOODcoqTX_w3fDiBsxkjCvXDwLgx7X-0Bofpa9XsHUUGoDDg6ioSlaQ_mfqKb_U-_l8NEj5xxUBXLWomURdahOdwMevgxrz8mxH-8pyx7HFwHv85uw7GJ-DiN77jfsTCki4mWiXI9-UVhWUnyGGNvhgdD3EMkO5dDITOkcUTbbNOhY4V9CcjdOj9iCVYcgsg"/>
+</div>
+<div class="flex-none w-64 aspect-[3/4] rounded-2xl overflow-hidden premium-shadow">
+<img class="w-full h-full object-cover" data-alt="Close-up of a skilled barista's hands using a professional espresso machine. Steam and a sense of movement are captured in high fidelity. The environment is clean and sophisticated. The focus is on the craft and expertise of coffee preparation, reflecting an artisanal digital aesthetic with precision and warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHQ4s2jhAlsukJ_ZPAetluad_Bps43G78Tr7QVCYHITVJpQGQwYo6NwcEaDp6W2OpSzAO6_O8dK4iBHg6eMx777jYb8w2_v-d1Kombl-CRlxSYElf-KZKcua4ZjQSeB2ZHvR4RWgw84Z2Ag4baVaRczGkiziM8QkyRtgIedoRe9qDE0CnHpeN-vCQ-U-otfjemxZAdYMy599jzDv3dz5azHJwF1OUWFLdc1budNfXdhWlBZBQ7lP-LCQ"/>
+</div>
+<div class="flex-none w-64 aspect-[3/4] rounded-2xl overflow-hidden premium-shadow">
+<img class="w-full h-full object-cover" data-alt="A curated flat-lay of a coffee cup, a leather-bound notebook, and a pair of modern glasses on a marble table. The composition is clean and aesthetic, perfect for social media. Soft natural light creates delicate shadows. The image represents the lifestyle of the modern coffee enthusiast who values both beauty and functionality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB1oH9iLL3W68xeIV09-3wSKAMoys-RGWjSacQGTIFBuL2jVsyqJuEtnbagX2gRBAgMAtP-TKkrD6Vy4tEbHAevT8XFVoEqdXTQmKyE8wAKDdgoUmn_ovXF0vf9dbBUrFtZxa-lEFzj5TfA3dY94BtiPGLaEQvlw4L7futTkpu9wC2BYQPVDHmZX-1TMV6Wm6a17eNX3gQVCIluA_irMqzcSSI0xCduW0d7P8Bq78IKwri4qf9PnhHRQ"/>
+</div>
+</div>
+</section>
+<!-- Visit Us Section -->
+<section class="py-stack-lg px-container-padding-mobile">
+<div class="bg-surface-container-high rounded-3xl p-8 flex flex-col gap-6 premium-shadow relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="z-10">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Visit Our Sanctuary</h2>
+<p class="font-body-md text-on-surface-variant">Located in the heart of the design district, welcoming you every day.</p>
+</div>
+<div class="flex flex-col gap-4 z-10">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-label-md text-primary">Address</p>
+<p class="font-body-md text-on-surface-variant">123 Roaster's Lane, Studio District<br/>Coffee City, CC 8820</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">schedule</span>
+<div>
+<p class="font-label-md text-primary">Opening Hours</p>
+<p class="font-body-md text-on-surface-variant">Mon – Fri: 07:00 – 19:00<br/>Sat – Sun: 08:00 – 21:00</p>
+</div>
+</div>
+</div>
+<div class="h-48 rounded-2xl overflow-hidden premium-shadow grayscale hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK_LT75HGHMIMrRv4Su9rjZBipXovFB1vR6iXmJbrmlfppjLNiErHCvI50iiMBSpJZpocTXL5zC8qLP_jkjGLRX1-mKfBHggDYSzqhf5HEnJ1ZxuQ3xTJ2qStj3cn19CSO-voOXBsl0C1sN-9aRC-xF5WPrNE-vPKAUPR_XMH1ExnnDAwYhKhxvATMV-2b9p1bwY75F2q2Hr1Vkrgx9OYT7rdhyRGw-pxA3ILARv4z8Zjrrsv_wwwFtg"/>
+</div>
+<button class="bg-primary-container text-on-primary-container h-14 rounded-2xl font-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform z-10">
+<span class="material-symbols-outlined">directions</span> Get Directions
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-primary-container w-full py-stack-lg px-container-padding-mobile flex flex-col items-center gap-stack-md text-center border-t border-outline-variant">
+<img alt="Swift Coffee Logo" class="h-12 w-auto mb-2" src="https://lh3.googleusercontent.com/aida/AP1WRLtajO-pd5sjW07SHS5u5A1qG4Rix5MNHrHCmMGf8Y1kzcEkZunvUDpplcUVnzwMivfEPiHHQuX7tdcQmzPgG9zQU0zeMiCAQyavKITZdnQ6CSgNJmxY0E6pPTfXpon86WMcH2Rerg_swYMSkQ49KiaUUIZEMyQjPsIepgQzFo_XVHEEjT9tUOM1CecwvIUP0UhDbyq8w4aBxY3-rw7TtRvsO72QO_P9324tI1JAXUrpGEHD9Xtm5gFZFh4"/>
+<p class="font-body-md text-on-surface-variant dark:text-on-primary-container max-w-xs">
+            © 2024 Cafe Bunda. Artisanal Digital Experience. Crafting moments of calm indulgence for the modern enthusiast.
+        </p>
+<div class="flex gap-6 mt-2">
+<a class="text-on-surface-variant hover:text-primary underline transition-all font-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all font-label-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline transition-all font-label-sm" href="#">Location</a>
+</div>
+<div class="flex gap-4 mt-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined scale-75">share</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined scale-75">mail</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined scale-75">call</span>
+</div>
+</div>
+</footer>
+<!-- Bottom Navbar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface dark:bg-surface-container-highest shadow-[0_-4px_12px_rgba(44,35,30,0.08)]">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">coffee</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Floating WhatsApp CTA -->
+<a class="fixed bottom-24 right-6 z-[40] floating-cta flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg active:scale-90 transition-transform" href="#">
+<svg fill="currentColor" height="28" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.628 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+</svg>
+</a>
+<script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeDrawer = document.getElementById('close-drawer');
+        const drawer = document.getElementById('drawer');
+        const drawerContent = document.getElementById('drawer-content');
+        const drawerScrim = document.getElementById('drawer-scrim');
+
+        function toggleDrawer(open) {
+            if (open) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawerContent.classList.remove('-translate-x-full');
+                    drawerScrim.classList.add('opacity-100');
+                }, 10);
+            } else {
+                drawerContent.classList.add('-translate-x-full');
+                drawerScrim.classList.remove('opacity-100');
+                setTimeout(() => {
+                    drawer.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        menuToggle.addEventListener('click', () => toggleDrawer(true));
+        closeDrawer.addEventListener('click', () => toggleDrawer(false));
+        drawerScrim.addEventListener('click', () => toggleDrawer(false));
+
+        // Interaction for filter chips
+        const filterChips = document.querySelectorAll('.overflow-x-auto button');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-white');
+                    c.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-primary', 'text-white');
+                chip.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+            });
+        });
+
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swift Coffee</title>
+    <link rel="preconnect" href="https://googleapis.com" />
+    <link rel="preconnect" href="https://gstatic.com" crossorigin />
+    <link
+      href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- --- NAVBAR --- -->
+    <nav class="navbar" id="navbar">
+      <span>Swift Coffee</span>
+
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <div class="link" id="link">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#galeri">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button type="button" id="btn">
+          <a href="cart.html">
+            <svg
+              width="800px"
+              height="800px"
+              viewBox="0 0 24 24"
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </button>
+      </div>
+    </nav>
+
+    <!-- --- HALAMAN UTAMA --- -->
+    <div class="halaman-utama">
+      
+      <!-- --- HERO SECTION --- -->
+      <section class="hero" id="hero">
+        <div class="hero-kiri">
+          <div class="thn">
+            <div class="tahun">
+              <span class="tahun-berdiri">Est 2025</span>
+            </div>
+          </div>
+          <span class="slogan">Your Everyday Escape</span>
+          <p>
+            Cari yang nyaman dan lezat, Swift Coffee siap melayani anda. Lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem.
+          </p>
+          <div class="button">
+            <a href="#menu" class="btn-hero" type="button">Explore Menu</a>
+            <a href="#" class="btn-hero" type="button">Discover</a>
+          </div>
+          <div class="kunjungan" id="kunjungan">
+            <span class="logo-1">☕</span>
+            <span class="logo-2">🥐</span>
+            <span class="logo-3">🥗</span>
+            <span class="penjelasan">Disukai lebih dari <b>2000+</b> pecinta kopi</span>
+          </div>
+        </div>
+
+        <div class="hero-kanan">
+          <div class="image-frame">
+            <div class="image-wrapper">
+              <img src="/frontend/svg/kopi2.jpg" alt="gambar kopi" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- ABOUT SECTION --- -->
+      <section class="about" id="about">
+        <div class="about-kiri">
+          <img class="about-1" src="/frontend/svg/kopi2.jpg" alt="gambar" />
+          <img class="about-2" src="/frontend/svg/kopi2.jpg" alt="gambar" />
+        </div>
+
+        <div class="about-kanan">
+          <span class="teks-1">OUR STORY</span>
+          <span class="teks-2">Sejak 2025</span>
+          <p class="teks-3">
+            Lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+            lorem lorem lorem lorem lorem lorem lorem.
+          </p>
+          <a class="teks-4" href="#">Read full story &nbsp; ➜</a>
+        </div>
+      </section>
+
+      <!-- --- MENU SECTION --- -->
+      <section class="menu" id="menu">
+        <div class="title-kategori-wrapper">
+          <span class="kategori-1">Cari Menu</span>
+          <span class="kategori-2">Dari signature latte hingga pastry artisan, temukan pasangan sempurna mu.</span>
+          
+          <search>
+            <form>
+              <input type="search" id="search" placeholder="Cari menu.." />
+            </form>
+          </search>
+          
+          <div class="kategori-wrapper">
+            <a class="kategori-3" href="#menu" data-target="makanan">Makanan</a>
+            <a class="kategori-4 active-kategori" href="#menu" data-target="minuman">Minuman</a>
+            <a class="kategori-5" href="#menu" data-target="snack">Snack</a>
+            <a class="kategori-6" href="#menu" data-target="coffee">Coffee</a>
+          </div>
+
+          <div class="sub-menu-wrapper"> 
+            
+            <!-- Sub-menu Minuman -->
+            <div class="pilihan sub-menu" id="sub-minuman">
+              <div class="sliding-highlight"></div>
+              <a class="pilihan-1 active" data-filter="coffee"><span>Coffee</span></a>
+              <a class="pilihan-1" data-filter="tea"><span>Tea</span></a>
+              <a class="pilihan-1" data-filter="signature"><span>Signature</span></a>
+              <a class="pilihan-1" data-filter="mocktails"><span>Mocktails</span></a>
+            </div>
+
+            <!-- Sub-menu Makanan -->
+            <div class="pilihan sub-menu hidden" id="sub-makanan">
+              <div class="sliding-highlight"></div>
+              <a class="pilihan-1 active" data-filter="berat"><span>Makanan Berat</span></a>
+              <a class="pilihan-1" data-filter="pasta"><span>Pasta</span></a>
+              <a class="pilihan-1" data-filter="salad"><span>Salad</span></a>
+            </div>
+
+            <!-- Sub-menu Snack -->
+            <div class="pilihan sub-menu hidden" id="sub-snack">
+              <div class="sliding-highlight"></div>
+              <a class="pilihan-1 active" data-filter="pastry"><span>Pastry</span></a>
+              <a class="pilihan-1" data-filter="gorengan"><span>Gorengan Lokal</span></a>
+            </div>
+
+            <!-- Sub-menu Coffee Beans -->
+            <div class="pilihan sub-menu hidden" id="sub-coffee">
+              <div class="sliding-highlight"></div>
+              <a class="pilihan-1 active" data-filter="beans"><span>Biji Kopi</span></a>
+              <a class="pilihan-1" data-filter="drip"><span>Drip Bag</span></a>
+              <a class="pilihan-1" data-filter="merch"><span>Merchandise</span></a>
+            </div>
+
+            <!-- Filter Buttons: Best Seller & Iced -->
+            <div class="best-seller-iced">
+              <a class="best-seller" id="bs-btn">Best Seller</a>
+              <a class="iced" id="i-btn">Iced</a>
+            </div>
+            
+          </div> 
+
+          <!-- KUMPULAN KARTU MENU -->
+          <div class="kartu-menu">
+            
+            <!-- Kartu 1 -->
+            <div class="kartu-menu-1" data-kategori="minuman" data-sub="signature">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi2.jpg" alt="Signature Latte" />
+                <span class="kartu-badge">Best Seller</span>
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Signature Latte</h3>
+                <p class="kartu-desk">House blend espresso dengan oat milk dan sirup madu homemade.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 42.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kartu 2 -->
+            <div class="kartu-menu-1" data-kategori="minuman" data-sub="coffee">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi.jpeg" alt="Iced Sea Salt Mocha" />
+                <span class="kartu-badge kartu-badge-2">Seasonal</span>
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Iced Sea Salt Mocha</h3>
+                <p class="kartu-desk">Dark chocolate, smooth espresso, dan sentuhan sea salt.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 48.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kartu 3 -->
+            <div class="kartu-menu-1" data-kategori="minuman" data-sub="coffee">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi2.jpg" alt="Flat White" />
+                <span class="kartu-badge kartu-badge-3">Classic</span>
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Flat White</h3>
+                <p class="kartu-desk">Rich double shot espresso dengan micro-foam velvety milk.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 38.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kartu 4 -->
+            <div class="kartu-menu-1" data-kategori="minuman" data-sub="coffee">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi.jpeg" alt="V60 Single Origin" />
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">V60 Single Origin</h3>
+                <p class="kartu-desk">Specialty beans dari petani lokal Indonesia yang dirotasi.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 45.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Kartu 5 -->
+            <div class="kartu-menu-1" data-kategori="makanan" data-sub="pasta">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi2.jpg" alt="Carbonara" />
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Classic Carbonara</h3>
+                <p class="kartu-desk">Pasta creamy dengan smoked beef dan taburan keju parmesan.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 55.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kartu 6 -->
+            <div class="kartu-menu-1" data-kategori="makanan" data-sub="pasta">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi.jpeg" alt="Aglio Olio" />
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Spicy Aglio Olio</h3>
+                <p class="kartu-desk">Pasta dengan potongan garlic, chilli flakes, dan olive oil.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 48.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Kartu 7 -->
+            <div class="kartu-menu-1" data-kategori="snack" data-sub="pastry">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi2.jpg" alt="Croissant" />
+                <span class="kartu-badge kartu-badge-3">New</span>
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Butter Croissant</h3>
+                <p class="kartu-desk">Croissant renyah dengan butter perancis asli yang wangi.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 28.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Kartu 8 -->
+            <div class="kartu-menu-1" data-kategori="snack" data-sub="gorengan">
+              <div class="kartu-gambar">
+                <img src="/frontend/svg/kopi.jpeg" alt="Pisang Goreng" />
+                <span class="kartu-badge">Best Seller</span>
+              </div>
+              <div class="kartu-info">
+                <h3 class="kartu-nama">Pisang Goreng Aren</h3>
+                <p class="kartu-desk">Pisang madu lokal dengan taburan gula aren lumer.</p>
+                <div class="kartu-bawah">
+                  <span class="kartu-harga">IDR 25.000</span>
+                  <button class="kartu-btn" type="button">+</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="lihat-semua" id="btn-lihat-semua" type="button">Lihat Semua Menu</button>
+        </div>
+      </section>
+
+      <!-- --- GALLERY SECTION --- -->
+      <section class="galeri" id="galeri">
+        <div class="galeri-title">
+          <h2>Capture the Moment</h2>
+          <p>The ambiance that makes Swift Coffee your home away from home.</p>
+        </div>
+        <div class="galeri-grid">
+          <!-- BARIS 1 & 2 (Sudah Penuh 4 Kolom) -->
+          <div class="galeri-item besar">
+            <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          </div>
+          <div class="galeri-item">
+            <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          </div>
+          <div class="galeri-item">
+            <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          </div>
+          <div class="galeri-item lebar">
+            <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          </div>
+          
+          <!-- 
+            GRID LAYOUT ARCHITECTURE:
+            - Grid configuration: 4 columns (repeat(4, 1fr))
+            - Item 1 (.besar): Spans 2 columns & 2 rows
+            - Item 2 & 3: Default (1 column each)
+            - Item 4 (.lebar): Spans 2 columns
+            
+            Row 1 Distribution: 2 (.besar) + 1 (default) + 1 (default) = 4 columns (100%)
+            Row 2 Distribution: 2 (.besar remainder) + 2 (.lebar) = 4 columns (100%)
+          -->
+        </div>
+      </section>
+
+      <!-- --- CONTACT SECTION --- -->
+      <section class="contact" id="contact">
+        
+          <div class="kotak-besar">
+            <div class="k-kiri">
+              <span class="title-kiri">Kunjungi Kami</span>
+              <p class="penjelasan">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro minus cumque dolore? Molestiae vitae libero autem in, reiciendis saepe quas est maxime exercitationem soluta aperiam unde qui rem quis consequatur!</p>
+              <span class="alamat">
+                <span><img src="/frontend/svg/location.svg" class="icon-box" alt="Location"> Alamat</span>
+                <p>Jl. Pesantren Jl. Imam Bonjol, Nunukan Tim., Kec. Nunukan, Kabupaten Nunukan, Kalimantan Utara 77482</p>
+              </span>
+              <span class="jam-operasional">
+                <span><img src="/frontend/svg/clock.svg" class="icon-box" alt="Clock"> Jam operasional</span>
+                <p>selasa - minggu 09.00 - 22.00
+                  sabtu 09.00 - 23.00
+                  Tutup senin</p>
+              </span>
+              <span class="contact">
+                <span class="contact-title"><img src="/frontend/svg/phone.svg" class="icon-box" alt="Phone"> Contact</span>
+                <span class="contact-1">+62 821 9033 4112</span>
+                <span class=contact-2>swftcoffee@gmail.com</span>
+              </span>
+
+              <button class="get-direction">Get Direction <img src="/frontend/svg/direction.svg" class="arrow-icon" alt="Arrow"></button>
+            </div>
+
+            <div class="maps">
+              <img src="/frontend/svg/kopi2.jpg">
+            </div>
+          </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
