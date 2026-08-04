@@ -1027,6 +1027,17 @@ section.contact {
   background-color: rgba(22, 14, 10, 0.05);
 }
 
+.kotak-wrapper {
+  width: 450px;
+  height: 200px;
+  background-color: #1d0b00;
+}
+
+.kotak-wrapper a {
+  text-decoration: none;
+  font-size: 60px;
+}
+
 /* Hamburger */
 
 .hamburger {
