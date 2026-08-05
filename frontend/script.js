@@ -218,7 +218,6 @@ daftarkartu.forEach(function (kartu, index) {
 lihatsemuabtn.addEventListener("click", function(e){
   e.preventDefault();
   
-  // Jika sedang terbuka semua, reset kembali ke batas awal
   if(lihatsemuabtn.innerText === "Lihat Lebih Sedikit") {
     batasTampil = 8;
     lihatsemuabtn.innerText = "Lihat Semua Menu";
