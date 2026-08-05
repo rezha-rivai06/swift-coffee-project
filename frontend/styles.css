@@ -1412,6 +1412,8 @@ section.contact {
     padding-top: 20px;
     padding-bottom: 40px;
     flex-direction: column;
+    justify-content: center;
+    display: flex;
   }
 
   .hero-kanan {
@@ -1423,6 +1425,8 @@ section.contact {
     padding: 0;
     /* Wajib! Hilangkan padding bawaan desktop supaya bisa full width */
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .hero-kanan .image-frame::before {
@@ -1454,20 +1458,18 @@ section.contact {
 
   .hero-kiri {
     order: 2;
-    margin-top: -150px;
-    /* TARIK KE ATAS GAMBAR! */
+    margin-top: -120px;
     position: relative;
     z-index: 10;
     gap: 8px;
     padding-left: 10px;
-    /* Sesuaikan dengan padding layar */
+    
   }
 
   .hero-kiri .thn {
     margin: 0;
-    align-self: flex-start;
-    /* INI KUNCINYA: Paksa dia mojok ke kiri */
-    text-align: left;
+    align-self: center;
+    text-align: center;
     animation: munculDariBawah 0.8s ease-out forwards;
   }
 
@@ -1475,9 +1477,8 @@ section.contact {
     border: none;
     padding: 0;
     background-color: transparent;
-    display: block;
-    /* Hilangkan flex & justify-content center dari desktop */
-    text-align: left;
+    display: flex;
+   justify-content: center;
   }
 
   .hero-kiri .thn .garis {
@@ -1497,14 +1498,10 @@ section.contact {
     font-size: 38px;
     line-height: 1.1;
     color: white;
-    align-self: flex-start;
-    /* INI KUNCINYA: Paksa dia mojok ke kiri */
+    align-self: center;
     max-width: 250px;
-    /* Diperbaiki dari 20px */
-    text-align: left;
-    /* Paksa rata kiri */
+    text-align: center;
     opacity: 0;
-    /* Sembunyikan dulu dari awal */
     animation: munculDariBawah 0.8s ease-out forwards;
     animation-delay: 0.3s;
   }
@@ -1525,7 +1522,6 @@ section.contact {
 
   .hero-kiri p {
     margin-top: 50px;
-    /* DORONG KEMBALI KE BAWAH GAMBAR */
     font-size: 15px;
     font-family: "Inter", sans-serif;
     text-align: start;
@@ -1535,11 +1531,26 @@ section.contact {
   }
 
   .btn-hero {
-    width: 100%;
+    width: 250px;
     max-width: 100%;
-    padding: 16px;
-    font-size: 15px;
+    padding: 13px;
+    font-size: 12px;
     border-radius: 50px;
+  }
+
+  .kunjungan {
+    display: flex;
+    justify-content: center;
+  }
+  .kujungan .logo-1, .logo-2, .logo-3 {
+    width: 40px;
+    height: 40px;
+    font-size: 1px;
+  }
+
+  .kunjungan .penjelasan {
+    font-size: 10px;
+    justify-content: center;
   }
 
   .navbar span {
@@ -1567,11 +1578,6 @@ section.contact {
 
   .about-kanan .teks-3 {
     font-size: 15px;
-  }
-
-  .kunjungan .penjelasan {
-    font-size: 13px;
-    margin-left: 12px;
   }
 
   /* --- SEARCH BOX LUXURIOUS --- */
