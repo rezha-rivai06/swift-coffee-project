@@ -432,7 +432,8 @@ body::-webkit-scrollbar {
 }
 
 input {
-  width: 250px;
+  width: 100%;
+  max-width: 500px;
   height: 40px;
   border-radius: 30px;
   border-style: none;
@@ -472,8 +473,7 @@ input::-webkit-search-cancel-button {
 
 .kategori-3,
 .kategori-4,
-.kategori-5,
-.kategori-6 {
+.kategori-5 {
   text-decoration: none;
   color: #4e4540;
   font-family: "Inter", sans-serif;
@@ -490,8 +490,7 @@ input::-webkit-search-cancel-button {
 
 .kategori-3::after,
 .kategori-4::after,
-.kategori-5::after,
-.kategori-6::after {
+.kategori-5::after {
   content: "";
   position: absolute;
   bottom: -1px;
@@ -505,15 +504,13 @@ input::-webkit-search-cancel-button {
 
 .kategori-3:hover,
 .kategori-4:hover,
-.kategori-5:hover,
-.kategori-6:hover {
+.kategori-5:hover {
   color: #160e0a;
 }
 
 .kategori-3:hover::after,
 .kategori-4:hover::after,
-.kategori-5:hover::after,
-.kategori-6:hover::after {
+.kategori-5:hover::after {
   width: 100%;
 }
 
@@ -529,10 +526,11 @@ input::-webkit-search-cancel-button {
 .sub-menu-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 60px;
+  justify-content: space-between;
+  gap: 24px;
   margin-top: 30px;
-  width: 170%;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .best-seller-iced {
@@ -601,14 +599,13 @@ input::-webkit-search-cancel-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 28px;
+  padding: 10px 22px;
   border-radius: 50px;
   background-color: transparent;
-  /* Tembus pandang agar highlight terlihat */
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid rgba(128, 117, 112, 0.3);
-  /* Border tipis pengganti outline */
+  white-space: nowrap;
 }
 
 /* Hilangkan border jika sedang disorot highlight hitam */
@@ -737,6 +734,7 @@ input::-webkit-search-cancel-button {
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -989,6 +987,7 @@ section.contact {
   font-family: "Inter", sans-serif;
   width: fit-content;
   margin-top: 16px;
+  margin-left: 60px;
   transition: all 0.3s ease;
 }
 
@@ -1000,7 +999,232 @@ section.contact {
 .arrow-icon {
   width: 20px;
   height: 20px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* ========================================= */
+/* KODE CSS KERANJANG (SLIDING DRAWER)       */
+/* ========================================= */
+
+/* 1. Latar Belakang Gelap (Overlay) */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px); /* Efek blur kaca */
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden; 
+  transition: all 0.3s ease-in-out;
+}
+
+.cart-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 2. Ruangan Keranjang (Panel Meluncur) */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px; /* Ukuran standar di Laptop */
+  max-width: 100%; /* Agar tidak jebol di HP (merespons layar kecil) */
+  height: 100vh;
+  background-color: white; /* Warna dasar web-mu */
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  z-index: 999;
+  
+  /* Sembunyikan di luar layar kanan */
+  transform: translateX(100%); 
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Flexbox agar Header, Item, dan Footer tersusun rapi ke bawah */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Saat class .active ditambahkan oleh Javascript, keranjang masuk layar */
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+/* ========================================= */
+/* ISI RUANGAN KERANJANG (MOCKUP UI)         */
+/* ========================================= */
+
+.cart-header {
+  padding: 24px;
+  border-bottom: 1px solid #e2dcd4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #efeeeb;
+}
+
+.cart-header h3 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  color: #1d0b00;
+  font-weight: 700;
+}
+
+#close-cart-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #4e4540;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#close-cart-btn:hover {
+  color: #1d0b00;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.cart-items {
+  flex: 1; /* Mengisi sisa ruang tengah */
+  padding: 24px;
+  overflow-y: auto; /* Bisa scroll jika item banyak */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Jarak antar pesanan */
+  background-color: #faf5f0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: white;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+}
+
+.cart-item-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.cart-item-info {
+  flex: 1; /* Supaya teks mengambil sisa ruang */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cart-item-name {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1d0b00;
+}
+
+.cart-item-price {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4e4540;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #efeeeb;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.qty-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4e4540;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.qty-btn:hover {
+  color: #1d0b00;
+}
+
+.qty-number {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1d0b00;
+  min-width: 16px;
+  text-align: center;
+}
+
+.cart-footer {
+  padding: 24px;
+  background-color: white;
+  border-top: 1px solid #e2dcd4;
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.02);
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.summary-label {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #4e4540;
+}
+
+.summary-total {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1d0b00;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #160e0a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #3b2a21;
+  transform: translateY(-2px);
 }
 
 .get-direction:hover .arrow-icon {
@@ -1014,19 +1238,9 @@ section.contact {
   background-position: center;
   position: relative;
   min-height: 450px;
-  filter: grayscale(100%);
 }
 
-.maps::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(22, 14, 10, 0.05);
-}
-
+/* Hapus .maps::after karena menutupi iframe peta sehingga tidak bisa diklik */
 .kotak-wrapper {
   width: 450px;
   height: 200px;
@@ -1111,37 +1325,61 @@ section.contact {
 
 @media screen and (max-width: 1024px) {
   .hero {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 24px;
+    min-height: 75vh;
     text-align: center;
     padding: 40px 40px 60px;
   }
 
   .hero-kiri {
-    margin-left: 0;
-    margin-top: 30px;
+    display: contents;
+  }
+  
+  .hero-kiri > * {
     width: 100%;
     max-width: 600px;
-    align-items: center;
-    order: 1;
+  }
+
+  .hero-kiri .thn { 
+    order: 1; 
+    margin-top: 30px; 
+    display: flex;
+    justify-content: center;
   }
 
   .hero-kiri .slogan {
     font-size: 50px;
     text-align: center;
+    order: 2;
   }
 
   .hero-kiri p {
     text-align: center;
     font-size: 17px;
     max-width: 520px;
+    order: 3;
+  }
+
+  .button {
+    justify-content: center;
+    gap: 20px;
+    order: 4;
   }
 
   .hero-kanan {
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     justify-content: center;
     width: 100%;
-    order: 2;
+    order: 5;
+  }
+
+  .kunjungan {
+    justify-content: center;
+    order: 6;
   }
 
   .hero-kanan .image-frame {
@@ -1153,19 +1391,11 @@ section.contact {
     height: 480px;
   }
 
-  .button {
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .kunjungan {
-    justify-content: center;
-  }
-
   .about {
     flex-direction: column;
     text-align: center;
-    padding: 60px 40px;
+    min-height: auto;
+    padding: 80px 40px;
     gap: 50px;
   }
 
@@ -1177,6 +1407,39 @@ section.contact {
     max-width: 600px;
     align-items: center;
   }
+
+  /* --- MENU CARD GRID (3 COLUMNS for large tablets) --- */
+  .kartu-menu {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* Contact Tablet & HP */
+  .kotak-besar {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    border-radius: 40px;
+  }
+  
+  .k-kiri {
+    flex: none;
+    width: 100%;
+    padding: 40px 40px;
+  }
+
+  .maps {
+    flex: none;
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+  }
+}
+
+
+.galeri {
+  min-height: auto;
+  padding: 80px 40px;
 }
 
 /* Responsive - 768px */
@@ -1362,11 +1625,6 @@ section.contact {
     justify-content: flex-start;
   }
 
-  /* --- MENU CARD GRID (2 COLUMNS) --- */
-  .kartu-menu {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
 
   /* --- HORIZONTAL SCROLL KATEGORI --- */
   .sub-menu-wrapper {
@@ -1390,6 +1648,30 @@ section.contact {
   .best-seller-iced::-webkit-scrollbar {
     display: none;
   }
+
+  /* --- MENU CARD GRID (2 COLUMNS) --- */
+  .kartu-menu {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  /* Gallery Tablet & HP (2x2 Grid) */
+  .galeri-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  
+  .galeri-item.besar,
+  .galeri-item.lebar {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .galeri-item {
+    aspect-ratio: 1 / 1;
+  }
+  
+
 }
 
 /* Responsive - 480px */
@@ -1594,7 +1876,8 @@ section.contact {
   }
 
   #search {
-    width: 190px;
+    width: 100%;
+    max-width: 100%;
     height: 40px;
     padding: 16px 24px;
     border-radius: 50px;
@@ -1619,9 +1902,9 @@ section.contact {
     justify-content: center;
   }
   .kategori-wrapper a {
-    font-size: 10px;
+    font-size: 15px;
     margin: 0px;
-    width: 50px;
+    width: 70px;
     height: 20px;
   }
 
@@ -1650,6 +1933,7 @@ section.contact {
     color: #666;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -1720,10 +2004,17 @@ section.contact {
   }
 
   /* --- CONTACT MOBILE --- */
+
+  .contact {
+    padding: 0;
+  }
   .kotak-besar {
     flex-direction: column;
+    height: auto;
     min-height: auto;
     border-radius: 40px;
+    width: 100%;
+    max-width: 450px;
   }
 
   .k-kiri {
@@ -1755,6 +2046,7 @@ section.contact {
     padding: 12px 24px;
     font-size: 14px;
     margin-top: 8px;
+    margin-left: 52px;
   }
 
   .maps {
@@ -1777,8 +2069,8 @@ section.contact {
   }
 
   .hero-kanan .image-wrapper {
-    width: 220px;
-    height: 280px;
+    width: 100%;
+    height: 380px;
     border-radius: 24px;
   }
 
