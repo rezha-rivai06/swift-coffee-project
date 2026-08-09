@@ -8,9 +8,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar {
@@ -547,18 +548,23 @@ input::-webkit-search-cancel-button {
   color: #4e4540;
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-size: 13px; /* Dikecilkan sedikit */
-  padding: 6px 18px; /* Mengganti width & height fix dengan padding agar proporsional */
+  font-size: 13px;
+  /* Dikecilkan sedikit */
+  padding: 6px 18px;
+  /* Mengganti width & height fix dengan padding agar proporsional */
   border-radius: 50px;
   border: 1px solid rgba(128, 117, 112, 0.3);
   background-color: transparent;
-  transition: all 0.3s ease; /* 'all' agar background dan text color bisa bertransisi halus */
+  transition: all 0.3s ease;
+  /* 'all' agar background dan text color bisa bertransisi halus */
 }
 
 /* Hapus .best-seller yang redundant, langsung targetkan hover untuk semua <a> di dalamnya */
 .best-seller-iced a:hover {
-  color: white; /* Teks jadi putih */
-  background-color: #160e0a; /* Background jadi gelap saat di-hover */
+  color: white;
+  /* Teks jadi putih */
+  background-color: #160e0a;
+  /* Background jadi gelap saat di-hover */
   border-color: #160e0a;
 }
 
@@ -654,6 +660,8 @@ input::-webkit-search-cancel-button {
     transform 0.5s cubic-bezier(0.2, 1, 0.3, 1),
     box-shadow 0.5s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .kartu-menu-1:hover {
@@ -710,6 +718,7 @@ input::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex-grow: 1; /* Membuat info mengambil semua sisa ruang vertikal */
 }
 
 .kartu-nama {
@@ -743,7 +752,7 @@ input::-webkit-search-cancel-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
+  margin-top: auto; /* Mendorong bagian bawah (harga & tombol) ke batas paling bawah card */
 }
 
 .kartu-harga {
@@ -871,6 +880,7 @@ input::-webkit-search-cancel-button {
 .galeri-item.lebar {
   grid-column: span 2;
 }
+
 /* Contact */
 
 section.contact {
@@ -892,7 +902,7 @@ section.contact {
   border-radius: 56px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   background-color: #faf9f6;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   overflow: hidden;
   padding: 0;
 }
@@ -922,14 +932,16 @@ section.contact {
   margin: 0 0 8px 0;
 }
 
-.alamat, .jam-operasional, .k-kiri .contact {
+.alamat,
+.jam-operasional,
+.k-kiri .contact {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.alamat > span:first-child,
-.jam-operasional > span:first-child,
+.alamat>span:first-child,
+.jam-operasional>span:first-child,
 .contact-title {
   font-family: "Inter", sans-serif;
   font-size: 16px;
@@ -951,7 +963,8 @@ section.contact {
 }
 
 
-.alamat p, .jam-operasional p {
+.alamat p,
+.jam-operasional p {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   color: #4e4540;
@@ -962,7 +975,8 @@ section.contact {
   white-space: pre-line;
 }
 
-.contact-1, .contact-2 {
+.contact-1,
+.contact-2 {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   color: #4e4540;
@@ -992,7 +1006,7 @@ section.contact {
 }
 
 .get-direction:hover {
-  box-shadow: 0 10px 15px -3px rgba(22,14,10,0.1);
+  box-shadow: 0 10px 15px -3px rgba(22, 14, 10, 0.1);
   transform: translateY(-2px);
 }
 
@@ -1014,10 +1028,11 @@ section.contact {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px); /* Efek blur kaca */
+  backdrop-filter: blur(3px);
+  /* Efek blur kaca */
   z-index: 998;
   opacity: 0;
-  visibility: hidden; 
+  visibility: hidden;
   transition: all 0.3s ease-in-out;
 }
 
@@ -1031,17 +1046,20 @@ section.contact {
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px; /* Ukuran standar di Laptop */
-  max-width: 100%; /* Agar tidak jebol di HP (merespons layar kecil) */
+  width: 400px;
+  /* Ukuran standar di Laptop */
+  max-width: 100%;
+  /* Agar tidak jebol di HP (merespons layar kecil) */
   height: 100vh;
-  background-color: white; /* Warna dasar web-mu */
-  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  background-color: white;
+  /* Warna dasar web-mu */
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 999;
-  
+
   /* Sembunyikan di luar layar kanan */
-  transform: translateX(100%); 
+  transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  
+
   /* Flexbox agar Header, Item, dan Footer tersusun rapi ke bawah */
   display: flex;
   flex-direction: column;
@@ -1091,12 +1109,15 @@ section.contact {
 }
 
 .cart-items {
-  flex: 1; /* Mengisi sisa ruang tengah */
+  flex: 1;
+  /* Mengisi sisa ruang tengah */
   padding: 24px;
-  overflow-y: auto; /* Bisa scroll jika item banyak */
+  overflow-y: auto;
+  /* Bisa scroll jika item banyak */
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Jarak antar pesanan */
+  gap: 20px;
+  /* Jarak antar pesanan */
   background-color: #faf5f0;
 }
 
@@ -1107,13 +1128,13 @@ section.contact {
   background-color: white;
   padding: 12px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cart-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
 }
 
 .cart-item-image {
@@ -1124,7 +1145,8 @@ section.contact {
 }
 
 .cart-item-info {
-  flex: 1; /* Supaya teks mengambil sisa ruang */
+  flex: 1;
+  /* Supaya teks mengambil sisa ruang */
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1168,6 +1190,25 @@ section.contact {
   transition: color 0.2s ease;
 }
 
+.trash-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a59b95;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.trash-btn:hover {
+  color: #ff4757;
+  background-color: rgba(255, 71, 87, 0.1);
+}
+
 .qty-btn:hover {
   color: #1d0b00;
 }
@@ -1181,11 +1222,20 @@ section.contact {
   text-align: center;
 }
 
+.trash {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 .cart-footer {
   padding: 24px;
   background-color: white;
   border-top: 1px solid #e2dcd4;
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.02);
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .cart-summary {
@@ -1252,6 +1302,91 @@ section.contact {
   font-size: 60px;
 }
 
+/* ========================================= */
+/* KODE CSS TOAST NOTIF & BADGE KERANJANG    */
+/* ========================================= */
+
+.toast-notif {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background-color: #160e0a;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+.toast-notif.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+#btn-keranjang {
+  position: relative;
+}
+
+.humberger-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: orange;
+  color: transparent;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.humberger-badge.hidden {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: orange;
+  color: white;
+  font-size: 5px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.cart-badge.hidden {
+  opacity: 0;
+  transform: scale(0);
+}
+
 /* Hamburger */
 
 .hamburger {
@@ -1261,6 +1396,23 @@ section.contact {
   cursor: pointer;
   padding: 8px;
   z-index: 1001;
+  position: relative;
+}
+
+.humberger-badge {
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff7300; /* Warna orange */
+  border-radius: 50%;
+  color: transparent; /* Membuat angka transparan sesuai logika yang diminta */
+  font-size: 0px; /* Menyembunyikan text space */
+}
+
+.humberger-badge.hidden {
+  display: none;
 }
 
 .hamburger .bar {
@@ -1288,7 +1440,40 @@ section.contact {
 
 /* Responsive - 1200px */
 
+@media screen and (max-width: 1280px) {
+  .hero {
+    padding: 20px 40px;
+  }
+
+  .hero-kiri {
+    margin-left: 80px;
+    width: 420px;
+  }
+
+  .hero-kiri .slogan {
+    font-size: 65px;
+  }
+
+  .hero-kanan .image-frame {
+    margin-right: 40px;
+  }
+
+  .hero-kanan .image-wrapper {
+    width: 420px;
+    height: 560px;
+  }
+
+  .hero-kanan .image-frame::before {
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border-radius: 58px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
+
   .hero,
   .menu,
   .galeri,
@@ -1337,15 +1522,15 @@ section.contact {
   .hero-kiri {
     display: contents;
   }
-  
-  .hero-kiri > * {
+
+  .hero-kiri>* {
     width: 100%;
     max-width: 600px;
   }
 
-  .hero-kiri .thn { 
-    order: 1; 
-    margin-top: 30px; 
+  .hero-kiri .thn {
+    order: 1;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
   }
@@ -1413,7 +1598,7 @@ section.contact {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-  
+
   /* Contact Tablet & HP */
   .kotak-besar {
     flex-direction: column;
@@ -1421,7 +1606,7 @@ section.contact {
     min-height: auto;
     border-radius: 40px;
   }
-  
+
   .k-kiri {
     flex: none;
     width: 100%;
@@ -1445,6 +1630,7 @@ section.contact {
 /* Responsive - 768px */
 
 @media screen and (max-width: 768px) {
+
   .hero,
   .menu,
   .galeri,
@@ -1470,7 +1656,7 @@ section.contact {
     order: 2;
   }
 
-  .navbar > span {
+  .navbar>span {
     order: 1;
   }
 
@@ -1615,7 +1801,8 @@ section.contact {
   /* --- KATEGORI & SUB-MENU LAYOUT --- */
   .sub-menu-wrapper {
     flex-direction: column;
-    align-items: flex-start; /* Rata kiri */
+    align-items: flex-start;
+    /* Rata kiri */
     gap: 16px;
     width: 100%;
   }
@@ -1629,17 +1816,22 @@ section.contact {
   /* --- HORIZONTAL SCROLL KATEGORI --- */
   .sub-menu-wrapper {
     width: 100%;
-    overflow: hidden; /* Mencegah pelebaran layar (horizontal scroll issue) */
+    overflow: hidden;
+    /* Mencegah pelebaran layar (horizontal scroll issue) */
   }
 
-  .pilihan, 
-  .kategori-wrapper, 
+  .pilihan,
+  .kategori-wrapper,
   .best-seller-iced {
     width: 100%;
-    overflow-x: auto; /* Bisa digeser */
-    white-space: nowrap; /* Mencegah anak turun ke bawah */
-    -webkit-overflow-scrolling: touch; /* Biar licin di iOS */
-    padding-bottom: 5px; /* Ruang bernapas */
+    overflow-x: auto;
+    /* Bisa digeser */
+    white-space: nowrap;
+    /* Mencegah anak turun ke bawah */
+    -webkit-overflow-scrolling: touch;
+    /* Biar licin di iOS */
+    padding-bottom: 5px;
+    /* Ruang bernapas */
   }
 
   /* Sembunyikan scrollbar bawaan agar mewah */
@@ -1654,23 +1846,23 @@ section.contact {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
+
   /* Gallery Tablet & HP (2x2 Grid) */
   .galeri-grid {
     grid-template-columns: repeat(2, 1fr);
     height: auto;
   }
-  
+
   .galeri-item.besar,
   .galeri-item.lebar {
     grid-column: span 1;
     grid-row: span 1;
   }
-  
+
   .galeri-item {
     aspect-ratio: 1 / 1;
   }
-  
+
 
 }
 
@@ -1691,11 +1883,11 @@ section.contact {
   }
 
   .hero {
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding: 0 15px 40px;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     display: flex;
+    gap: 0;
   }
 
   .hero-kanan {
@@ -1705,7 +1897,6 @@ section.contact {
 
   .hero-kanan .image-frame {
     padding: 0;
-    /* Wajib! Hilangkan padding bawaan desktop supaya bisa full width */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -1717,44 +1908,47 @@ section.contact {
 
   .hero-kanan .image-wrapper {
     position: relative;
-    /* Buat nampung gradien */
     width: 100%;
-    height: 480px;
-    /* Tinggi elegan */
-    border-radius: 24px;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    border-radius: 0 0 24px 24px;
     overflow: hidden;
-    /* Biar ujung lengkungnya rapi */
+    box-shadow: none;
   }
 
-  /* Bikin Gradien Gelap di Bawah Gambar */
+  /* Gradient gelap di bawah gambar agar teks putih terbaca */
   .hero-kanan .image-wrapper::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, rgba(20, 15, 10, 0.95), transparent);
+    height: 50%;
+    background: linear-gradient(to top, rgba(20, 15, 10, 0.85) 10%, transparent);
     z-index: 5;
   }
 
+  /* Hero-kiri: tarik naik ke dalam gradient gambar */
   .hero-kiri {
     order: 2;
-    margin-top: -108px;
+    margin-top: -140px;
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    padding: 0 15px;
+    gap: 0;
+    padding: 0 24px;
+    width: 100%;
+    text-align: center;
   }
 
+  /* EST Badge: di atas gradient, putih */
   .hero-kiri .thn {
-    margin: 0;
+    position: static;
+    margin: 0 0 8px 0;
     align-self: center;
     text-align: center;
-    margin-bottom: -15px;
     animation: munculDariBawah 0.8s ease-out forwards;
   }
 
@@ -1763,7 +1957,8 @@ section.contact {
     padding: 0;
     background-color: transparent;
     display: flex;
-   justify-content: center;
+    justify-content: center;
+    border-radius: 0;
   }
 
   .hero-kiri .thn .garis {
@@ -1772,19 +1967,21 @@ section.contact {
 
   .hero-kiri .thn .tahun-berdiri {
     font-family: "Inter", sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
+    font-size: 11px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(211, 195, 188, 0.9);
+    font-weight: 500;
   }
 
+  /* Slogan: di atas gradient, putih, animasi dari bawah */
   .hero-kiri .slogan {
+    position: static;
     font-family: "Playfair Display", serif;
-    font-size: 30px;
-    line-height: 1.1;
+    font-size: 28px;
+    line-height: 1.2;
     color: white;
-    align-self: center;
-    max-width: 250px;
+    max-width: 280px;
     text-align: center;
     opacity: 0;
     animation: munculDariBawah 0.8s ease-out forwards;
@@ -1795,45 +1992,64 @@ section.contact {
     0% {
       opacity: 0;
       transform: translateY(30px);
-      /* Mulai dari 30px di bawah posisi asli */
     }
 
     100% {
       opacity: 1;
       transform: translateY(0);
-      /* Kembali ke posisi semula */
     }
   }
 
+  /* Paragraf: di bawah gambar, pada background terang, rata tengah */
   .hero-kiri p {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    font-size: 15px;
+    margin: 24px 0 16px;
+    font-size: 14px;
     font-family: "Inter", sans-serif;
     text-align: center;
-    max-width: 90%;
+    max-width: 100%;
     color: #4e4540;
-    line-height: 1.6;
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  /* Tombol: full-width, rata tengah */
+  .button {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
   }
 
   .btn-hero {
-    width: 250px;
+    width: 100%;
     max-width: 100%;
-    padding: 13px;
-    font-size: 12px;
+    padding: 15px;
+    font-size: 14px;
     border-radius: 50px;
+    text-align: center;
+  }
+
+  /* Animasi sentuhan (Touch) untuk mobile */
+  .btn-hero:active {
+    transform: scale(0.95);
+  }
+
+  .btn-hero:active::before {
+    width: 100%;
   }
 
   .kunjungan {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin-top: 16px;
     gap: 4px;
+    width: 100%;
   }
 
-  .kunjungan .logo-1, 
-  .kunjungan .logo-2, 
+  .kunjungan .logo-1,
+  .kunjungan .logo-2,
   .kunjungan .logo-3 {
     width: 35px;
     height: 35px;
@@ -1841,7 +2057,7 @@ section.contact {
   }
 
   .kunjungan .penjelasan {
-    width: 100%; /* Memaksa teks turun ke baris baru */
+    width: 100%;
     text-align: center;
     font-size: 12px;
     margin-top: 8px;
@@ -1901,6 +2117,7 @@ section.contact {
     gap: 37px;
     justify-content: center;
   }
+
   .kategori-wrapper a {
     font-size: 15px;
     margin: 0px;
@@ -1912,16 +2129,18 @@ section.contact {
     display: flex;
     padding: 10px 15px 10px 15px;
   }
+
   .pilihan-1 span {
     font-size: 10px;
   }
+
   /* --- CARD ADJUSTMENTS FOR 2 COLUMNS ON SUPER SMALL SCREENS --- */
   .kartu-info {
     padding: 16px 12px;
   }
 
   .kartu-nama {
-    font-size: 15px; 
+    font-size: 15px;
     margin-bottom: 6px;
     font-weight: 700;
   }
@@ -1943,7 +2162,7 @@ section.contact {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 8px;
+    margin-top: auto;
   }
 
   .kartu-harga {
@@ -1986,7 +2205,7 @@ section.contact {
   .galeri-title p {
     font-size: 12px;
   }
-  
+
   .galeri-grid {
     grid-template-columns: repeat(2, 1fr);
     height: 500px;
@@ -2008,6 +2227,7 @@ section.contact {
   .contact {
     padding: 0;
   }
+
   .kotak-besar {
     flex-direction: column;
     height: auto;
@@ -2030,7 +2250,10 @@ section.contact {
     font-size: 14px;
   }
 
-  .alamat p, .jam-operasional p, .contact-1, .contact-2 {
+  .alamat p,
+  .jam-operasional p,
+  .contact-1,
+  .contact-2 {
     font-size: 13px;
     padding-left: 52px;
   }
@@ -2058,6 +2281,135 @@ section.contact {
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+}
+
+/* Responsive - 479px */
+
+@media screen and (max-width: 479px) {
+
+  /* Menggunakan CSS Grid agar teks bisa ditumpuk (overlap) ke gambar dengan presisi */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    padding: 16px 20px 40px;
+    gap: 0;
+  }
+
+  .hero-kanan {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    width: 100%;
+  }
+
+  .hero-kanan .image-wrapper {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Gradient gelap di atas gambar agar teks putih terbaca jelas */
+  .hero-kanan .image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(20, 15, 10, 0.8), transparent);
+    z-index: 5;
+  }
+
+  /* `display: contents` membongkar hero-kiri agar anak-anaknya masuk langsung ke grid .hero */
+  .hero-kiri {
+    display: contents;
+  }
+
+  /* EST Badge: Di dalam gambar, rata tengah */
+  .hero-kiri .thn {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: end;
+    justify-self: center;
+    margin: 0 0 100px 0; /* Memberi jarak lebih tinggi dari bawah */
+    z-index: 10;
+    animation: munculDariBawah 0.8s ease-out forwards;
+  }
+
+  .hero-kiri .thn .tahun {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .hero-kiri .thn .tahun-berdiri {
+    color: rgba(211, 195, 188, 0.9);
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+
+  /* Slogan: Di dalam gambar, rata tengah */
+  .hero-kiri .slogan {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: end;
+    justify-self: center;
+    text-align: center;
+    margin: 0 0 40px 0; /* Memberi jarak lebih tinggi dari bawah */
+    z-index: 10;
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    color: white;
+    max-width: 260px;
+    line-height: 1.2;
+    opacity: 0;
+    animation: munculDariBawah 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  /* Paragraf: Di bawah gambar (baris grid 2), rata tengah */
+  .hero-kiri p {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    margin: 24px 0 16px;
+    text-align: center;
+    font-size: 14px;
+    color: #4e4540;
+    line-height: 1.7;
+  }
+
+  /* Tombol: Di bawah paragraf (baris grid 3), rata tengah, flex kolom */
+  .button {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .btn-hero {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 50px;
+    text-align: center;
+  }
+
+  /* Kunjungan: Paling bawah (baris grid 4), rata tengah */
+  .kunjungan {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
   }
 }
 

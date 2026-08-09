@@ -23,6 +23,7 @@
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
+        <span id="humberger-badge" class="humberger-badge hidden">0</span>
       </div>
 
       <div class="link" id="link">
@@ -49,6 +50,7 @@
                 stroke-linejoin="round"
               />
             </svg>
+            <span id="cart-badge" class="cart-badge hidden">0</span>
         </button>
       </div>
     </nav>
@@ -192,16 +194,6 @@
             <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
           </div>
           
-          <!-- 
-            GRID LAYOUT ARCHITECTURE:
-            - Grid configuration: 4 columns (repeat(4, 1fr))
-            - Item 1 (.besar): Spans 2 columns & 2 rows
-            - Item 2 & 3: Default (1 column each)
-            - Item 4 (.lebar): Spans 2 columns
-            
-            Row 1 Distribution: 2 (.besar) + 1 (default) + 1 (default) = 4 columns (100%)
-            Row 2 Distribution: 2 (.besar remainder) + 2 (.lebar) = 4 columns (100%)
-          -->
         </div>
       </section>
 
@@ -250,9 +242,9 @@
     <!-- SLIDING DRAWER CART -->
     <!-- ========================================= -->
     
-    <div class="cart-overlay active" id="cart-overlay"></div>
+    <div class="cart-overlay" id="cart-overlay"></div>
 
-    <div class="cart-drawer active" id="cart-drawer">
+    <div class="cart-drawer" id="cart-drawer">
       
       <div class="cart-header">
         <h3>Keranjang Anda</h3>
@@ -260,43 +252,55 @@
       </div>
 
       <div class="cart-items">
-        <div class="cart-item">
-          <img src="/frontend/svg/kopi2.jpg" alt="Iced Aren Latte" class="cart-item-image" />
-          <div class="cart-item-info">
-            <h4 class="cart-item-name">Iced Aren Latte</h4>
-            <span class="cart-item-price">Rp 25.000</span>
-          </div>
-          <div class="cart-item-quantity">
-            <button class="qty-btn decrease-btn">-</button>
-            <span class="qty-number">1</span>
-            <button class="qty-btn increase-btn">+</button>
-          </div>
-        </div>
+        
+      </div>
 
-        <div class="cart-item">
-          <img src="/frontend/svg/kopi2.jpg" alt="Cireng Bumbu Rujak" class="cart-item-image" />
-          <div class="cart-item-info">
-            <h4 class="cart-item-name">Cireng Bumbu Rujak</h4>
-            <span class="cart-item-price">Rp 18.000</span>
-          </div>
-          <div class="cart-item-quantity">
-            <button class="qty-btn decrease-btn">-</button>
-            <span class="qty-number">2</span>
-            <button class="qty-btn increase-btn">+</button>
-          </div>
+
+
+      <div class="cart-footer">
+        <div class="cart-summary">
+
         </div>
+        <button type="button" class="checkout-btn" id="btn-cart">
+          
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- SLIDING DRAWER CHECKOUT -->
+    <!-- ========================================= -->
+    
+    <div class="cart-drawer checkout-drawer" id="checkout-drawer">
+      
+      <div class="cart-header">
+        <h3>Detail Pesanan</h3>
+        <button id="close-checkout-btn" style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
+      </div>
+
+      <div class="cart-items" id="checkout-items">
+        
       </div>
 
       <div class="cart-footer">
         <div class="cart-summary">
-          <span class="summary-label">Total Pembayaran</span>
-          <span class="summary-total">Rp 61.000</span>
+          <span class="summary-label">Total Pesanan</span>
+          <span class="summary-total" id="checkout-total">Rp 0</span>
         </div>
-        <button type="button" class="checkout-btn">
-          Checkout Pesanan
+        <button type="button" class="checkout-btn" id="btn-buat-pesanan">
+          Buat Pesanan
         </button>
       </div>
 
+    </div>
+
+    <!-- ========================================= -->
+    <!-- TOAST NOTIFICATION -->
+    <!-- ========================================= -->
+    <div id="toast-notif" class="toast-notif">
+      <span class="toast-icon"></span>
+      <span class="toast-message" id="toast-message">Berhasil ditambahkan ke keranjang!</span>
     </div>
 
     <script src="script.js"></script>

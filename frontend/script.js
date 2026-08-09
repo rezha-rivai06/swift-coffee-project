@@ -1,3 +1,5 @@
+
+
 const cartBtn = document.getElementById("btn");
 const hamburger = document.getElementById("hamburger");
 const link = document.getElementById("link");
@@ -287,7 +289,7 @@ bestsellerbtn.addEventListener("click", function (e) {
   if (bestsellerbtn.classList.contains("active")) {
     bestsellerbtn.classList.remove("active");
 
-    const tombolAktif = document.querySelector(".pilihan-1.active");
+    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
     if (tombolAktif) {
       saringKartuMenu(tombolAktif.getAttribute("data-filter"));
     }
@@ -296,7 +298,7 @@ bestsellerbtn.addEventListener("click", function (e) {
     icedbtn.classList.remove("active");
     bestsellerbtn.classList.add("active");
 
-    const tombolAktif = document.querySelector(".pilihan-1.active");
+    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
     const subAktif = tombolAktif ? tombolAktif.getAttribute("data-filter") : "";
 
     targetkartu.forEach(function (kartu) {
@@ -325,7 +327,7 @@ icedbtn.addEventListener("click", function (e) {
   if (icedbtn.classList.contains("active")) {
     icedbtn.classList.remove("active");
 
-    const tombolAktif = document.querySelector(".pilihan-1.active");
+    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
     if (tombolAktif) {
       saringKartuMenu(tombolAktif.getAttribute("data-filter"));
     }
@@ -334,7 +336,7 @@ icedbtn.addEventListener("click", function (e) {
     bestsellerbtn.classList.remove("active");
     icedbtn.classList.add("active");
 
-    const tombolAktif = document.querySelector(".pilihan-1.active");
+    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
     const subAktif = tombolAktif ? tombolAktif.getAttribute("data-filter") : "";
 
     targetkartu.forEach(function (kartu) {
@@ -409,9 +411,180 @@ async function loadMenu() {
       `;
 
       menuContainer.appendChild(divKartu);
+
+        
     });
 
     saringKartuMenu("signature");
+
+    
+    // ==========================================
+    // LOGIKA KERANJANG DINAMIS
+    // ==========================================
+    let isiKeranjang = [];
+    const tombolpluskartu = document.querySelectorAll(".kartu-btn");
+    
+    tombolpluskartu.forEach(function(tombol){
+      tombol.addEventListener("click", function(e) {
+         e.preventDefault(); 
+         
+         const kartu = tombol.closest(".kartu-info").parentElement;
+         const namaBarang = kartu.querySelector(".kartu-nama").innerText;
+         const hargaTeks = kartu.querySelector(".kartu-harga").innerText;
+         const hargaAngka = parseInt(hargaTeks.replace(/[^0-9]/g, "")); 
+         const gambarBarang = kartu.querySelector("img").src;
+
+         const barangDitemukan = isiKeranjang.find(function(item) {
+           return item.nama === namaBarang;
+         });
+
+         if (barangDitemukan) {
+           barangDitemukan.jumlah += 1;
+         } else {
+           isiKeranjang.push({
+             nama: namaBarang,
+             harga: hargaAngka,
+             gambar: gambarBarang,
+             jumlah: 1
+           });
+         }
+
+         renderKeranjang();
+         
+         // ==========================================
+         // NOTIFIKASI TOAST & BADGE KERANJANG
+         // ==========================================
+         const toastContainer = document.getElementById("toast-notif");
+         const pesantoast = document.getElementById("toast-message");
+         const badgekeranjang = document.getElementById("cart-badge");
+         const humberger = document.getElementById("humberger-badge");
+
+         pesantoast.innerText = namaBarang + " dimasukkan ke keranjang";
+         toastContainer.classList.add("show");
+
+         setTimeout(function (){
+          toastContainer.classList.remove("show");
+          badgekeranjang.innerText = isiKeranjang.length;
+          badgekeranjang.classList.remove("hidden");
+          humberger.innerText = isiKeranjang.length;
+          humberger.classList.remove("hidden");
+         }, 2000);
+      });
+    });
+
+    // ==========================================
+    // FUNGSI PENCETAK KERANJANG (RENDER)
+    // ==========================================
+    function renderKeranjang() {
+      const wadahItems = document.querySelector(".cart-items");
+      const wadahFooter = document.querySelector(".cart-footer");
+      const wadahSummary = document.querySelector(".cart-summary");
+      const tombolCart = document.getElementById("btn-cart");
+      
+      if (isiKeranjang.length === 0) {
+        wadahItems.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan.</p>`;
+        wadahFooter.style.display = "none";
+        return; 
+      }
+
+      wadahItems.innerHTML = "";
+      wadahFooter.style.display = "block";
+
+      let totalHarga = 0;
+
+      isiKeranjang.forEach(function(item) {
+        totalHarga += (item.harga * item.jumlah);
+        const formatRupiah = "Rp " + item.harga.toLocaleString('id-ID');
+2
+        wadahItems.innerHTML += `
+          <div class="cart-item">
+            <img src="${item.gambar}" alt="${item.nama}" class="cart-item-image" />
+            <div class="cart-item-info">
+              <h4 class="cart-item-name">${item.nama}</h4>
+              <span class="cart-item-price">${formatRupiah}</span>
+            </div>
+            <div class="cart-item-quantity">
+              <button class="qty-btn decrease-btn" data-nama="${item.nama}">-</button>
+              <span class="qty-number">${item.jumlah}</span>
+              <button class="qty-btn increase-btn" data-nama="${item.nama}">+</button>
+            </div>
+            <button class="trash-btn delete-btn" data-nama="${item.nama}" aria-label="Hapus item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
+            </button>
+          </div>
+        `;
+      });
+
+      wadahSummary.innerHTML = `
+        <span class="summary-label">Total Pembayaran</span>
+        <span class="summary-total">Rp ${totalHarga.toLocaleString('id-ID')}</span>
+      `;
+      tombolCart.innerText = "Checkout Pesanan";
+    }
+    renderKeranjang();
+
+    // ==========================================
+    // LOGIKA TOMBOL PLUS & MINUS DI KERANJANG
+    // ==========================================
+    const wadahkeranjang = document.querySelector(".cart-items");
+    
+    wadahkeranjang.addEventListener("click", function(e) {
+      if (e.target.classList.contains("increase-btn")) {
+        const namaBarang = e.target.dataset.nama; 
+        
+        const item = isiKeranjang.find(function(i) {
+          return i.nama === namaBarang;
+        });
+        
+        if (item) {
+          item.jumlah += 1;
+        }
+        
+        renderKeranjang();
+      } 
+      else if (e.target.classList.contains("decrease-btn")) {
+        const namaBarang = e.target.dataset.nama;
+        
+        const item = isiKeranjang.find(function(i) {
+          return i.nama === namaBarang;
+        });
+        
+        if (item) {
+          item.jumlah -= 1;
+          
+          if (item.jumlah === 0) {
+            isiKeranjang = isiKeranjang.filter(function(i) {
+              return i.nama !== namaBarang;
+            });
+          }
+          
+          renderKeranjang();
+        }
+      } else if (e.target.closest(".delete-btn")) {
+         const namaBarang = e.target.closest(".delete-btn").dataset.nama;
+         const badgekeranjang = document.getElementById("cart-badge");
+         const humberger = document.getElementById("humberger-badge");
+        
+         isiKeranjang = isiKeranjang.filter(function (i) {
+            return i.nama !== namaBarang;
+         });
+
+         if (isiKeranjang.length === 0) {
+            badgekeranjang.classList.add("hidden");
+            humberger.classList.add("hidden");
+         } else {
+            badgekeranjang.innerText = isiKeranjang.length;
+            humberger.innerText = isiKeranjang.length;
+         }
+
+         renderKeranjang();
+      }
+    });
 
   } catch (error) {
     console.error("Gagal mengambil data menu dari Backend:", error);
@@ -473,11 +646,69 @@ if (cartOverlay) {
 }
 
 
+const btnCart = document.getElementById("btn-cart");
+const cartDrawerNode = document.getElementById("cart-drawer");
+const checkoutDrawerNode = document.getElementById("checkout-drawer");
 
-const btncart = ducument.getElementById("btn-cart");
+btnCart.addEventListener("click", function() {
+  // 1. Tutup keranjang, buka checkout
+  cartDrawerNode.classList.remove("active");
+  checkoutDrawerNode.classList.add("active");
+  
+  // 2. Render isi pesanan
+  renderCheckout();
+});
 
-btncart.addEventListener("click", function(e){
-  e.preventDefault();
+// Fungsi untuk mencetak ulang laci Checkout
+function renderCheckout() {
+  const wadahCheckout = document.getElementById("checkout-items");
+  const wadahTotalCheckout = document.getElementById("checkout-total");
+  
+  if (isiKeranjang.length === 0) {
+    wadahCheckout.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan.</p>`;
+    wadahTotalCheckout.innerText = "Rp 0";
+    return;
+  }
+  
+  wadahCheckout.innerHTML = "";
+  let totalHarga = 0;
+  
+  isiKeranjang.forEach(function(item) {
+    const subtotal = item.harga * item.jumlah;
+    totalHarga += subtotal;
+    
+    // Tampilan item checkout (lebih ringkas tanpa tombol plus/minus)
+    wadahCheckout.innerHTML += `
+      <div class="cart-item" style="border-bottom: 1px solid #eee; padding-bottom: 16px; margin-bottom: 16px;">
+        <img src="${item.gambar}" alt="${item.nama}" class="cart-item-image" />
+        <div class="cart-item-info">
+          <h4 class="cart-item-name">${item.nama}</h4>
+          <span class="cart-item-price" style="font-size: 13px; color: #888;">${item.jumlah}x @ Rp ${item.harga.toLocaleString('id-ID')}</span>
+        </div>
+        <div style="font-weight: 600; color: #4e4540; margin-left: auto;">
+          Rp ${subtotal.toLocaleString('id-ID')}
+        </div>
+      </div>
+    `;
+  });
+  
+  wadahTotalCheckout.innerText = "Rp " + totalHarga.toLocaleString('id-ID');
+}
 
-  alert('hallo')
-}); 
+// Fungsi saat tombol X di laci checkout diklik
+const btnTutupCheckout = document.getElementById("close-checkout-btn");
+if (btnTutupCheckout) {
+  btnTutupCheckout.addEventListener("click", function() {
+    checkoutDrawerNode.classList.remove("active");
+    cartOverlay.classList.remove("active");
+  });
+}
+
+// Fungsi tombol Buat Pesanan (Opsional untuk dilanjutkan)
+const btnBuatPesanan = document.getElementById("btn-buat-pesanan");
+if (btnBuatPesanan) {
+  btnBuatPesanan.addEventListener("click", function() {
+    alert("Pesanan berhasil dibuat! Terima kasih.");
+    // Logika hapus keranjang dan tutup laci bisa ditambahkan di sini
+  });
+}
