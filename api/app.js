@@ -1,25 +1,42 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
+
+// ==========================================
+// MENGIMPOR KOKI DARI DAPUR (BACKEND)
+// ==========================================
+const { ambilDataMenu } = require('../backend/menuLogic');
+const { prosesPesanan } = require('../backend/checkoutLogic');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Endpoint API
+// ==========================================
+// ENDPOINT 1: MEMINTA MENU
+// ==========================================
 app.get('/api/menu', (req, res) => {
-  const jsonPath = path.join(__dirname, '../backend/menu.json');
-  fs.readFile(jsonPath, 'utf8', (err, data) => {
-    if (err) {
-      console.error("Gagal membaca menu.json:", err);
-      return res.status(500).json({ error: "Gagal memuat data menu" });
-    }
-    
-    // 3. Ubah teks JSON menjadi format objek asli lalu kirimkan ke Frontend
-    res.json(JSON.parse(data));
-  });
+  try {
+    const dataMenu = ambilDataMenu();
+    res.json(dataMenu);
+  } catch (error) {
+    console.error("Gagal mengambil menu:", error);
+    res.status(500).json({ error: "Gagal memuat data menu" });
+  }
+});
+
+// ==========================================
+// ENDPOINT 2: MENGIRIM PESANAN
+// ==========================================
+app.post('/api/checkout', (req, res) => {
+  try {
+    const dataPesanan = req.body;
+    const hasilWA = prosesPesanan(dataPesanan);
+    res.json({ status: "sukses", linkWA: hasilWA });
+  } catch (error) {
+    console.error("Gagal memproses pesanan:", error);
+    res.status(500).json({ error: "Terjadi kesalahan di server" });
+  }
 });
 
 const PORT = 5000;

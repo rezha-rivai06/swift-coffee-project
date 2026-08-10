@@ -1,4 +1,7 @@
 /*halaman utama*/
+/* TEST KEENAM: Lanjut terosss! */
+/* TEST KELIMA: Mantap! Kolaborasi Antigravity x VS Code is real! */
+/* TEST KEEMPAT: Gaskeun! */
 
 * {
   box-sizing: border-box;
@@ -718,7 +721,8 @@ input::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex-grow: 1; /* Membuat info mengambil semua sisa ruang vertikal */
+  flex-grow: 1;
+  /* Membuat info mengambil semua sisa ruang vertikal */
 }
 
 .kartu-nama {
@@ -752,7 +756,8 @@ input::-webkit-search-cancel-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto; /* Mendorong bagian bawah (harga & tombol) ke batas paling bawah card */
+  margin-top: auto;
+  /* Mendorong bagian bawah (harga & tombol) ke batas paling bawah card */
 }
 
 .kartu-harga {
@@ -1001,7 +1006,7 @@ section.contact {
   font-family: "Inter", sans-serif;
   width: fit-content;
   margin-top: 16px;
-  margin-left: 60px;
+  margin-left: 0;
   transition: all 0.3s ease;
 }
 
@@ -1405,10 +1410,13 @@ section.contact {
   right: -2px;
   width: 8px;
   height: 8px;
-  background-color: #ff7300; /* Warna orange */
+  background-color: #ff7300;
+  /* Warna orange */
   border-radius: 50%;
-  color: transparent; /* Membuat angka transparan sesuai logika yang diminta */
-  font-size: 0px; /* Menyembunyikan text space */
+  color: transparent;
+  /* Membuat angka transparan sesuai logika yang diminta */
+  font-size: 0px;
+  /* Menyembunyikan text space */
 }
 
 .humberger-badge.hidden {
@@ -1436,6 +1444,58 @@ section.contact {
 
 .hamburger.active .bar:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ==========================================
+   RESERVASI SECTION (TAMBAHAN)
+   ========================================== */
+.reservasi .res-kotak {
+  background-color: white;
+}
+
+.reservasi .res-kiri {
+  flex: 1;
+}
+
+.reservasi .res-gambar {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.reservasi .res-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, white 0%, transparent 100%);
+}
+
+.reservasi .res-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  color: #4e4540;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.reservasi .res-input:focus {
+  border-color: #d35400;
+  background: #fff;
+
+}
+
+.reservasi .res-baris-dua {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 /* Responsive - 1200px */
@@ -1477,7 +1537,7 @@ section.contact {
   .hero,
   .menu,
   .galeri,
-  .contact {
+  section.contact {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -1634,7 +1694,7 @@ section.contact {
   .hero,
   .menu,
   .galeri,
-  .contact {
+  section.contact {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -1877,7 +1937,7 @@ section.contact {
   .about,
   .menu,
   .galeri,
-  .contact {
+  section.contact {
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -2224,8 +2284,8 @@ section.contact {
 
   /* --- CONTACT MOBILE --- */
 
-  .contact {
-    padding: 0;
+  section.contact {
+    padding: 40px 15px;
   }
 
   .kotak-besar {
@@ -2269,7 +2329,7 @@ section.contact {
     padding: 12px 24px;
     font-size: 14px;
     margin-top: 8px;
-    margin-left: 52px;
+    margin-left: 0;
   }
 
   .maps {
@@ -2335,7 +2395,8 @@ section.contact {
     grid-row: 1 / 2;
     align-self: end;
     justify-self: center;
-    margin: 0 0 100px 0; /* Memberi jarak lebih tinggi dari bawah */
+    margin: 0 0 100px 0;
+    /* Memberi jarak lebih tinggi dari bawah */
     z-index: 10;
     animation: munculDariBawah 0.8s ease-out forwards;
   }
@@ -2360,7 +2421,8 @@ section.contact {
     align-self: end;
     justify-self: center;
     text-align: center;
-    margin: 0 0 40px 0; /* Memberi jarak lebih tinggi dari bawah */
+    margin: 0 0 40px 0;
+    /* Memberi jarak lebih tinggi dari bawah */
     z-index: 10;
     font-family: "Playfair Display", serif;
     font-size: 28px;
