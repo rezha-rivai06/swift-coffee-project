@@ -467,7 +467,8 @@ async function loadMenu() {
             nama: namaBarang,
             harga: hargaAngka,
             gambar: gambarBarang,
-            jumlah: 1
+            jumlah: 1,
+            tipe: "takeaway"
           });
         }
 
@@ -495,6 +496,21 @@ async function loadMenu() {
     });
 
     // ==========================================
+    // LOGIKA CART TAB SWITCHER
+    // ==========================================
+    let activeCartTab = "takeaway";
+    const cartTabs = document.querySelectorAll(".cart-tab");
+    
+    cartTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        cartTabs.forEach(t => t.classList.remove("active-cart-tab"));
+        tab.classList.add("active-cart-tab");
+        activeCartTab = tab.getAttribute("data-tab");
+        renderKeranjang();
+      });
+    });
+
+    // ==========================================
     // FUNGSI PENCETAK KERANJANG (RENDER)
     // ==========================================
     function renderKeranjang() {
@@ -507,8 +523,11 @@ async function loadMenu() {
       const wadahSummary = document.querySelector(".cart-summary");
       const tombolCart = document.getElementById("btn-cart");
 
-      if (isiKeranjang.length === 0) {
-        wadahItems.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan.</p>`;
+      // Filter berdasarkan tab aktif
+      const filteredKeranjang = isiKeranjang.filter(item => (item.tipe || "takeaway") === activeCartTab);
+
+      if (filteredKeranjang.length === 0) {
+        wadahItems.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan untuk ${activeCartTab === 'takeaway' ? 'Takeaway' : 'Dine-In'}.</p>`;
         wadahFooter.style.display = "none";
         return;
       }
@@ -518,7 +537,7 @@ async function loadMenu() {
 
       let totalHarga = 0;
 
-      isiKeranjang.forEach(function (item) {
+      filteredKeranjang.forEach(function (item) {
         totalHarga += (item.harga * item.jumlah);
         const formatRupiah = "Rp " + item.harga.toLocaleString('id-ID');
         2
@@ -621,6 +640,12 @@ async function loadMenu() {
     const checkoutDrawerNode = document.getElementById("checkout-drawer");
 
     btnCart.addEventListener("click", function () {
+      if (activeCartTab === "dinein") {
+        document.getElementById("res-menu-area").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("cart-overlay").classList.remove("active");
+        document.getElementById("cart-drawer").classList.remove("active");
+        return;
+      }
       cartDrawerNode.classList.remove("active");
       checkoutDrawerNode.classList.add("active");
 
@@ -631,8 +656,10 @@ async function loadMenu() {
     function renderCheckout() {
       const wadahCheckout = document.getElementById("checkout-items");
       const wadahTotalCheckout = document.getElementById("checkout-total");
+      
+      const pesananTakeaway = isiKeranjang.filter(item => (item.tipe || "takeaway") === "takeaway");
 
-      if (isiKeranjang.length === 0) {
+      if (pesananTakeaway.length === 0) {
         wadahCheckout.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan.</p>`;
         wadahTotalCheckout.innerText = "Rp 0";
         return;
@@ -641,7 +668,7 @@ async function loadMenu() {
       wadahCheckout.innerHTML = "";
       let totalHarga = 0;
 
-      isiKeranjang.forEach(function (item) {
+      pesananTakeaway.forEach(function (item) {
         const subtotal = item.harga * item.jumlah;
         totalHarga += subtotal;
 
@@ -693,6 +720,8 @@ async function loadMenu() {
           btnBuatPesanan.innerText = "Memproses...";
           btnBuatPesanan.disabled = true;
 
+          const pesananTakeaway = isiKeranjang.filter(item => (item.tipe || "takeaway") === "takeaway");
+          
           const response = await fetch("http://localhost:5000/api/checkout", {
             method: "POST",
             headers: {
@@ -701,7 +730,7 @@ async function loadMenu() {
             body: JSON.stringify({
               nama: nama,
               tipe: tipe,
-              pesanan: isiKeranjang
+              pesanan: pesananTakeaway
             })
           });
 
@@ -736,11 +765,14 @@ async function loadMenu() {
         btnBuatPesanan.innerText = "Buat Pesanan";
         btnBuatPesanan.disabled = false;
 
-        localStorage.removeItem("keranjangCafe");
-        isiKeranjang = [];
-        renderKeranjang();
-        checkoutDrawerNode.classList.remove("active");
-        cartOverlay.classList.remove("active");
+        // Logika hapus item setelah berhasil
+        if (isiKeranjang.length === 0) {
+          localStorage.removeItem("keranjangCafe");
+        } else {
+          // Hanya hapus item takeaway dari localstorage jika sukses
+          isiKeranjang = isiKeranjang.filter(item => item.tipe === "dinein");
+          localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
+        }
 
         const badgekeranjang = document.getElementById("cart-badge");
         const humberger = document.getElementById("humberger-badge");
@@ -748,7 +780,17 @@ async function loadMenu() {
         if (isiKeranjang.length === 0) {
           badgekeranjang.classList.add("hidden");
           humberger.classList.add("hidden");
+        } else {
+          badgekeranjang.innerText = isiKeranjang.length;
+          humberger.innerText = isiKeranjang.length;
+          badgekeranjang.classList.remove("hidden");
+          humberger.classList.remove("hidden");
         }
+
+        renderKeranjang();
+        checkoutDrawerNode.classList.remove("active");
+        const cartOverlay = document.getElementById("cart-overlay");
+        if(cartOverlay) cartOverlay.classList.remove("active");
       });
     }
 
@@ -758,6 +800,262 @@ async function loadMenu() {
 }
 
 loadMenu();
+
+
+/* ==========================================
+ * RESERVASI MEJA
+ * ========================================== */
+const reservasibtn = document.getElementById("btn-cek-reservasi");
+const statusTeks = document.getElementById("res-status");
+
+reservasibtn.addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const nama = document.getElementById("res-nama").value.trim();
+  const tanggal = document.getElementById("res-tanggal").value;
+  const tamu = document.getElementById("res-tamu").value;
+
+  if (nama === "" || tanggal === "" || tamu === "") {
+    statusTeks.textContent = "Mohon lengkapi semua data reservasi terlebih dahulu.";
+    statusTeks.style.color = "red";
+    return;
+  }
+
+  try {
+    statusTeks.textContent = "Mengecek ketersediaan kursi...";
+    statusTeks.style.color = "blue";
+
+    const responseCek = await fetch("http://localhost:5000/api/cek-reservasi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tanggal: tanggal, jumlahTamu: tamu })
+    });
+    
+    const dataCek = await responseCek.json();
+
+    if (dataCek.tersedia === false) {
+      statusTeks.textContent = dataCek.pesan;
+      statusTeks.style.color = "red";
+      return;
+    }
+
+    statusTeks.textContent = "Kursi tersedia! Silakan pilih menu di bawah lalu konfirmasi.";
+    statusTeks.style.color = "green";
+
+    // MUNCULKAN MENU DINE-IN DAN SCROLL
+    const resMenuArea = document.getElementById("res-menu-area");
+    if (resMenuArea) {
+      resMenuArea.style.display = "block";
+      resMenuArea.scrollIntoView({ behavior: "smooth" });
+      
+      // Load menu dine-in jika belum di-load
+      const slider = document.getElementById("res-menu-slider");
+      if (slider && slider.children.length === 0) {
+        loadMenuDineIn();
+      }
+    }
+
+  } catch (error) {
+    console.error("Gagal terhubung ke API:", error);
+    statusTeks.textContent = "Gagal!";
+    statusTeks.style.color = "red";
+  }
+});
+
+// ==========================================
+// RENDER MENU DINE-IN
+// ==========================================
+let dataMenuDineIn = [];
+
+async function loadMenuDineIn() {
+  try {
+    const response = await fetch("http://localhost:5000/api/menu");
+    dataMenuDineIn = await response.json();
+    renderSliderDineIn("signature"); // default
+  } catch (err) {
+    console.error("Gagal load menu dinein", err);
+  }
+}
+
+function renderSliderDineIn(filterKategori) {
+  const slider = document.getElementById("res-menu-slider");
+  if(!slider) return;
+  slider.innerHTML = "";
+  
+  const menuFiltered = dataMenuDineIn.filter(m => filterKategori === "" || m.sub === filterKategori);
+  
+  menuFiltered.forEach(menu => {
+    const divKartu = document.createElement("div");
+    divKartu.classList.add("res-kartu-mini");
+    const formatHarga = "Rp " + menu.harga.toLocaleString('id-ID');
+    
+    divKartu.innerHTML = `
+      <div class="kartu-gambar">
+        <img src="${menu.gambar}" alt="${menu.nama}" />
+      </div>
+      <div class="kartu-info">
+        <h3 class="kartu-nama">${menu.nama}</h3>
+        <div class="kartu-bawah">
+          <span class="kartu-harga">${formatHarga}</span>
+          <button class="kartu-btn btn-add-dinein" data-nama="${menu.nama}" data-harga="${menu.harga}" data-gambar="${menu.gambar}">+</button>
+        </div>
+      </div>
+    `;
+    slider.appendChild(divKartu);
+  });
+
+  // Tambahkan event listener ke tombol + dinein
+  const btns = slider.querySelectorAll(".btn-add-dinein");
+  btns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const namaBarang = this.getAttribute("data-nama");
+      const hargaTeks = this.getAttribute("data-harga");
+      const hargaAngka = parseInt(hargaTeks);
+      const gambarBarang = this.getAttribute("data-gambar");
+
+      // Ambil keranjang terbaru
+      const datastorage = localStorage.getItem("keranjangCafe");
+      let isiKeranjang = datastorage ? JSON.parse(datastorage) : [];
+
+      const barangDitemukan = isiKeranjang.find(item => item.nama === namaBarang && item.tipe === "dinein");
+      if (barangDitemukan) {
+        barangDitemukan.jumlah += 1;
+      } else {
+        isiKeranjang.push({
+          nama: namaBarang,
+          harga: hargaAngka,
+          gambar: gambarBarang,
+          jumlah: 1,
+          tipe: "dinein"
+        });
+      }
+
+      localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
+      
+      // Update UI Cart Badge
+      const badgekeranjang = document.getElementById("cart-badge");
+      const humberger = document.getElementById("humberger-badge");
+      if(badgekeranjang) {
+         badgekeranjang.innerText = isiKeranjang.length;
+         badgekeranjang.classList.remove("hidden");
+      }
+      if(humberger) {
+         humberger.innerText = isiKeranjang.length;
+         humberger.classList.remove("hidden");
+      }
+
+      // Show toast
+      const toastContainer = document.getElementById("toast-notif");
+      const pesantoast = document.getElementById("toast-message");
+      if(pesantoast) pesantoast.innerText = namaBarang + " (Dine-In) masuk keranjang";
+      if(toastContainer) {
+        toastContainer.classList.add("show");
+        setTimeout(() => toastContainer.classList.remove("show"), 2000);
+      }
+      
+      // Jika kebetulan keranjang sedang dirender, render ulang
+      if(typeof renderKeranjang === "function") {
+         // but since it's scoped, we trigger click on active tab?
+         // We can just rely on user opening cart, or we dispatch an event.
+         // Actually, renderKeranjang is inside loadMenu() scope. 
+         // But let's just make it reload if cart is open.
+      }
+    });
+  });
+}
+
+// Logika Kategori Dine In
+const btnKategoriRes = document.querySelectorAll(".res-kategori");
+btnKategoriRes.forEach(btn => {
+  btn.addEventListener("click", function() {
+    btnKategoriRes.forEach(b => b.classList.remove("active-res-kategori"));
+    this.classList.add("active-res-kategori");
+    
+    document.querySelectorAll(".res-sub-menu").forEach(el => el.classList.add("hidden"));
+    const target = this.getAttribute("data-res-target");
+    const targetSubMenu = document.getElementById("res-sub-" + target);
+    if(targetSubMenu) targetSubMenu.classList.remove("hidden");
+    
+    // Auto click first sub menu
+    const firstSub = targetSubMenu.querySelector(".res-sub");
+    if(firstSub) firstSub.click();
+  });
+});
+
+const btnSubRes = document.querySelectorAll(".res-sub");
+btnSubRes.forEach(btn => {
+  btn.addEventListener("click", function() {
+    const parent = this.closest(".res-sub-menu");
+    parent.querySelectorAll(".res-sub").forEach(b => b.classList.remove("active-res-sub"));
+    this.classList.add("active-res-sub");
+    
+    const filter = this.getAttribute("data-res-filter");
+    renderSliderDineIn(filter);
+  });
+});
+
+
+// ==========================================
+// CHECKOUT DINE IN
+// ==========================================
+const btnCheckoutDinein = document.getElementById("btn-checkout-dinein");
+if (btnCheckoutDinein) {
+  btnCheckoutDinein.addEventListener("click", async function (e) {
+    e.preventDefault();
+    const nama = document.getElementById("res-nama").value.trim();
+    const tanggal = document.getElementById("res-tanggal").value;
+    const tamu = document.getElementById("res-tamu").value;
+    
+    let isiKeranjang = [];
+    const ds = localStorage.getItem("keranjangCafe");
+    if (ds) isiKeranjang = JSON.parse(ds);
+    const pesananDineIn = isiKeranjang.filter(item => item.tipe === "dinein");
+
+    const statusTeks = document.getElementById("res-status");
+
+    try {
+      btnCheckoutDinein.innerText = "Memproses...";
+      const responseBuat = await fetch("http://localhost:5000/api/buat-reservasi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nama: nama, tanggal: tanggal, jumlahTamu: tamu, pesanan: pesananDineIn })
+      });
+
+      const dataBuat = await responseBuat.json();
+
+      if (dataBuat.sukses === true) {
+        // Hapus item dine-in dari keranjang
+        isiKeranjang = isiKeranjang.filter(item => item.tipe !== "dinein");
+        localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
+
+        const toastContainer = document.getElementById("toast-notif");
+        const pesanToast = document.getElementById("toast-message");
+        
+        if(statusTeks) statusTeks.textContent = "";
+        if(pesanToast) pesanToast.textContent = "Reservasi berhasil! Mengalihkan...";
+        if(toastContainer) toastContainer.classList.add("show");
+
+        setTimeout(() => {
+          if(toastContainer) toastContainer.classList.remove("show");
+          window.open(dataBuat.linkWA, '_blank');
+          window.location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      console.error(error);
+      if(statusTeks) {
+        statusTeks.textContent = "Gagal checkout.";
+        statusTeks.style.color = "red";
+      }
+    } finally {
+      btnCheckoutDinein.innerText = "🍽️ Konfirmasi Reservasi & Pesan";
+    }
+  });
+}
+
+
+
 
 // ==========================================
 // GET DIRECTION LOGIC BUTTON

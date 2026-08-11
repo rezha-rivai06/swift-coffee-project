@@ -101,6 +101,12 @@
       </div>
     </section>
 
+    <!-- --- DEMO TOGGLE NAVIGATION (OPSI B) --- -->
+    <div class="demo-spa-nav" style="display: flex; justify-content: center; gap: 16px; margin: 60px 20px 20px 20px; flex-wrap: wrap;">
+      <button id="toggle-takeaway" class="reservasi-btn" style="background-color: #160e0a; color: white; border: 2px solid #160e0a;">🛍️ Menu Takeaway</button>
+      <button id="toggle-dinein" class="reservasi-btn" style="background-color: white; color: #160e0a; border: 2px solid #160e0a;">🍽️ Reservasi Dine-In</button>
+    </div>
+
     <!-- --- MENU SECTION --- -->
     <section class="menu" id="menu">
       <div class="title-kategori-wrapper">
@@ -164,7 +170,7 @@
     </section>
 
     <!-- --- RESERVASI SECTION --- -->
-    <section class="contact reservasi" id="reservasi">
+    <section class="contact reservasi" id="reservasi" style="display: none;">
       <div class="kotak-besar res-kotak">
         <div class="k-kiri res-kiri">
           <span class="title-kiri">Reservasi Meja</span>
@@ -188,48 +194,11 @@
           <button id="btn-cek-reservasi" class="reservasi-btn" style="justify-content: center; width: 100%; padding: 16px;">
             Cek Ketersediaan & Pesan Meja
           </button>
-
-          <!-- DINE-IN MENU AREA -->
-          <div id="res-menu-area" style="display: none;">
-            <span class="title-kiri" style="font-size: 22px; margin-top: 40px; display: block;">Pilih Menu Dine-In</span>
-            <p class="penjelasan" style="margin-bottom: 16px;">Tambahkan pesanan untuk meja Anda sebelum konfirmasi.</p>
-
-            <div class="res-kategori-wrapper">
-              <a class="res-kategori active-res-kategori" data-res-target="minuman">Minuman</a>
-              <a class="res-kategori" data-res-target="makanan">Makanan</a>
-              <a class="res-kategori" data-res-target="snack">Snack</a>
-            </div>
-
-            <div class="res-sub-wrapper">
-              <div class="res-sub-menu" id="res-sub-minuman">
-                <a class="res-sub active-res-sub" data-res-filter="signature"><span>Signature</span></a>
-                <a class="res-sub" data-res-filter="non coffee"><span>Non Coffee</span></a>
-                <a class="res-sub" data-res-filter="iced coffee"><span>Iced Coffee</span></a>
-                <a class="res-sub" data-res-filter="hot coffee"><span>Hot Coffee</span></a>
-                <a class="res-sub" data-res-filter="tea"><span>Tea</span></a>
-              </div>
-              <div class="res-sub-menu hidden" id="res-sub-makanan">
-                <a class="res-sub active-res-sub" data-res-filter="berat"><span>Makanan Berat</span></a>
-                <a class="res-sub" data-res-filter="pasta"><span>Pasta</span></a>
-                <a class="res-sub" data-res-filter="sampingan"><span>Sampingan</span></a>
-              </div>
-              <div class="res-sub-menu hidden" id="res-sub-snack">
-                <a class="res-sub active-res-sub" data-res-filter="gorengan"><span>Gorengan</span></a>
-                <a class="res-sub" data-res-filter="dimsum"><span>Dimsum</span></a>
-                <a class="res-sub" data-res-filter="manis"><span>Manis</span></a>
-                <a class="res-sub" data-res-filter="risoles"><span>Risoles</span></a>
-              </div>
-            </div>
-
-            <div class="res-menu-slider" id="res-menu-slider"></div>
-
-            <button id="btn-checkout-dinein" class="reservasi-btn" style="justify-content: center; width: 100%; padding: 16px; margin-top: 24px;">
-              🍽️ Konfirmasi Reservasi & Pesan
-            </button>
-          </div>
-
         </div>
-        <!-- Gambar dihilangkan untuk UX yang lebih clean dan fokus -->
+        
+        <div class="maps res-gambar">
+          <img src="/frontend/svg/kopi2.jpg" alt="Interior Cafe" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
       </div>
     </section>
 
@@ -310,12 +279,6 @@
         style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
     </div>
 
-    <!-- CART TAB SWITCHER -->
-    <div class="cart-tab-switcher">
-      <button class="cart-tab active-cart-tab" data-tab="takeaway">Takeaway</button>
-      <button class="cart-tab" data-tab="dinein">Dine-In</button>
-    </div>
-
     <div class="cart-items">
 
     </div>
@@ -388,6 +351,42 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- --- SCRIPT DEMO SPA (OPSI B) --- -->
+  <script>
+    const btnTakeaway = document.getElementById("toggle-takeaway");
+    const btnDinein = document.getElementById("toggle-dinein");
+    const secMenu = document.getElementById("menu");
+    const secReservasi = document.getElementById("reservasi");
+
+    // Fungsi untuk mode Takeaway
+    btnTakeaway.addEventListener("click", () => {
+      // Ubah tampilan section
+      secMenu.style.display = "block";
+      secReservasi.style.display = "none";
+      
+      // Ubah styling tombol (Aktif: Hitam, Pasif: Putih)
+      btnTakeaway.style.backgroundColor = "#160e0a";
+      btnTakeaway.style.color = "white";
+      
+      btnDinein.style.backgroundColor = "white";
+      btnDinein.style.color = "#160e0a";
+    });
+
+    // Fungsi untuk mode Dine-In
+    btnDinein.addEventListener("click", () => {
+      // Ubah tampilan section
+      secMenu.style.display = "none";
+      secReservasi.style.display = "block";
+      
+      // Ubah styling tombol (Aktif: Hitam, Pasif: Putih)
+      btnDinein.style.backgroundColor = "#160e0a";
+      btnDinein.style.color = "white";
+      
+      btnTakeaway.style.backgroundColor = "white";
+      btnTakeaway.style.color = "#160e0a";
+    });
+  </script>
 </body>
 
 </html>

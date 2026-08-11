@@ -1,7 +1,6 @@
 /*halaman utama*/
-/* TEST KEENAM: Lanjut terosss! */
-/* TEST KELIMA: Mantap! Kolaborasi Antigravity x VS Code is real! */
-/* TEST KEEMPAT: Gaskeun! */
+
+
 
 * {
   box-sizing: border-box;
@@ -469,6 +468,7 @@ input::-webkit-search-cancel-button {
 .kategori-wrapper {
   margin-top: 40px;
   display: flex;
+  justify-content: center;
   gap: 50px;
   font-size: 16px;
   padding-bottom: 20px;
@@ -991,7 +991,7 @@ section.contact {
   padding-left: 60px;
 }
 
-.get-direction {
+.get-direction, .reservasi-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -1010,7 +1010,7 @@ section.contact {
   transition: all 0.3s ease;
 }
 
-.get-direction:hover {
+.get-direction:hover, .reservasi-btn:hover {
   box-shadow: 0 10px 15px -3px rgba(22, 14, 10, 0.1);
   transform: translateY(-2px);
 }
@@ -1497,7 +1497,158 @@ section.contact {
   gap: 16px;
   margin-bottom: 24px;
 }
+/* === DINE-IN MENU SLIDER & KATEGORI === */
+.res-kategori-wrapper {
+  display: flex;
+  gap: 24px;
+  border-bottom: 2px solid rgba(128, 117, 112, 0.2);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
 
+.res-kategori {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: rgba(78, 69, 64, 0.6);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.active-res-kategori {
+  color: #160e0a;
+  font-weight: bold;
+}
+
+.active-res-kategori::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d35400;
+}
+
+.res-sub-wrapper {
+  margin-bottom: 20px;
+}
+
+.res-sub-menu {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.res-sub-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.res-sub {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid rgba(128, 117, 112, 0.3);
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4e4540;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.active-res-sub {
+  background-color: #160e0a;
+  color: white;
+  border-color: #160e0a;
+}
+
+.res-menu-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 0 24px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.res-menu-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* === KARTU MINI (DINE-IN) === */
+.res-kartu-mini {
+  min-width: 160px;
+  max-width: 160px;
+  background-color: #faf9f6;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.res-kartu-mini .kartu-gambar {
+  aspect-ratio: 1 / 1;
+}
+
+.res-kartu-mini .kartu-info {
+  padding: 16px;
+  gap: 8px;
+}
+
+.res-kartu-mini .kartu-nama {
+  font-size: 15px;
+}
+
+.res-kartu-mini .kartu-harga {
+  font-size: 14px;
+}
+
+.res-kartu-mini .kartu-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
+
+/* === CART TAB SWITCHER === */
+.cart-tab-switcher {
+  display: flex;
+  padding: 0 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-tab {
+  flex: 1;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.active-cart-tab {
+  color: #d35400;
+}
+
+.active-cart-tab::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d35400;
+}
 /* Responsive - 1200px */
 
 @media screen and (max-width: 1280px) {
@@ -2325,7 +2476,7 @@ section.contact {
     margin-right: 12px;
   }
 
-  .get-direction {
+  .get-direction, .reservasi-btn {
     padding: 12px 24px;
     font-size: 14px;
     margin-top: 8px;
