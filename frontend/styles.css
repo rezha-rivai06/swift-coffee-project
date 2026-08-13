@@ -2649,3 +2649,32 @@ section.contact {
     height: 170px;
   }
 }
+
+/* === RINCIAN RESERVASI (DINE-IN) === */
+.rincian-reservasi-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.rincian-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.rincian-label {
+  color: #666;
+  font-weight: 500;
+}
+
+.rincian-value {
+  color: #333;
+  font-weight: 600;
+}
+.hidden {
+  display: none !important;
+}

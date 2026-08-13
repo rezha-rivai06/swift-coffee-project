@@ -176,12 +176,12 @@
           </div>
           <div class="res-baris-dua">
             <div style="flex: 1;">
-              <label for="res-tanggal" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal</label>
+              <label for="res-tanggal" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal Reservasi</label>
               <input type="date" id="res-tanggal" class="res-input">
             </div>
             <div style="flex: 1;">
-              <label for="res-tamu" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jumlah Tamu</label>
-              <input type="number" id="res-tamu" min="1" placeholder="Misal: 4" class="res-input">
+              <label for="res-tamu" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jumlah orang</label>
+              <input type="number" id="res-tamu" min="1" placeholder="Masukkan Jumlah" class="res-input">
             </div>
           </div>
           <p id="res-status" style="font-size: 14px; margin-bottom: 16px; font-weight: 500; height: 20px;"></p>
@@ -194,37 +194,55 @@
             <span class="title-kiri" style="font-size: 22px; margin-top: 40px; display: block;">Pilih Menu Dine-In</span>
             <p class="penjelasan" style="margin-bottom: 16px;">Tambahkan pesanan untuk meja Anda sebelum konfirmasi.</p>
 
-            <div class="res-kategori-wrapper">
-              <a class="res-kategori active-res-kategori" data-res-target="minuman">Minuman</a>
-              <a class="res-kategori" data-res-target="makanan">Makanan</a>
-              <a class="res-kategori" data-res-target="snack">Snack</a>
+            <search>
+              <form style="display: flex; justify-content: center; width: 100%;">
+                <input type="search" id="res-search" placeholder="Cari menu reservasi.." />
+              </form>
+            </search>
+
+            <div class="kategori-wrapper">
+              <a class="kategori-3" href="#reservasi" data-res-target="makanan">Makanan</a>
+              <a class="kategori-4 active-kategori" href="#reservasi" data-res-target="minuman">Minuman</a>
+              <a class="kategori-5" href="#reservasi" data-res-target="snack">Snack</a>
             </div>
 
-            <div class="res-sub-wrapper">
-              <div class="res-sub-menu" id="res-sub-minuman">
-                <a class="res-sub active-res-sub" data-res-filter="signature"><span>Signature</span></a>
-                <a class="res-sub" data-res-filter="non coffee"><span>Non Coffee</span></a>
-                <a class="res-sub" data-res-filter="iced coffee"><span>Iced Coffee</span></a>
-                <a class="res-sub" data-res-filter="hot coffee"><span>Hot Coffee</span></a>
-                <a class="res-sub" data-res-filter="tea"><span>Tea</span></a>
+            <div class="sub-menu-wrapper">
+              <div class="pilihan sub-menu" id="res-sub-minuman">
+                <div class="sliding-highlight"></div>
+                <a class="pilihan-1 active" data-res-filter="signature"><span>Signature</span></a>
+                <a class="pilihan-1" data-res-filter="non coffee"><span>Non Coffee</span></a>
+                <a class="pilihan-1" data-res-filter="iced coffee"><span>Iced Coffee</span></a>
+                <a class="pilihan-1" data-res-filter="hot coffee"><span>Hot Coffee</span></a>
+                <a class="pilihan-1" data-res-filter="tea"><span>Tea</span></a>
               </div>
-              <div class="res-sub-menu hidden" id="res-sub-makanan">
-                <a class="res-sub active-res-sub" data-res-filter="berat"><span>Makanan Berat</span></a>
-                <a class="res-sub" data-res-filter="pasta"><span>Pasta</span></a>
-                <a class="res-sub" data-res-filter="sampingan"><span>Sampingan</span></a>
+
+              <div class="pilihan sub-menu hidden" id="res-sub-makanan">
+                <div class="sliding-highlight"></div>
+                <a class="pilihan-1 active" data-res-filter="berat"><span>Makanan Berat</span></a>
+                <a class="pilihan-1" data-res-filter="pasta"><span>Pasta</span></a>
+                <a class="pilihan-1" data-res-filter="sampingan"><span>Sampingan</span></a>
               </div>
-              <div class="res-sub-menu hidden" id="res-sub-snack">
-                <a class="res-sub active-res-sub" data-res-filter="gorengan"><span>Gorengan</span></a>
-                <a class="res-sub" data-res-filter="dimsum"><span>Dimsum</span></a>
-                <a class="res-sub" data-res-filter="manis"><span>Manis</span></a>
-                <a class="res-sub" data-res-filter="risoles"><span>Risoles</span></a>
+
+              <div class="pilihan sub-menu hidden" id="res-sub-snack">
+                <div class="sliding-highlight"></div>
+                <a class="pilihan-1 active" data-res-filter="gorengan"><span>Gorengan</span></a>
+                <a class="pilihan-1" data-res-filter="dimsum"><span>Dimsum</span></a>
+                <a class="pilihan-1" data-res-filter="manis"><span>Manis</span></a>
+                <a class="pilihan-1" data-res-filter="risoles"><span>Risoles</span></a>
               </div>
+
+              <div class="best-seller-iced">
+                <a class="best-seller" id="res-bs-btn">Best Seller</a>
+                <a class="iced" id="res-i-btn">Iced</a>
+              </div>
+
+              <div class="kartu-menu" id="res-menu-container"></div>
             </div>
 
-            <div class="res-menu-slider" id="res-menu-slider"></div>
+            <button class="lihat-semua" id="res-btn-lihat-semua" type="button" style="display: block; margin: 0 auto;">Lihat Semua Menu</button>
 
             <button id="btn-checkout-dinein" class="reservasi-btn" style="justify-content: center; width: 100%; padding: 16px; margin-top: 24px;">
-              🍽️ Konfirmasi Reservasi & Pesan
+              Konfirmasi Reservasi
             </button>
           </div>
 
@@ -296,9 +314,8 @@
     </section>
   </div>
 
-  <!-- ========================================= -->
+  
   <!-- SLIDING DRAWER CART -->
-  <!-- ========================================= -->
 
   <div class="cart-overlay" id="cart-overlay"></div>
 
@@ -313,7 +330,7 @@
     <!-- CART TAB SWITCHER -->
     <div class="cart-tab-switcher">
       <button class="cart-tab active-cart-tab" data-tab="takeaway">Takeaway</button>
-      <button class="cart-tab" data-tab="dinein">Dine-In</button>
+      <button class="cart-tab" data-tab="dinein">Reservasi</button>
     </div>
 
     <div class="cart-items">
@@ -323,8 +340,31 @@
 
 
     <div class="cart-footer">
-      <div class="cart-summary">
+      <!-- Form Nama Pemesan Khusus Takeaway -->
+      <div id="cart-takeaway-info" style="margin-bottom: 16px; padding: 12px; border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; font-size: 14px;">
+        <label for="nama-pemesan-takeaway" style="display: block; margin-bottom: 6px; font-weight: 600; color: #333;">Nama Pemesan <span style="color:red">*</span></label>
+        <input type="text" id="nama-pemesan-takeaway" placeholder="Masukkan nama kamu" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none;">
+      </div>
 
+      <!-- Rincian Khusus Dine-In (Disembunyikan default) -->
+      <div id="cart-dinein-info" class="hidden" style="margin-bottom: 16px; padding: 12px; border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; font-size: 14px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span style="color: #333; font-weight: 500;">Nama Pemesan:</span>
+          <strong id="cart-info-nama" style="font-weight: 700;">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span style="color: #333; font-weight: 500;">Tanggal:</span>
+          <strong id="cart-info-tanggal" style="font-weight: 700;">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #333; font-weight: 500;">Jumlah Tamu:</span>
+          <strong id="cart-info-tamu" style="font-weight: 700;">-</strong>
+        </div>
+      </div>
+      
+      <div class="cart-summary">
+        <span class="summary-label">Total Pembayaran</span>
+        <span class="summary-total" id="cart-total-price">Rp 0</span>
       </div>
       <button type="button" class="checkout-btn" id="btn-cart">
 
@@ -333,61 +373,16 @@
 
   </div>
 
-  <!-- ========================================= -->
-  <!-- SLIDING DRAWER CHECKOUT -->
-  <!-- ========================================= -->
 
-  <div class="cart-drawer checkout-drawer" id="checkout-drawer">
 
-    <div class="cart-header">
-      <h3>Detail Pesanan</h3>
-      <button id="close-checkout-btn"
-        style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
-    </div>
-
-    <!-- FORMULIR DATA DIRI -->
-    <div class="checkout-form" style="padding: 20px; border-bottom: 1px solid #eee;">
-      <div style="margin-bottom: 12px;">
-        <label for="nama-pemesan"
-          style="display: block; font-size: 14px; margin-bottom: 4px; color: black; font-weight: 600;">Nama Pemesan <span
-            style="color:red">*</span></label>
-        <input type="text" id="nama-pemesan" placeholder="nama kamu"
-          style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box; outline: none; transition: border-color 0.3s;"
-          required>
-      </div>
-      <div style="margin-top: 12px;">
-        <p style="font-size: 13px; color: #d35400; background: #fff5eb; padding: 12px; border-radius: 8px; border-left: 4px solid #d35400; font-weight: 500;">
-          * Pesanan dalam keranjang ini khusus untuk layanan <b>Takeaway</b>.
-        </p>
-        <input type="hidden" id="tipe-pesanan" value="Takeaway">
-      </div>
-    </div>
-
-    <div class="cart-items" id="checkout-items">
-
-    </div>
-
-    <div class="cart-footer">
-      <div class="cart-summary">
-        <span class="summary-label">Total Pesanan</span>
-        <span class="summary-total" id="checkout-total">Rp 0</span>
-      </div>
-      <button type="button" class="checkout-btn" id="btn-buat-pesanan">
-        Buat Pesanan
-      </button>
-    </div>
-
-  </div>
-
-  <!-- ========================================= -->
   <!-- TOAST NOTIFICATION -->
-  <!-- ========================================= -->
   <div id="toast-notif" class="toast-notif">
     <span class="toast-icon"></span>
     <span class="toast-message" id="toast-message">Berhasil ditambahkan ke keranjang!</span>
   </div>
 
   <script src="script.js"></script>
+  <script src="reservasi.js"></script>
 </body>
 
 </html>

@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-// ==========================================
-// MENGIMPOR KOKI DARI DAPUR (BACKEND)
-// ==========================================
 const { ambilDataMenu } = require('../backend/menuLogic');
 const { prosesPesanan } = require('../backend/checkoutLogic');
 const { cekKetersediaan, tambahReservasi } = require('../backend/reservasiLogic');
@@ -58,14 +55,15 @@ app.post('/api/buat-reservasi', (req, res) => {
     const { nama, tanggal, jumlahTamu, pesanan } = req.body;
     const idBooking = tambahReservasi(tanggal, jumlahTamu);
     
-    let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan Reservasi Meja.\n————————————\nNama : ${nama}\nTanggal : ${tanggal}\nJumlah Tamu : ${jumlahTamu} orang\nBooking ID : ${idBooking}\n————————————\n`;
+    let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan Reservasi.\n————————————\nNama : ${nama}\nTanggal : ${tanggal}\nJumlah Tamu : ${jumlahTamu} orang\nBooking ID : ${idBooking}\n————————————\n`;
     
     if (pesanan && pesanan.length > 0) {
       teksWA += `*Pesanan Dine-In:*\n`;
       let total = 0;
       pesanan.forEach(item => {
-        teksWA += `- ${item.jumlah}x ${item.nama} (Rp ${item.harga.toLocaleString('id-ID')})\n`;
-        total += (item.jumlah * item.harga);
+        const harga = item.harga || 0; 
+        teksWA += `- ${item.jumlah}x ${item.nama} (Rp ${harga.toLocaleString('id-ID')})\n`;
+        total += (item.jumlah * harga);
       });
       teksWA += `\n*Total Tagihan: Rp ${total.toLocaleString('id-ID')}*\n————————————\n`;
     }
@@ -84,7 +82,7 @@ app.post('/api/buat-reservasi', (req, res) => {
 
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Server Pelayan API sudah menyala di http://localhost:${PORT}`);
+  console.log(`Server Pelayan API aktif di http://localhost:${PORT}`);
 });
 
 
