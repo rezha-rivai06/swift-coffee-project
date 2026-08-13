@@ -1,5 +1,3 @@
-// RESERVASI.JS - Logika Kloning Menu Khusus Reservasi
-
 let batasTampilRes = 4;
 let pesanKosongRes;
 
@@ -37,10 +35,16 @@ function saringKartuMenuRes(kategoriYangDipilih) {
 
   const lihatsemuabtn = document.getElementById("res-btn-lihat-semua");
   if (lihatsemuabtn) {
-    if (jumlahmenutampil >= totalRelevan) {
-      lihatsemuabtn.textContent = "Lihat Lebih Sedikit";
+ 
+    if (totalRelevan <= 4) {
+      lihatsemuabtn.style.display = "none";
     } else {
-      lihatsemuabtn.textContent = "Lihat Semua Menu";
+      lihatsemuabtn.style.display = "block";
+      if (jumlahmenutampil >= totalRelevan) {
+        lihatsemuabtn.textContent = "Lihat Lebih Sedikit";
+      } else {
+        lihatsemuabtn.textContent = "Lihat Semua Menu";
+      }
     }
   }
 }
@@ -52,7 +56,9 @@ resKategoriUtama.forEach(function (kategori) {
     e.preventDefault();
 
     const searchInput = document.getElementById("res-search");
-    if (searchInput && searchInput.value.trim() !== "") return;
+    if (searchInput && searchInput.value.trim() !== "" && e.isTrusted) {
+      searchInput.value = "";
+    }
 
     resKategoriUtama.forEach(function (k) {
       k.classList.remove("active-kategori");
@@ -72,7 +78,7 @@ resKategoriUtama.forEach(function (kategori) {
     const semuaSubMenu = document.querySelectorAll("#res-menu-area .sub-menu");
     semuaSubMenu.forEach(function (menu) {
       menu.classList.add("hidden");
-    });
+    }); 
 
     const subMenuYangMauDibuka = document.getElementById(idSubMenuTarget);
     if (subMenuYangMauDibuka) {
@@ -80,6 +86,10 @@ resKategoriUtama.forEach(function (kategori) {
 
       setTimeout(function () {
         geserKotakHitamRes(subMenuYangMauDibuka);
+        
+        // Jangan klik sub-menu pertama secara otomatis jika ini dipicu oleh pencarian (programmatic)
+        if (searchInput && searchInput.value.trim() !== "" && !e.isTrusted) return;
+        
         const tombolPertama = subMenuYangMauDibuka.querySelector(".pilihan-1");
         if (tombolPertama) {
           tombolPertama.click();
@@ -96,7 +106,21 @@ resTombolSubMenu.forEach(function (tombol) {
     e.preventDefault();
 
     const searchInput = document.getElementById("res-search");
-    if (searchInput && searchInput.value.trim() !== "") return;
+    if (searchInput && searchInput.value.trim() !== "") {
+      if (e.isTrusted) {
+        searchInput.value = "";
+      } else {
+        // Klik terprogram dari pencarian. Hanya perbarui UI, jangan jalankan saringKartuMenuRes
+        const subMenuInduk = tombol.closest(".sub-menu");
+        const tombolLainnya = subMenuInduk.querySelectorAll(".pilihan-1");
+        tombolLainnya.forEach(function (t) {
+          t.classList.remove("active");
+        });
+        tombol.classList.add("active");
+        geserKotakHitamRes(subMenuInduk);
+        return;
+      }
+    }
 
     const subMenuInduk = tombol.closest(".sub-menu");
     const tombolLainnya = subMenuInduk.querySelectorAll(".pilihan-1");
@@ -199,7 +223,7 @@ if(resSearchbox) {
       let kategoriAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
 
       if (!kategoriAktif) {
-        kategoriAktif = document.querySelector('#res-menu-area .kategori-wrapper a[data-res-target="minuman"]');
+        kategoriAktif = document.querySelector('#res-menu-area .kategori-wrapper a[data-res-target="makanan"]');
       }
 
       if (kategoriAktif) {
@@ -229,6 +253,9 @@ if(resBestsellerbtn) {
     } else {
       if(resIcedbtn) resIcedbtn.classList.remove("active");
       resBestsellerbtn.classList.add("active");
+
+      const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
+      if (resLihatsemuabtn) resLihatsemuabtn.style.display = "none";
 
       const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
       const subAktif = tombolAktif ? tombolAktif.getAttribute("data-res-filter") : "";
@@ -263,23 +290,25 @@ if(resIcedbtn) {
       }
 
     } else {
-      if(resBestsellerbtn) resBestsellerbtn.classList.remove("active");
-      resIcedbtn.classList.add("active");
+      document.querySelector('#res-menu-area .kategori-wrapper a[data-res-target="minuman"]').click();
 
-      const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
-      const subAktif = tombolAktif ? tombolAktif.getAttribute("data-res-filter") : "";
+      setTimeout(() => {
+        if(resBestsellerbtn) resBestsellerbtn.classList.remove("active");
+        resIcedbtn.classList.add("active");
 
-      targetkartu.forEach(function (kartu) {
-        const isiteks = kartu.innerText.toLowerCase();
-        const subKartu = kartu.getAttribute("data-sub");
-        const sesuaiSub = subAktif === "" || subKartu === subAktif;
+        const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
+        if (resLihatsemuabtn) resLihatsemuabtn.style.display = "none";
 
-        if (isiteks.includes("iced") && sesuaiSub) {
-          kartu.style.display = "block";
-        } else {
-          kartu.style.display = "none";
-        }
-      });
+        targetkartu.forEach(function (kartu) {
+          const isiTeks = kartu.innerText.toLowerCase();
+
+          if (isiTeks.includes("iced")) {
+            kartu.style.display = "block";
+          } else {
+            kartu.style.display = "none";
+          }
+        });
+      }, 20);
     }
   });
 }
@@ -375,7 +404,7 @@ async function loadMenuDineInClone() {
     }
     
     // Trigger initial filter
-    const firstCat = document.querySelector('#res-menu-area .kategori-wrapper a[data-res-target="minuman"]');
+    const firstCat = document.querySelector('#res-menu-area .kategori-wrapper a.active-kategori');
     if (firstCat) {
       firstCat.click();
     }

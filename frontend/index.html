@@ -114,15 +114,15 @@
         </search>
 
         <div class="kategori-wrapper">
-          <a class="kategori-3" href="#menu" data-target="makanan">Makanan</a>
-          <a class="kategori-4 active-kategori" href="#menu" data-target="minuman">Minuman</a>
+          <a class="kategori-3 active-kategori" href="#menu" data-target="makanan">Makanan</a>
+          <a class="kategori-4" href="#menu" data-target="minuman">Minuman</a>
           <a class="kategori-5" href="#menu" data-target="snack">Snack</a>
         </div>
 
         <div class="sub-menu-wrapper">
 
           <!-- Sub-menu Minuman -->
-          <div class="pilihan sub-menu" id="sub-minuman">
+          <div class="pilihan sub-menu hidden" id="sub-minuman">
             <div class="sliding-highlight"></div>
             <a class="pilihan-1 active" data-filter="signature"><span>Signature</span></a>
             <a class="pilihan-1" data-filter="non coffee"><span>Non Coffee</span></a>
@@ -132,7 +132,7 @@
           </div>
 
           <!-- Sub-menu Makanan -->
-          <div class="pilihan sub-menu hidden" id="sub-makanan">
+          <div class="pilihan sub-menu" id="sub-makanan">
             <div class="sliding-highlight"></div>
             <a class="pilihan-1 active" data-filter="berat"><span>Makanan Berat</span></a>
             <a class="pilihan-1" data-filter="pasta"><span>Pasta</span></a>
@@ -159,7 +159,7 @@
           </div>
         </div>
 
-        <button class="lihat-semua" id="btn-lihat-semua" type="button">Lihat Semua Menu</button>
+        <button class="lihat-semua" id="btn-lihat-semua" type="button" style="margin-top: 40px;">Lihat Semua Menu</button>
       </div>
     </section>
 
@@ -176,11 +176,11 @@
           </div>
           <div class="res-baris-dua">
             <div style="flex: 1;">
-              <label for="res-tanggal" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal Reservasi</label>
+              <label for="res-tanggal" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal Reservasi <span id="err-tanggal" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
               <input type="date" id="res-tanggal" class="res-input">
             </div>
             <div style="flex: 1;">
-              <label for="res-tamu" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jumlah orang</label>
+              <label for="res-tamu" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jumlah orang <span id="err-tamu" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
               <input type="number" id="res-tamu" min="1" placeholder="Masukkan Jumlah" class="res-input">
             </div>
           </div>
@@ -191,8 +191,10 @@
 
           <!-- DINE-IN MENU AREA -->
           <div id="res-menu-area" style="display: none;">
-            <span class="title-kiri" style="font-size: 22px; margin-top: 40px; display: block;">Pilih Menu Dine-In</span>
-            <p class="penjelasan" style="margin-bottom: 16px;">Tambahkan pesanan untuk meja Anda sebelum konfirmasi.</p>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-bottom: 32px; margin-top: 40px;">
+              <span class="title-kiri" style="font-size: 22px; margin-bottom: 8px;">Pilih Menu Dine-In</span>
+              <p class="penjelasan" style="margin-bottom: 0;">Tambahkan pesanan untuk meja Anda sebelum konfirmasi.</p>
+            </div>
 
             <search>
               <form style="display: flex; justify-content: center; width: 100%;">
@@ -201,13 +203,13 @@
             </search>
 
             <div class="kategori-wrapper">
-              <a class="kategori-3" href="#reservasi" data-res-target="makanan">Makanan</a>
-              <a class="kategori-4 active-kategori" href="#reservasi" data-res-target="minuman">Minuman</a>
+              <a class="kategori-3 active-kategori" href="#reservasi" data-res-target="makanan">Makanan</a>
+              <a class="kategori-4" href="#reservasi" data-res-target="minuman">Minuman</a>
               <a class="kategori-5" href="#reservasi" data-res-target="snack">Snack</a>
             </div>
 
             <div class="sub-menu-wrapper">
-              <div class="pilihan sub-menu" id="res-sub-minuman">
+              <div class="pilihan sub-menu hidden" id="res-sub-minuman">
                 <div class="sliding-highlight"></div>
                 <a class="pilihan-1 active" data-res-filter="signature"><span>Signature</span></a>
                 <a class="pilihan-1" data-res-filter="non coffee"><span>Non Coffee</span></a>
@@ -216,7 +218,7 @@
                 <a class="pilihan-1" data-res-filter="tea"><span>Tea</span></a>
               </div>
 
-              <div class="pilihan sub-menu hidden" id="res-sub-makanan">
+              <div class="pilihan sub-menu" id="res-sub-makanan">
                 <div class="sliding-highlight"></div>
                 <a class="pilihan-1 active" data-res-filter="berat"><span>Makanan Berat</span></a>
                 <a class="pilihan-1" data-res-filter="pasta"><span>Pasta</span></a>
@@ -239,7 +241,7 @@
               <div class="kartu-menu" id="res-menu-container"></div>
             </div>
 
-            <button class="lihat-semua" id="res-btn-lihat-semua" type="button" style="display: block; margin: 0 auto;">Lihat Semua Menu</button>
+            <button class="lihat-semua" id="res-btn-lihat-semua" type="button" style="display: block; margin: 40px auto 0;">Lihat Semua Menu</button>
 
             <button id="btn-checkout-dinein" class="reservasi-btn" style="justify-content: center; width: 100%; padding: 16px; margin-top: 24px;">
               Konfirmasi Reservasi

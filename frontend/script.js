@@ -29,7 +29,7 @@ function geserKotakHitam(subMenuAktif) {
 }
 
 function saringKartuMenu(kategoriYangDipilih) {
-  const semuaKartu = document.querySelectorAll(".kartu-menu-1");
+  const semuaKartu = document.querySelectorAll("#menu-container .kartu-menu-1");
   let jumlahmenutampil = 0;
   let totalRelevan = 0;
 
@@ -52,22 +52,42 @@ function saringKartuMenu(kategoriYangDipilih) {
 
   const lihatsemuabtn = document.getElementById("btn-lihat-semua");
   if (lihatsemuabtn) {
-    if (jumlahmenutampil >= totalRelevan) {
-      lihatsemuabtn.textContent = "Lihat Lebih Sedikit";
+
+    if (totalRelevan <= 4) {
+      lihatsemuabtn.style.display = "none";
     } else {
-      lihatsemuabtn.textContent = "Lihat Semua Menu";
+      lihatsemuabtn.style.display = "block";
+      if (jumlahmenutampil >= totalRelevan) {
+        lihatsemuabtn.textContent = "Lihat Lebih Sedikit";
+      } else {
+        lihatsemuabtn.textContent = "Lihat Semua Menu";
+      }
     }
   }
 }
 
-const semuaTombolSubMenu = document.querySelectorAll(".pilihan-1");
+const semuaTombolSubMenu = document.querySelectorAll("#menu .pilihan-1");
 
 semuaTombolSubMenu.forEach(function (tombol) {
   tombol.addEventListener("click", function (e) {
     e.preventDefault();
 
     const searchInput = document.getElementById("search");
-    if (searchInput && searchInput.value.trim() !== "") return;
+    if (searchInput && searchInput.value.trim() !== "") {
+      if (e.isTrusted) {
+        searchInput.value = "";
+      } else {
+        // Klik terprogram dari pencarian. Hanya perbarui UI, jangan jalankan saringKartuMenu (agar hasil cari tidak tertimpa)
+        const subMenuInduk = tombol.closest(".sub-menu");
+        const tombolLainnya = subMenuInduk.querySelectorAll(".pilihan-1");
+        tombolLainnya.forEach(function (t) {
+          t.classList.remove("active");
+        });
+        tombol.classList.add("active");
+        geserKotakHitam(subMenuInduk);
+        return;
+      }
+    }
 
     const subMenuInduk = tombol.closest(".sub-menu");
     const tombolLainnya = subMenuInduk.querySelectorAll(".pilihan-1");
@@ -91,14 +111,16 @@ semuaTombolSubMenu.forEach(function (tombol) {
   });
 });
 
-const semuaKategoriUtama = document.querySelectorAll(".kategori-wrapper a");
+const semuaKategoriUtama = document.querySelectorAll("#menu .kategori-wrapper a");
 
 semuaKategoriUtama.forEach(function (kategori) {
   kategori.addEventListener("click", function (e) {
     e.preventDefault();
 
     const searchInput = document.getElementById("search");
-    if (searchInput && searchInput.value.trim() !== "") return;
+    if (searchInput && searchInput.value.trim() !== "" && e.isTrusted) {
+      searchInput.value = "";
+    }
 
     semuaKategoriUtama.forEach(function (k) {
       k.classList.remove("active-kategori");
@@ -115,7 +137,7 @@ semuaKategoriUtama.forEach(function (kategori) {
     const namaTarget = kategori.getAttribute("data-target");
     const idSubMenuTarget = "sub-" + namaTarget;
 
-    const semuaSubMenu = document.querySelectorAll(".sub-menu");
+    const semuaSubMenu = document.querySelectorAll("#menu .sub-menu");
     semuaSubMenu.forEach(function (menu) {
       menu.classList.add("hidden");
     });
@@ -126,6 +148,10 @@ semuaKategoriUtama.forEach(function (kategori) {
 
       setTimeout(function () {
         geserKotakHitam(subMenuYangMauDibuka);
+        
+        // Jangan klik sub-menu pertama secara otomatis jika ini dipicu oleh pencarian (programmatic)
+        if (searchInput && searchInput.value.trim() !== "" && !e.isTrusted) return;
+        
         const tombolPertama = subMenuYangMauDibuka.querySelector(".pilihan-1");
         if (tombolPertama) {
           tombolPertama.click();
@@ -135,22 +161,11 @@ semuaKategoriUtama.forEach(function (kategori) {
   });
 });
 
-// INITIALIZATION ON LOAD & RESIZE
 window.addEventListener("DOMContentLoaded", function () {
-  const subMenuAwal = document.querySelector(".sub-menu:not(.hidden)");
-  if (subMenuAwal) {
-    geserKotakHitam(subMenuAwal);
-
-    const tombolAktifAwal = subMenuAwal.querySelector(".pilihan-1.active");
-    if (tombolAktifAwal) {
-      const nilaiFilterAwal = tombolAktifAwal.getAttribute("data-filter");
-      saringKartuMenu(nilaiFilterAwal);
-    }
-  }
 });
 
 window.addEventListener("resize", function () {
-  const subMenuAktif = document.querySelector(".sub-menu:not(.hidden)");
+  const subMenuAktif = document.querySelector("#menu .sub-menu:not(.hidden)");
   if (subMenuAktif) {
     geserKotakHitam(subMenuAktif);
   }
@@ -190,10 +205,10 @@ searchbox.addEventListener("input", function (teksketik) {
     const lihatsemuabtn = document.getElementById("btn-lihat-semua");
     if (lihatsemuabtn) lihatsemuabtn.style.display = "block"; // Munculkan kembali
 
-    let kategoriAktif = document.querySelector(".kategori-wrapper a.active-kategori");
+    let kategoriAktif = document.querySelector("#menu .kategori-wrapper a.active-kategori");
 
     if (!kategoriAktif) {
-      kategoriAktif = document.querySelector('.kategori-wrapper a[data-target="minuman"]');
+      kategoriAktif = document.querySelector('#menu .kategori-wrapper a[data-target="makanan"]');
     }
 
     if (kategoriAktif) {
@@ -209,7 +224,7 @@ searchbox.addEventListener("keydown", function (e) {
     const teksDiketik = searchbox.value.toLowerCase();
     let menuTidakDitemukan = true;
     let subKategoriDitemukan = "";
-    const ambilsemuakartu = document.querySelectorAll(".kartu-menu-1");
+    const ambilsemuakartu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
     ambilsemuakartu.forEach(function (kartu) {
       const ambilnamakartu = kartu.querySelector(".kartu-nama").innerText.toLowerCase();
@@ -234,11 +249,11 @@ searchbox.addEventListener("keydown", function (e) {
       const lihatsemuabtn = document.getElementById("btn-lihat-semua");
       if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
 
-      document.querySelectorAll(".kategori-wrapper a").forEach(k => k.classList.remove("active-kategori"));
-      document.querySelectorAll(".pilihan-1").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".sliding-highlight").forEach(k => k.style.width = "0px");
+      document.querySelectorAll("#menu .kategori-wrapper a").forEach(k => k.classList.remove("active-kategori"));
+      document.querySelectorAll("#menu .pilihan-1").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll("#menu .sliding-highlight").forEach(k => k.style.width = "0px");
 
-      const semuaSubMenu = document.querySelectorAll(".sub-menu");
+      const semuaSubMenu = document.querySelectorAll("#menu .sub-menu");
       if (semuaSubMenu) {
         semuaSubMenu.forEach(function (menu) {
           menu.classList.add("hidden");
@@ -270,12 +285,12 @@ const bestsellerbtn = document.getElementById("bs-btn");
 bestsellerbtn.addEventListener("click", function (e) {
   e.preventDefault();
 
-  const targetkartu = document.querySelectorAll(".kartu-menu-1");
+  const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
   if (bestsellerbtn.classList.contains("active")) {
     bestsellerbtn.classList.remove("active");
 
-    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
+    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
     if (tombolAktif) {
       saringKartuMenu(tombolAktif.getAttribute("data-filter"));
     }
@@ -283,8 +298,11 @@ bestsellerbtn.addEventListener("click", function (e) {
   } else {
     icedbtn.classList.remove("active");
     bestsellerbtn.classList.add("active");
+    
+    const lihatsemuabtn = document.getElementById("btn-lihat-semua");
+    if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
 
-    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
+    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
     const subAktif = tombolAktif ? tombolAktif.getAttribute("data-filter") : "";
 
     targetkartu.forEach(function (kartu) {
@@ -306,34 +324,37 @@ const icedbtn = document.getElementById("i-btn");
 
 icedbtn.addEventListener("click", function (e) {
   e.preventDefault();
-  const targetkartu = document.querySelectorAll(".kartu-menu-1");
+  const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
   if (icedbtn.classList.contains("active")) {
     icedbtn.classList.remove("active");
 
-    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
+    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
     if (tombolAktif) {
       saringKartuMenu(tombolAktif.getAttribute("data-filter"));
     }
 
   } else {
-    bestsellerbtn.classList.remove("active");
-    icedbtn.classList.add("active");
+      document.querySelector('.kategori-wrapper a[data-target="minuman"]').click();
 
-    const tombolAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active");
-    const subAktif = tombolAktif ? tombolAktif.getAttribute("data-filter") : "";
+      setTimeout (() => {
+        bestsellerbtn.classList.remove("active");
+        icedbtn.classList.add("active");
 
-    targetkartu.forEach(function (kartu) {
-      const isiteks = kartu.innerText.toLowerCase();
-      const subKartu = kartu.getAttribute("data-sub");
-      const sesuaiSub = subAktif === "" || subKartu === subAktif;
+        const lihatsemuabtn = document.getElementById("btn-lihat-semua");
+        if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
 
-      if (isiteks.includes("iced") && sesuaiSub) {
-        kartu.style.display = "block";
-      } else {
-        kartu.style.display = "none";
-      }
-    });
+          targetkartu.forEach( function (kartu) {
+            const isiTeks = kartu.innerText.toLowerCase();
+
+            if (isiTeks.includes("iced")) {
+              kartu.style.display = "block";
+              
+            } else {
+              kartu.style.display = "none";
+            }
+          });
+      }, 20);
   }
 });
 
@@ -394,7 +415,10 @@ async function loadMenu() {
 
     });
 
-    saringKartuMenu("signature");
+    const kategoriAktif = document.querySelector('#menu .kategori-wrapper a.active-kategori');
+    if (kategoriAktif) {
+      kategoriAktif.click();
+    }
 
     // LOGIKA KERANJANG DINAMIS & LOCAL STORAGE
 
@@ -745,6 +769,39 @@ reservasibtn.addEventListener("click", async function (e) {
   const nama = document.getElementById("res-nama").value.trim();
   const tanggal = document.getElementById("res-tanggal").value;
   const tamu = document.getElementById("res-tamu").value;
+  const errTanggal = document.getElementById("err-tanggal");
+  const errTamu = document.getElementById("err-tamu");
+
+  errTanggal.style.display = "none";
+  errTamu.style.display = "none";
+
+  let adaError = false;
+
+  if (tanggal !== "") {
+    const tanggalInput = new Date(tanggal);
+    const tanggalHariIni = new Date();
+    tanggalHariIni.setHours(0, 0, 0, 0);
+
+    if (tanggalInput < tanggalHariIni) {
+      errTanggal.style.display = "inline";
+      adaError = true;
+    }
+  }
+
+  if (tamu !== "") {
+    const jumlahTamu = parseInt(tamu);
+
+    if (jumlahTamu <= 0) {
+      errTamu.style.display = "inline";
+      adaError = true;
+    }
+  }
+
+  if (adaError) {
+    statusTeks.innerText = "";
+    return;
+  }
+
 
   if (nama === "" || tanggal === "" || tamu === "") {
     statusTeks.textContent = "Mohon lengkapi semua data reservasi terlebih dahulu.";

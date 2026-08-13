@@ -70,7 +70,7 @@ app.post('/api/buat-reservasi', (req, res) => {
     
     teksWA += `Terima kasih!`;
     
-    const linkWA = "https://wa.me/6281234567890?text=" + encodeURIComponent(teksWA);
+    const linkWA = "https://wa.me/61346851655?text=" + encodeURIComponent(teksWA);
     
     res.json({ sukses: true, linkWA: linkWA });
   } catch (error) {
