@@ -3,6 +3,35 @@ const cartBtn = document.getElementById("btn");
 const hamburger = document.getElementById("hamburger");
 const link = document.getElementById("link");
 let batasTampil = 4;
+let isiKeranjang = [];
+
+function showToast(msg) {
+  const toastContainer = document.getElementById("toast-notif");
+  const pesantoast = document.getElementById("toast-message");
+  if (toastContainer && pesantoast) {
+    pesantoast.innerText = msg;
+    toastContainer.classList.add("show");
+    setTimeout(() => {
+      toastContainer.classList.remove("show");
+    }, 3000);
+  }
+}
+
+function updateBadgeKeranjang() {
+  const badgekeranjang = document.getElementById("cart-badge");
+  const humbergerbadge = document.getElementById("humberger-badge");
+  if (badgekeranjang && humbergerbadge) {
+    badgekeranjang.innerText = isiKeranjang.length;
+    humbergerbadge.innerText = isiKeranjang.length;
+    if (isiKeranjang.length > 0) {
+      badgekeranjang.classList.remove("hidden");
+      humbergerbadge.classList.remove("hidden");
+    } else {
+      badgekeranjang.classList.add("hidden");
+      humbergerbadge.classList.add("hidden");
+    }
+  }
+}
 
 // NAVBAR & MOBILE MENU
 hamburger.addEventListener("click", function () {
@@ -24,7 +53,9 @@ function geserKotakHitam(subMenuAktif) {
 
   if (kotakHitam && tombolAktif) {
     kotakHitam.style.width = tombolAktif.offsetWidth + "px";
+    kotakHitam.style.height = tombolAktif.offsetHeight + "px";
     kotakHitam.style.left = tombolAktif.offsetLeft + "px";
+    kotakHitam.style.top = tombolAktif.offsetTop + "px";
   }
 }
 
@@ -381,7 +412,7 @@ lihatsemuabtn.addEventListener("click", function (e) {
   saringKartuMenu(namaKategoriSaatIni);
 });
 
-// DYNAMIC MENU FETCH (MOCK API)
+// DYNAMIC MENU
 async function loadMenu() {
   try {
     const respons = await fetch('http://localhost:5000/api/menu');
@@ -425,25 +456,11 @@ async function loadMenu() {
     let activeCartTab = "takeaway";
 
     const datastorage = localStorage.getItem("keranjangCafe");
-    let isiKeranjang;
 
     if (datastorage) {
       isiKeranjang = JSON.parse(datastorage);
-
-      const badgekeranjang = document.getElementById("cart-badge");
-      const humbergerbadge = document.getElementById("humberger-badge");
-
-      if (isiKeranjang.length > 0) {
-        badgekeranjang.innerText = isiKeranjang.length;
-        humbergerbadge.innerText = isiKeranjang.length;
-
-        badgekeranjang.classList.remove("hidden");
-        humbergerbadge.classList.remove("hidden");
-      }
-
+      updateBadgeKeranjang();
       renderKeranjang();
-    } else {
-      isiKeranjang = [];
     }
 
     const tombolpluskartu = document.querySelectorAll(".kartu-btn");
@@ -479,18 +496,13 @@ async function loadMenu() {
         // NOTIFIKASI TOAST & BADGE KERANJANG
         const toastContainer = document.getElementById("toast-notif");
         const pesantoast = document.getElementById("toast-message");
-        const badgekeranjang = document.getElementById("cart-badge");
-        const humberger = document.getElementById("humberger-badge");
-
+        
         pesantoast.innerText = namaBarang + " dimasukkan ke keranjang";
         toastContainer.classList.add("show");
 
         setTimeout(function () {
           toastContainer.classList.remove("show");
-          badgekeranjang.innerText = isiKeranjang.length;
-          badgekeranjang.classList.remove("hidden");
-          humberger.innerText = isiKeranjang.length;
-          humberger.classList.remove("hidden");
+          updateBadgeKeranjang();
         }, 2000);
       });
     });
@@ -634,6 +646,8 @@ async function loadMenu() {
         const namaBarang = btnDelete.dataset.nama;
 
         isiKeranjang = isiKeranjang.filter(item => !(item.nama === namaBarang && (item.tipe || "takeaway") === activeCartTab));
+        localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
+        updateBadgeKeranjang();
         renderKeranjang();
       }
     }); 
@@ -649,6 +663,7 @@ async function loadMenu() {
         if (activeCartTab === "dinein") {
           const resNama = document.getElementById("res-nama").value.trim();
           const resTanggal = document.getElementById("res-tanggal").value;
+          const resJam = document.getElementById("res-jam").value;
           const resTamu = document.getElementById("res-tamu").value;
           const pesananDineIn = isiKeranjang.filter(item => item.tipe === "dinein");
           
@@ -662,24 +677,24 @@ async function loadMenu() {
           btnCart.disabled = true;
 
           try {
-            const resp = await fetch("http://localhost:5000/api/buat-reservasi", {
+            const res = await fetch("http://localhost:5000/api/buat-reservasi", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ nama: resNama, tanggal: resTanggal, jumlahTamu: resTamu, pesanan: pesananDineIn })
+              body: JSON.stringify({ nama: resNama, tanggal: resTanggal, jam: resJam, jumlahTamu: resTamu, pesanan: pesananDineIn })
             });
-            const dataBuat = await resp.json();
+            const dataBuat = await res.json();
             if (dataBuat.sukses) {
               isiKeranjang = isiKeranjang.filter(item => item.tipe !== "dinein");
               localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
               window.open(dataBuat.linkWA, '_blank');
               window.location.reload();
             } else {
-              alert("Gagal membuat reservasi.");
+              showToast("Gagal membuat reservasi.");
               btnCart.innerText = "Buat Pesanan";
               btnCart.disabled = false;
             }
           } catch(err) {
-            alert("Error server saat reservasi!");
+            showToast("Error server saat reservasi!");
             btnCart.innerText = "Buat Pesanan";
             btnCart.disabled = false;
           }
@@ -769,11 +784,15 @@ reservasibtn.addEventListener("click", async function (e) {
   const nama = document.getElementById("res-nama").value.trim();
   const tanggal = document.getElementById("res-tanggal").value;
   const tamu = document.getElementById("res-tamu").value;
+  const jam = document.getElementById("res-jam").value;
+
   const errTanggal = document.getElementById("err-tanggal");
   const errTamu = document.getElementById("err-tamu");
+  const errJam = document.getElementById("err-jam");
 
   errTanggal.style.display = "none";
   errTamu.style.display = "none";
+  errJam.style.display = "none";
 
   let adaError = false;
 
@@ -783,8 +802,19 @@ reservasibtn.addEventListener("click", async function (e) {
     tanggalHariIni.setHours(0, 0, 0, 0);
 
     if (tanggalInput < tanggalHariIni) {
+      errTanggal.innerText = "pilih waktu kedepan";
       errTanggal.style.display = "inline";
       adaError = true;
+    } else {
+      const batasMaksimal = new Date(tanggalHariIni);
+      batasMaksimal.setDate(batasMaksimal.getDate() + 14);
+
+      if (tanggalInput > batasMaksimal) {
+        errTanggal.innerText = "batas maksimal reservasi hanya 14 hari kedepan";
+        errTanggal.style.display = "inline";
+        adaError = true;
+      }
+
     }
   }
 
@@ -797,26 +827,52 @@ reservasibtn.addEventListener("click", async function (e) {
     }
   }
 
+  if (jam !== "" && tanggal !== "") {
+    const jamPisah = jam.split(":");
+    const jamAngka = parseInt(jamPisah[0]);
+    const hari = new Date(tanggal).getDay();
+
+    if (hari === 1) {
+      errTanggal.innerText = "Maaf, Cafe tutup setiap hari senin";
+      errTanggal.style.display = "inline";
+      adaError = true;
+    } else if (hari >= 2 && hari <= 5) {
+      if (jamAngka < 9 || jamAngka > 21) {
+        errJam.innerText = "Jam operasional 09:00 - 22.00";
+        errJam.style.display = "inline";
+        adaError = true;
+      }
+    } else if (hari === 6 || hari === 0) {
+      if (jamAngka < 9 || jamAngka > 22){
+        errJam.innerText = "Jam operasional Akhir Pekan 09:00 - 23:00";
+        errJam.style.display = "inline";
+        adaError = true;
+      }
+    }
+  }
+
   if (adaError) {
     statusTeks.innerText = "";
     return;
   }
 
-
-  if (nama === "" || tanggal === "" || tamu === "") {
+  if (nama === "" || tanggal === "" || tamu === "" || jam === "") {
     statusTeks.textContent = "Mohon lengkapi semua data reservasi terlebih dahulu.";
     statusTeks.style.color = "red";
     return;
   }
 
   try {
+    reservasibtn.innerText = "Mengecek..."
+    reservasibtn.disabled = true;
+
     statusTeks.textContent = "Mengecek ketersediaan kursi...";
     statusTeks.style.color = "blue";
 
     const responseCek = await fetch("http://localhost:5000/api/cek-reservasi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tanggal: tanggal, jumlahTamu: tamu })
+      body: JSON.stringify({ tanggal: tanggal, jam: jam, jumlahTamu: tamu })
     });
     
     const dataCek = await responseCek.json();
@@ -830,22 +886,19 @@ reservasibtn.addEventListener("click", async function (e) {
     statusTeks.textContent = "Kursi tersedia! Silakan pilih menu di bawah lalu konfirmasi.";
     statusTeks.style.color = "green";
 
-    // MUNCULKAN MENU DINE-IN DAN SCROLL
     const resMenuArea = document.getElementById("res-menu-area");
     if (resMenuArea) {
       resMenuArea.style.display = "block";
       resMenuArea.scrollIntoView({ behavior: "smooth" });
-      
-      const slider = document.getElementById("res-menu-slider");
-      if (slider && slider.children.length === 0) {
-        
-      }
     }
 
   } catch (error) {
     console.error("Gagal terhubung ke API:", error);
     statusTeks.textContent = "Gagal!";
     statusTeks.style.color = "red";
+  } finally {
+    reservasibtn.innerText = "Cek Ketersediaan";
+    reservasibtn.disabled = false;
   }
 });
 
@@ -866,7 +919,7 @@ if (btnCheckoutDinein) {
     const summarytamu = document.querySelector('#summary-tamu');
 
     if (nama === "" || tanggal === "" || tamu === "") {
-      alert('harp lengkapi data pemesanan terlebih dahulu');
+      showToast("Harap lengkapi data pemesanan terlebih dahulu");
 
       return;
     }
@@ -893,8 +946,8 @@ if (btnCheckoutDinein) {
       totalDinein += item.harga * item.jumlah;
     });
 
-    const checkoutTotalElement = document.getElementById('checkout-total');
-    checkoutTotalElement.textContent = "Rp " + totalDinein.toLocaleString('id-ID');
+    const checkoutTotalElement = document.getElementById('cart-total-price');
+    if (checkoutTotalElement) checkoutTotalElement.textContent = "Rp " + totalDinein.toLocaleString('id-ID');
 
     document.getElementById("checkout-drawer").classList.add("active");
     document.getElementById('tipe-pesanan').value = "Dinein";
@@ -905,18 +958,34 @@ if (btnCheckoutDinein) {
 }
 
 // GET DIRECTION LOGIC BUTTON
-const getdirectionbtn = document.querySelector(".get-direction");
+const getDirectionBtn = document.getElementById('get-direction-btn');
+if (getDirectionBtn) {
+  getDirectionBtn.addEventListener('click', () => {
+    window.open('https://maps.app.goo.gl/9Qd4H6nL2H4F3P5h7', '_blank');
+  });
+}
 
-getdirectionbtn.addEventListener("click", function (e) {
-  e.preventDefault();
+// =========================================
+// FITUR UX: AUTO-SAVE FORM RESERVASI
+// =========================================
+document.addEventListener("DOMContentLoaded", function() {
+  const inputNama = document.getElementById("res-nama");
+  const inputTanggal = document.getElementById("res-tanggal");
+  const inputJam = document.getElementById("res-jam");
+  const inputTamu = document.getElementById("res-tamu");
 
-  const mapsswiftcoffee = "https://maps.app.goo.gl/ENBFCxDhLW8HL5vG9";
-  const userAgent = navigator.userAgent.toLowerCase();
+  if (inputNama && inputTanggal && inputJam && inputTamu) {
+    // Muat data yang tersimpan sebelumnya (kalau ada)
+    inputNama.value = localStorage.getItem("draft_nama") || "";
+    inputTanggal.value = localStorage.getItem("draft_tanggal") || "";
+    inputJam.value = localStorage.getItem("draft_jam") || "";
+    inputTamu.value = localStorage.getItem("draft_tamu") || "";
 
-  if (userAgent.includes("android") || userAgent.includes("iphone") || userAgent.includes("ipad")) {
-    window.open(mapsswiftcoffee, "_blank");
-  } else {
-    window.open(mapsswiftcoffee, "_blank");
+    // Simpan otomatis setiap kali pengguna mengetik
+    inputNama.addEventListener("input", e => localStorage.setItem("draft_nama", e.target.value));
+    inputTanggal.addEventListener("input", e => localStorage.setItem("draft_tanggal", e.target.value));
+    inputJam.addEventListener("input", e => localStorage.setItem("draft_jam", e.target.value));
+    inputTamu.addEventListener("input", e => localStorage.setItem("draft_tamu", e.target.value));
   }
 });
 
@@ -955,3 +1024,31 @@ if (cartOverlay) {
     cartOverlay.classList.remove("active");
   });
 }
+// OUR STORY DRAWER
+const buka = document.querySelector("#btn-our-story");
+const tutup = document.querySelector("#close-story-btn");
+const overlay = document.querySelector("#story-overlay");
+const laci = document.querySelector("#story-drawer");
+
+function bukaStoryDrawer() {
+  overlay.classList.add("active");
+  laci.classList.add("active");
+}
+
+function tutupStoryDrawer() {
+  overlay.classList.remove("active");
+  laci.classList.remove("active");
+}
+
+buka.addEventListener("click", function(e) {
+  e.preventDefault();
+  bukaStoryDrawer();
+});
+
+tutup.addEventListener("click", function() {
+  tutupStoryDrawer()
+});
+
+overlay.addEventListener("click", function() {
+  tutupStoryDrawer()
+});

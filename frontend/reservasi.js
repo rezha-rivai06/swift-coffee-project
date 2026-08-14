@@ -7,7 +7,9 @@ function geserKotakHitamRes(subMenuAktif) {
 
   if (kotakHitam && tombolAktif) {
     kotakHitam.style.width = tombolAktif.offsetWidth + "px";
+    kotakHitam.style.height = tombolAktif.offsetHeight + "px";
     kotakHitam.style.left = tombolAktif.offsetLeft + "px";
+    kotakHitam.style.top = tombolAktif.offsetTop + "px";
   }
 }
 
@@ -348,7 +350,7 @@ async function loadMenuDineInClone() {
     menuContainer.innerHTML = "";
 
     dataMenu.forEach(function (menu) {
-      const formatHarga = "Rp " + menu.harga.toLocaleString('id-ID');
+      const formatHarga = menu.harga.toLocaleString('id-ID');
       
       // Determine badge
       let badgeHTML = "";
@@ -450,7 +452,7 @@ async function loadMenuDineInClone() {
 
         const toastContainer = document.getElementById("toast-notif");
         const pesantoast = document.getElementById("toast-message");
-        if(pesantoast) pesantoast.innerText = namaBarang + " (Dine-In) masuk keranjang";
+        if(pesantoast) pesantoast.innerText = namaBarang + " masuk keranjang";
         if(toastContainer) {
           toastContainer.classList.add("show");
           setTimeout(() => toastContainer.classList.remove("show"), 2000);

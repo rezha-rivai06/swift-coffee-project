@@ -4,12 +4,10 @@ const cors = require('cors');
 
 const { ambilDataMenu } = require('../backend/menuLogic');
 const { prosesPesanan } = require('../backend/checkoutLogic');
-const { cekKetersediaan, tambahReservasi } = require('../backend/reservasiLogic');
+const { cekKetersediaan, tambahReservasi, buatPesanWhatsAppReservasi } = require('../backend/reservasiLogic');
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-
 
 app.get('/api/menu', (req, res) => {
   try {
@@ -20,7 +18,6 @@ app.get('/api/menu', (req, res) => {
     res.status(500).json({ error: "Gagal memuat data menu" });
   }
 });
-
 
 app.post('/api/checkout', (req, res) => {
   try {
@@ -37,11 +34,10 @@ app.post('/api/checkout', (req, res) => {
 // ENDPOINT 3 & 4: RESERVASI MEJA
 // ==========================================
 
-// Endpoint Cek Ketersediaan
-app.post('/api/cek-reservasi', (req, res) => {
+app.post('/api/cek-reservasi', async (req, res) => {
   try {
-    const {tanggal, jumlahTamuMasuk} = req.body;
-    const hasilCek = cekKetersediaan(tanggal, jumlahTamuMasuk);
+    const { tanggal, jam, jumlahTamu } = req.body;
+    const hasilCek = await cekKetersediaan(tanggal, jam, jumlahTamu);
     res.json(hasilCek);
   } catch (error) {
     console.log(error);
@@ -49,28 +45,12 @@ app.post('/api/cek-reservasi', (req, res) => {
   }
 });
 
-// Endpoint Buat Reservasi
-app.post('/api/buat-reservasi', (req, res) => {
+app.post('/api/buat-reservasi', async (req, res) => {
   try {
-    const { nama, tanggal, jumlahTamu, pesanan } = req.body;
-    const idBooking = tambahReservasi(tanggal, jumlahTamu);
+    const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
+    const idBooking = await tambahReservasi(tanggal, jam, jumlahTamu);
     
-    let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan Reservasi.\n————————————\nNama : ${nama}\nTanggal : ${tanggal}\nJumlah Tamu : ${jumlahTamu} orang\nBooking ID : ${idBooking}\n————————————\n`;
-    
-    if (pesanan && pesanan.length > 0) {
-      teksWA += `*Pesanan Dine-In:*\n`;
-      let total = 0;
-      pesanan.forEach(item => {
-        const harga = item.harga || 0; 
-        teksWA += `- ${item.jumlah}x ${item.nama} (Rp ${harga.toLocaleString('id-ID')})\n`;
-        total += (item.jumlah * harga);
-      });
-      teksWA += `\n*Total Tagihan: Rp ${total.toLocaleString('id-ID')}*\n————————————\n`;
-    }
-    
-    teksWA += `Terima kasih!`;
-    
-    const linkWA = "https://wa.me/61346851655?text=" + encodeURIComponent(teksWA);
+    const linkWA = buatPesanWhatsAppReservasi(nama, tanggal, jam, jumlahTamu, idBooking, pesanan);
     
     res.json({ sukses: true, linkWA: linkWA });
   } catch (error) {
@@ -78,7 +58,6 @@ app.post('/api/buat-reservasi', (req, res) => {
     res.status(500).json({ error: "Gagal membuat reservasi" });
   }
 });
-
 
 const PORT = 5000;
 app.listen(PORT, () => {

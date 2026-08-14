@@ -92,12 +92,9 @@
         <span class="teks-1">OUR STORY</span>
         <span class="teks-2">Sejak 2025</span>
         <p class="teks-3">
-          Lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-          lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-          lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-          lorem lorem lorem lorem lorem lorem lorem.
+          Berawal dari sebuah garasi kecil di sudut kota, impian kami sederhana: menyajikan secangkir kopi berkualitas yang bisa menyatukan berbagai lapisan masyarakat. Di tahun 2025, saat dunia sedang bergerak begitu cepat, kami ingin menciptakan sebuah ruang di mana waktu seakan berjalan lebih lambat.
         </p>
-        <a class="teks-4" href="#">Read full story &nbsp; ➜</a>
+        <a class="teks-4" href="#" id="btn-our-story">Read full story &nbsp; ➜</a>
       </div>
     </section>
 
@@ -176,17 +173,21 @@
           </div>
           <div class="res-baris-dua">
             <div style="flex: 1;">
-              <label for="res-tanggal" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal Reservasi <span id="err-tanggal" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
+              <label for="res-tanggal" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Tanggal <span id="err-tanggal" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
               <input type="date" id="res-tanggal" class="res-input">
             </div>
             <div style="flex: 1;">
-              <label for="res-tamu" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jumlah orang <span id="err-tamu" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
-              <input type="number" id="res-tamu" min="1" placeholder="Masukkan Jumlah" class="res-input">
+              <label for="res-jam" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jam Kedatangan <span id="err-jam" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
+              <input type="time" id="res-jam" class="res-input">
+            </div>
+            <div style="flex: 1;">
+              <label for="res-tamu" style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Jmlh Tamu <span id="err-tamu" style="color: red; font-size: 12px; display: none;">Input tidak valid</span></label>
+              <input type="number" id="res-tamu" min="1" placeholder="Angka" class="res-input">
             </div>
           </div>
           <p id="res-status" style="font-size: 14px; margin-bottom: 16px; font-weight: 500; height: 20px;"></p>
           <button id="btn-cek-reservasi" class="reservasi-btn" style="justify-content: center; width: 100%; padding: 16px;">
-            Cek Ketersediaan & Pesan Meja
+            Cek Ketersediaan
           </button>
 
           <!-- DINE-IN MENU AREA -->
@@ -383,8 +384,34 @@
     <span class="toast-message" id="toast-message">Berhasil ditambahkan ke keranjang!</span>
   </div>
 
-  <script src="script.js"></script>
+  <!-- SLIDING DRAWER OUR STORY -->
+  <div class="story-overlay" id="story-overlay"></div>
+
+  <div class="story-drawer" id="story-drawer">
+    <div class="story-header">
+      <h3 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #160e0a;">The Story of Our Cafe</h3>
+      <button id="close-story-btn"
+        style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
+    </div>
+
+    <div class="story-content">
+      <h2 class="story-title" style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #160e0a; text-align: center; margin-bottom: 24px;">Sejak 2025</h2>
+      <p class="story-paragraph" style="font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.8; color: #4e4540; text-align: justify; margin-bottom: 20px;">
+        Berawal dari sebuah garasi kecil di sudut kota, impian kami sederhana: menyajikan secangkir kopi berkualitas yang bisa menyatukan berbagai lapisan masyarakat. Di tahun 2025, saat dunia sedang bergerak begitu cepat, kami ingin menciptakan sebuah ruang di mana waktu seakan berjalan lebih lambat.
+      </p>
+      <p class="story-paragraph" style="font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.8; color: #4e4540; text-align: justify; margin-bottom: 20px;">
+        Setiap biji kopi yang kami sangrai membawa cerita dari para petani lokal. Setiap hidangan yang kami sajikan diracik dengan cinta dan ketelitian oleh koki-koki andal. Bagi kami, kopi bukanlah sekadar minuman, melainkan sebuah seni merawat rasa.
+      </p>
+      <p class="story-paragraph" style="font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.8; color: #4e4540; text-align: justify; margin-bottom: 30px;">
+        Kami bukan sekadar kedai kopi, kami adalah ruang tamu ketiga bagi Anda. Tempat di mana ide-ide besar lahir, pertemanan dirajut, dan lelah sejenak dilupakan.
+      </p>
+      <p class="story-signature" style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: #160e0a; text-align: right; font-style: italic;">
+        - The Founders
+      </p>
+    </div>
+  </div>
   <script src="reservasi.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
