@@ -1,6 +1,6 @@
 const mongoDb = require('mongoose');
 
-mongoDb.connect("mongodb+srv://rivzhent_db_user:ddJANbwX5VDVfPJM@rivzhent.4hyfgt5.mongodb.net/cafe_db?retryWrites=true&w=majority")
+mongoDb.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Terhubung!"))
   .catch((err) => console.error("Gagal nyambung MongoDB:", err));
 
