@@ -5,18 +5,50 @@ const cors = require('cors');
 
 const { ambilDataMenu } = require('../backend/menuLogic');
 const { prosesPesanan } = require('../backend/checkoutLogic');
-const { cekKetersediaan, tambahReservasi, buatPesanWhatsAppReservasi } = require('../backend/reservasiLogic');
+const { cekKetersediaan, tambahReservasi, buatPesanWhatsAppReservasi, ambilSemuaReservasi, hapusReservasi } = require('../backend/reservasiLogic');
+const { verifikasiPassword, cekToken } = require('../backend/authLogic');
+const rateLimit = require('express-rate-limit');
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/menu', (req, res) => {
+app.get('/api/menu', async (req, res) => {
   try {
-    const dataMenu = ambilDataMenu();
+    const dataMenu = await ambilDataMenu();
     res.json(dataMenu);
   } catch (error) {
     console.error("Gagal mengambil menu:", error);
     res.status(500).json({ error: "Gagal memuat data menu" });
+  }
+});
+
+app.post('/api/menu', cekToken, async (req, res) => {
+  try {
+    const menuBaru = await require('../backend/menuLogic').tambahMenu(req.body);
+    res.json({ sukses: true, menu: menuBaru });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Gagal menambah menu" });
+  }
+});
+
+app.put('/api/menu/:id', cekToken, async (req, res) => {
+  try {
+    const menuEdit = await require('../backend/menuLogic').editMenu(req.params.id, req.body);
+    res.json({ sukses: true, menu: menuEdit });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Gagal mengedit menu" });
+  }
+});
+
+app.delete('/api/menu/:id', cekToken, async (req, res) => {
+  try {
+    await require('../backend/menuLogic').hapusMenu(req.params.id);
+    res.json({ sukses: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Gagal menghapus menu" });
   }
 });
 
@@ -31,9 +63,6 @@ app.post('/api/checkout', (req, res) => {
   }
 });
 
-// ==========================================
-// ENDPOINT 3 & 4: RESERVASI MEJA
-// ==========================================
 
 app.post('/api/cek-reservasi', async (req, res) => {
   try {
@@ -46,7 +75,13 @@ app.post('/api/cek-reservasi', async (req, res) => {
   }
 });
 
-app.post('/api/buat-reservasi', async (req, res) => {
+const rateLimitReservasi = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: "Sistem mendeteksi spam pesanan. Harap tunggu 15 menit lagi." }
+});
+
+app.post('/api/buat-reservasi', rateLimitReservasi, async (req, res) => {
   try {
     const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
     const idBooking = await tambahReservasi(tanggal, jam, jumlahTamu);
@@ -59,6 +94,44 @@ app.post('/api/buat-reservasi', async (req, res) => {
     res.status(500).json({ error: "Gagal membuat reservasi" });
   }
 });
+
+// =====================================================================
+// [KEAMANAN: LOKET LOGIN]
+// =====================================================================
+
+app.post('/api/login', (req, res) => {
+  const { password } = req.body;
+  const token = verifikasiPassword(password);
+  
+  if (token) {
+    res.json({ sukses: true, token: token });
+  } else {
+    res.status(401).json({ error: "Password Salah!" });
+  }
+});
+
+
+app.get('/api/reservasi', cekToken, async (req, res) => {
+  try {
+  const data = await ambilSemuaReservasi();
+  res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Gagal memuat data reservasi" });
+  }  
+});
+
+
+app.delete('/api/reservasi/:idBooking', cekToken, async (req, res) => {
+  try {
+  const { idBooking } = req.params;
+  await hapusReservasi(idBooking);
+  res.json({sukses: true });
+  } catch (error) {
+    res.status(500).json({ error: "Gagal menghapus reservasi" });
+  }  
+});
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => {

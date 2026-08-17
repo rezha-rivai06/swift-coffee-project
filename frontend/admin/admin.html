@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftCafe - Admin Dashboard</title>
+    <!-- Google Fonts untuk Typography yang Sleek -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Bagian Header (Logo & Typography) -->
+        <header class="admin-header">
+            <h1 class="logo-text">Swift<span>Cafe</span> <span class="badge-admin">ADMIN</span></h1>
+            <p class="subtitle">Sistem Manajemen Meja & Reservasi Real-Time</p>
+        </header>
+        
+        <nav class="admin-nav">
+            <button id="btn-tab-reservasi" class="nav-btn active">Reservasi Meja</button>
+            <button id="btn-tab-menu" class="nav-btn">Manajemen Menu</button>
+        </nav>
+
+        <main class="table-container" id="section-reservasi">
+            <table id="tabelReservasi" class="custom-table">
+                <thead>
+                    <tr>
+                        <th>ID Booking</th>
+                        <th>Nama Pemesan</th>
+                        <th>Tgl & Jam</th>
+                        <th>Jumlah Tamu</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyReservasi">
+                    <!-- Data dari JS akan di-inject ke sini -->
+                    <tr>
+                        <td colspan="6" class="empty-state">Memuat data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <!-- Bagian Manajemen Menu -->
+        <main class="menu-container" id="section-menu" style="display: none;">
+            <div class="menu-header">
+                <h2>Daftar Menu Tersedia</h2>
+                <button id="btn-tambah-menu" class="btn-tambah">+ Tambah Menu Baru</button>
+            </div>
+            
+            <div id="grid-menu" class="menu-grid">
+                <!-- Kartu Menu akan diinject lewat JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Form Menu -->
+    <div id="modal-menu" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Tambah Menu</h2>
+            <form id="form-menu">
+                <input type="hidden" id="menu-id">
+                
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="menu-kategori" required>
+                        <option value="minuman">Minuman</option>
+                        <option value="makanan">Makanan</option>
+                        <option value="snack">Snack</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Sub Kategori / Jenis</label>
+                    <input type="text" id="menu-sub" placeholder="Contoh: signature, tea, pasta..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nama Menu</label>
+                    <input type="text" id="menu-nama" placeholder="Nama Menu" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="menu-deskripsi" rows="3" placeholder="Deskripsi menu" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Harga (Format Bebas)</label>
+                    <input type="text" id="menu-harga" placeholder="Contoh: IDR 25.000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Link Gambar (URL Eksternal)</label>
+                    <input type="text" id="menu-gambar" placeholder="https://i.imgur.com/..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Badge (Opsional)</label>
+                    <input type="text" id="menu-badge" placeholder="Contoh: Best Seller">
+                </div>
+                
+                <button type="submit" class="btn-simpan">Simpan Menu</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="../config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

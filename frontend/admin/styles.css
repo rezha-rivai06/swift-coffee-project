@@ -1,0 +1,504 @@
+/* Reset & Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+:root {
+    --bg-main: #f3f4f6; 
+    --surface: #ffffff; 
+    --primary: #1f1f1f;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --danger: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --border: #e5e7eb;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header & Typography */
+.admin-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-text {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo-text span:not(.badge-admin) {
+    color: var(--accent);
+}
+
+.badge-admin {
+    font-size: 0.9rem;
+    background-color: var(--danger);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-left: 5px;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* Tabel Reservasi */
+.table-container {
+    background-color: var(--surface);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.custom-table th {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding: 15px;
+    border-bottom: 2px solid var(--border);
+}
+
+.custom-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.custom-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 30px !important;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-aktif {
+    background-color: rgba(46, 213, 115, 0.2);
+    color: var(--success);
+}
+
+.status-menunggu {
+    background-color: rgba(255, 165, 2, 0.2);
+    color: var(--warning);
+}
+
+/* Button Selesai */
+.btn-selesai {
+    background-color: var(--danger);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-selesai:hover {
+    background-color: #ff2b40;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
+}
+
+.btn-selesai:active {
+    transform: translateY(0);
+}
+.aksi-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-batal {
+    background-color: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-batal:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* RESPONSIVE DESIGN (MOBILE & TABLET) */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+    
+    .admin-header {
+        margin-bottom: 25px;
+    }
+    
+    .logo-text {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Ubah Tabel jadi Card biar nggak perlu di-scroll */
+    .table-container {
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .custom-table, .custom-table tbody, .custom-table tr, .custom-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .custom-table thead {
+        display: none; /* Sembunyikan Header Tabel di HP */
+    }
+
+    .custom-table tr {
+        background-color: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .custom-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--border);
+    }
+
+    .custom-table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        justify-content: flex-end;
+    }
+
+    /* Bikin Label Palsu di HP */
+    .custom-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-muted);
+        text-align: left;
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+
+    /* Bikin kolom Aksi jadi rapi (tanpa tulisan "Aksi") */
+    .custom-table td[data-label="Aksi"]::before {
+        display: none;
+    }
+
+    .custom-table td[data-label="Aksi"] {
+        padding-top: 15px;
+        justify-content: center;
+    }
+
+    /* Bikin kolom ID Booking jadi Header Kartu */
+    .custom-table td[data-label="ID Booking"] {
+        background-color: #f8f9fa;
+        margin: -15px -15px 10px -15px;
+        padding: 12px 15px;
+        border-radius: 12px 12px 0 0;
+        border-bottom: 1px solid var(--border);
+        color: var(--primary);
+    }
+    
+    .custom-table td[data-label="ID Booking"]::before {
+        color: var(--primary);
+    }
+
+    .custom-table td div {
+        text-align: right;
+    }
+
+    .aksi-buttons {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-selesai, .btn-batal {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        flex: 1;
+        margin-top: 5px;
+    }
+}
+
+/* =========================================
+   TAB NAVIGASI
+========================================= */
+.admin-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+}
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: all 0.3s;
+    border-radius: 8px;
+}
+.nav-btn:hover {
+    color: var(--primary);
+    background-color: rgba(22, 14, 10, 0.05);
+}
+.nav-btn.active {
+    color: var(--primary);
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   MENU GRID & KARTU
+========================================= */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.btn-tambah {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.btn-tambah:hover {
+    transform: translateY(-2px);
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.menu-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.menu-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.menu-info h3 {
+    margin: 5px 0;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+.menu-info p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+.menu-harga {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+.menu-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+.menu-actions button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+}
+.btn-edit {
+    background-color: #f3f4f6;
+    color: var(--primary);
+}
+.btn-edit:hover { background-color: #e5e7eb; }
+.btn-hapus {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+.btn-hapus:hover { background-color: rgba(239, 68, 68, 0.2); }
+
+/* =========================================
+   MODAL FORM
+========================================= */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+.modal.show {
+    display: flex;
+}
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #6b7280;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--primary);
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+}
+.btn-simpan {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.btn-simpan:hover {
+    background-color: #000;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN KHUSUS ADMIN (MOBILE)
+========================================= */
+@media screen and (max-width: 768px) {
+    /* Perbaikan Logo yang Nabrak */
+    .logo-text {
+        font-size: 2.2rem;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .badge-admin {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    /* Perbaikan Tab Navigasi & Tombol */
+    .admin-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-btn {
+        width: 100%;
+    }
+
+    /* Perbaikan Header Menu Biar Nggak Dempet */
+    .menu-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    .menu-header h2 {
+        font-size: 1.3rem;
+    }
+    .btn-tambah {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+}

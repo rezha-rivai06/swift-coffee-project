@@ -414,22 +414,39 @@ lihatsemuabtn.addEventListener("click", function (e) {
 
 // DYNAMIC MENU
 async function loadMenu() {
-  try {
-    const respons = await fetch('http://localhost:5000/api/menu');
-    const dataMenu = await respons.json();
+  const menuContainer = document.getElementById("menu-container");
+  const resMenuContainer = document.getElementById("res-menu-container");
+  
+  const skeletonHTML = `
+      <div class="skeleton-card">
+        <div class="skeleton-gambar shimmer"></div>
+        <div class="skeleton-info">
+          <div class="skeleton-bar title shimmer"></div>
+          <div class="skeleton-bar shimmer"></div>
+          <div class="skeleton-bar short shimmer"></div>
+        </div>
+      </div>
+  `;
 
-    const menuContainer = document.getElementById("menu-container");
+  menuContainer.innerHTML = "";
+  if (resMenuContainer) resMenuContainer.innerHTML = "";
+
+  for (let i = 0; i < 4; i++) {
+    menuContainer.innerHTML += skeletonHTML;
+    if (resMenuContainer) resMenuContainer.innerHTML += skeletonHTML;
+  }
+
+  try {
+    const respons = await fetch(CONFIG.API_URL + '/api/menu');
+    const dataMenu = await respons.json();
+    
     menuContainer.innerHTML = "";
+    if (resMenuContainer) resMenuContainer.innerHTML = "";
 
     dataMenu.forEach(function (menu) {
-      const divKartu = document.createElement("div");
-      divKartu.className = "kartu-menu-1";
-      divKartu.setAttribute("data-kategori", menu.kategori);
-      divKartu.setAttribute("data-sub", menu.sub);
-
-      divKartu.innerHTML = `
+      const cardHTML = `
         <div class="kartu-gambar">
-          <img src="${menu.gambar}" alt="${menu.nama}" />
+          <img src="${menu.gambar}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" />
           ${menu.badge ? `<span class="kartu-badge ${menu.badgeClass}">${menu.badge}</span>` : ""}
         </div>
         <div class="kartu-info">
@@ -442,8 +459,21 @@ async function loadMenu() {
         </div>
       `;
 
+      const divKartu = document.createElement("div");
+      divKartu.className = "kartu-menu-1";
+      divKartu.setAttribute("data-kategori", menu.kategori);
+      divKartu.setAttribute("data-sub", menu.sub);
+      divKartu.innerHTML = cardHTML;
       menuContainer.appendChild(divKartu);
 
+      if (resMenuContainer) {
+        const resKartu = document.createElement("div");
+        resKartu.className = "kartu-menu-1";
+        resKartu.setAttribute("data-kategori", menu.kategori);
+        resKartu.setAttribute("data-sub", menu.sub);
+        resKartu.innerHTML = cardHTML;
+        resMenuContainer.appendChild(resKartu);
+      }
     });
 
     const kategoriAktif = document.querySelector('#menu .kategori-wrapper a.active-kategori');
@@ -677,7 +707,7 @@ async function loadMenu() {
           btnCart.disabled = true;
 
           try {
-            const res = await fetch("http://localhost:5000/api/buat-reservasi", {
+            const res = await fetch(CONFIG.API_URL + "/api/buat-reservasi", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ nama: resNama, tanggal: resTanggal, jam: resJam, jumlahTamu: resTamu, pesanan: pesananDineIn })
@@ -689,7 +719,10 @@ async function loadMenu() {
               window.open(dataBuat.linkWA, '_blank');
               window.location.reload();
             } else {
-              showToast("Gagal membuat reservasi.");
+              const pesanError = dataBuat.error || "Gagal membuat reservasi.";
+              console.warn(pesanError);
+              showToast(pesanError);
+              
               btnCart.innerText = "Buat Pesanan";
               btnCart.disabled = false;
             }
@@ -724,7 +757,7 @@ async function loadMenu() {
           btnCart.innerText = "Memproses...";
           btnCart.disabled = true;
           
-          const response = await fetch("http://localhost:5000/api/checkout", {
+          const response = await fetch(CONFIG.API_URL + "/api/checkout", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -869,7 +902,7 @@ reservasibtn.addEventListener("click", async function (e) {
     statusTeks.textContent = "Mengecek ketersediaan kursi...";
     statusTeks.style.color = "blue";
 
-    const responseCek = await fetch("http://localhost:5000/api/cek-reservasi", {
+    const responseCek = await fetch(CONFIG.API_URL + "/api/cek-reservasi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tanggal: tanggal, jam: jam, jumlahTamu: tamu })

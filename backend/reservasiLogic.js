@@ -21,23 +21,16 @@ const bersihkanDataLama = async () => {
 const cekKetersediaan = async (tanggal, jamMasuk, jumlahTamuMasuk) => {
   const jumlahTamu = parseInt(jumlahTamuMasuk);
   const reservasiHariIni = await Reservasi.find({ tanggal: tanggal });
-  const pecahMasuk = jamMasuk.split(":");
-  const desimalMasuk = parseInt(pecahMasuk[0]) + (parseInt(pecahMasuk[1]) / 60);
 
-  const totalTamuJamIni = reservasiHariIni.reduce((total, res) => {
-    if (!res.jam) return total + res.jumlahTamu; 
-    const pecahRes = res.jam.split(":");
-    const desimalRes = parseInt(pecahRes[0]) + (parseInt(pecahRes[1]) / 60);
-    const selisih = Math.abs(desimalMasuk - desimalRes);
-    if (selisih < 2) return total + res.jumlahTamu;
-    return total;
+  const totalTamuHariIni = reservasiHariIni.reduce((total, res) => {
+    return total + res.jumlahTamu;
   }, 0);
   
-  if ((totalTamuJamIni + jumlahTamu) > KAPASITAS_MAKSIMAL) {
-    const sisaKursi = KAPASITAS_MAKSIMAL - totalTamuJamIni;
+  if ((totalTamuHariIni + jumlahTamu) > KAPASITAS_MAKSIMAL) {
+    const sisaKursi = KAPASITAS_MAKSIMAL - totalTamuHariIni;
     return { 
       tersedia: false, 
-      pesan: `Maaf, kursi pada rentang jam tersebut tidak cukup. Sisa: ${sisaKursi} kursi.` 
+      pesan: `Maaf, kursi untuk hari tersebut tidak cukup. Sisa: ${sisaKursi} kursi.` 
     };
   }
   return { tersedia: true };
@@ -78,10 +71,22 @@ const buatPesanWhatsAppReservasi = (nama, tanggal, jam, jumlahTamu, idBooking, p
   return "https://wa.me/61346851655?text=" + encodeURIComponent(teksWA);
 };
 
+
+// ADMIN DASHBOARD
+const ambilSemuaReservasi = async () => {
+  const ambilDataReservasi = await Reservasi.find().sort({ dibuatPada: -1});
+  return ambilDataReservasi;
+};
+const hapusReservasi = async (idBooking) => {
+  const hapusDataReservasi = await Reservasi.deleteOne({ idBooking });
+  return true;
+};
 module.exports = {
   cekKetersediaan,
   tambahReservasi,
   bersihkanDataLama,
   batalReservasi,
-  buatPesanWhatsAppReservasi
-};
+  buatPesanWhatsAppReservasi,
+  ambilSemuaReservasi,
+  hapusReservasi
+}

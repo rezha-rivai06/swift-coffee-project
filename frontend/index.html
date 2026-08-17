@@ -75,7 +75,7 @@
       <div class="hero-kanan">
         <div class="image-frame">
           <div class="image-wrapper">
-            <img src="/frontend/svg/kopi2.jpg" alt="gambar kopi" />
+            <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar kopi" />
           </div>
         </div>
       </div>
@@ -84,8 +84,8 @@
     <!-- --- ABOUT SECTION --- -->
     <section class="about" id="about">
       <div class="about-kiri">
-        <img class="about-1" src="/frontend/svg/kopi2.jpg" alt="gambar" />
-        <img class="about-2" src="/frontend/svg/kopi2.jpg" alt="gambar" />
+        <img class="about-1" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
+        <img class="about-2" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
       </div>
 
       <div class="about-kanan">
@@ -263,16 +263,16 @@
       <div class="galeri-grid">
         <!-- BARIS 1 & 2 (Sudah Penuh 4 Kolom) -->
         <div class="galeri-item besar">
-          <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
         <div class="galeri-item">
-          <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
         <div class="galeri-item">
-          <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
         <div class="galeri-item lebar">
-          <img src="/frontend/svg/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
 
       </div>
@@ -410,8 +410,40 @@
       </p>
     </div>
   </div>
-  <script src="reservasi.js"></script>
+  <!-- FOOTER RAHASIA -->
+<footer style="text-align: center; padding: 20px; font-size: 10px; color: #b0a8a3;">
+   <span id="staff-login" style="cursor: pointer;"> SwiftCafe &copy; 2025. ☕</span>
+  </footer>
+
+  <script src="config.js"></script>
   <script src="script.js"></script>
+  <script src="reservasi.js"></script>
+  <script>
+    document.getElementById('staff-login').addEventListener('click', async () => {
+      const password = prompt("SwiftCafe Admin Password:");
+      if (!password) return; 
+
+      try {
+        const hasil = await fetch(CONFIG.API_URL + '/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: password })
+        });
+        
+        const respon = await hasil.json();
+        console.log(respon);
+        
+        if (respon.sukses) {
+          localStorage.setItem('adminToken', respon.token);
+          window.location.href = "admin/admin.html";
+        } else {
+          alert("Password Salah! atau Akses Ditolak!");
+        }
+      } catch (error) {
+        alert("Terjadi kesalahan koneksi.");
+      }
+    });
+  </script>
 </body>
 
 </html>

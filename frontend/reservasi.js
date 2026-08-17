@@ -342,7 +342,7 @@ if(resLihatsemuabtn) {
 // 6. Data API Loading
 async function loadMenuDineInClone() {
   try {
-    const respons = await fetch('http://localhost:5000/api/menu');
+    const respons = await fetch(CONFIG.API_URL + '/api/menu');
     const dataMenu = await respons.json();
 
     const menuContainer = document.getElementById("res-menu-container");

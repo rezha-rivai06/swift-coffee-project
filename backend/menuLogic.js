@@ -1,11 +1,22 @@
+const Menu = require('./models/Menu');
 
-const fs = require('fs');
-const path = require('path');
-
-const ambilDataMenu = () => {
-    const jsonPath = path.join(__dirname, 'menu.json');
-    const rawData = fs.readFileSync(jsonPath, 'utf8');
-    return JSON.parse(rawData);
+const ambilDataMenu = async () => {
+    return await Menu.find().sort({ kategori: 1, sub: 1 });
 };
 
-module.exports = { ambilDataMenu };
+const tambahMenu = async (data) => {
+    const menuBaru = new Menu(data);
+    await menuBaru.save();
+    return menuBaru;
+};
+
+const editMenu = async (id, data) => {
+    return await Menu.findByIdAndUpdate(id, data, { new: true });
+};
+
+const hapusMenu = async (id) => {
+    await Menu.findByIdAndDelete(id);
+    return true;
+};
+
+module.exports = { ambilDataMenu, tambahMenu, editMenu, hapusMenu };
