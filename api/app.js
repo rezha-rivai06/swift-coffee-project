@@ -12,6 +12,16 @@ const rateLimit = require('express-rate-limit');
 app.use(cors());
 app.use(express.json());
 
+const connectDB = require('../backend/db');
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ error: "Gagal menyambung ke Database" });
+  }
+});
+
 app.get('/api/menu', async (req, res) => {
   try {
     const dataMenu = await ambilDataMenu();

@@ -1,8 +1,5 @@
 const mongoDb = require('mongoose');
 
-mongoDb.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Terhubung!"))
-  .catch((err) => console.error("Gagal nyambung MongoDB:", err));
 
 const KAPASITAS_MAKSIMAL = 50;
 
