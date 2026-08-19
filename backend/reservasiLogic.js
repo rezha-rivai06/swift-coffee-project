@@ -68,7 +68,7 @@ const buatPesanWhatsAppReservasi = (nama, tanggal, jam, jumlahTamu, idBooking, p
   }
   
   teksWA += `Terima kasih!`;
-  return "https://wa.me/61346851655?text=" + encodeURIComponent(teksWA);
+  return "https://wa.me/6282190334112?text=" + encodeURIComponent(teksWA);
 };
 
 
