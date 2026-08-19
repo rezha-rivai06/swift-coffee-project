@@ -15,11 +15,11 @@ Tugasmu adalah mengubah "Spesifikasi Fitur" yang saya berikan di bawah menjadi K
 4. Di bawah setiap instruksi wajib diberi ruang bertuliskan "// TULIS KODEMU DI BAWAH INI:".
 
 
-langsung letakkan pseudocode kedalam kode
+you can direct put to my code and put to strategis place
 
 Berikut adalah Spesifikasi Fitur yang ingin saya buat saat ini:
 
-[ALUR BISNIS]:
+[ALUR BISNIS]: oke bro kita bisa melanjutkan apa yang sudah direncanakan sebelumnya kamu bisa membuat pseudocode dengan format seperti ini bro
 [TARGET ELEMEN / DOM]: 
 [STATE DATA]: 
 

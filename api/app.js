@@ -86,7 +86,7 @@ app.post('/api/buat-reservasi', rateLimitReservasi, async (req, res) => {
     const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
     const idBooking = await tambahReservasi(tanggal, jam, jumlahTamu);
     
-    const linkWA = buatPesanWhatsAppReservasi(nama, tanggal, jam, jumlahTamu, idBooking, pesanan);
+ const linkWA = buatPesanWhatsAppReservasi(nama, tanggal, jam, jumlahTamu, idBooking, pesanan);   
     
     res.json({ sukses: true, linkWA: linkWA });
   } catch (error) {
@@ -131,6 +131,32 @@ app.delete('/api/reservasi/:idBooking', cekToken, async (req, res) => {
   }  
 });
 
+
+const { ambilStatistik, tambahStatistik } = require('../backend/pengunjungLogic');
+
+const limiterRequest = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 2,
+  message: { error: "Sistem mendeteksi spam pesanan. Harap tunggu 1 menit lagi." }
+});
+
+app.get('/api/statistik', async (req, res) => {
+  try {
+    const data = await ambilStatistik();
+    return res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Gagal memuat" });
+  }
+});
+
+app.post('/api/statistik', limiterRequest, async (req, res) => {
+  try {
+    const data = await tambahStatistik();
+    return res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Gagal memuat" });
+  }   
+});
 
 
 const PORT = 5000;
