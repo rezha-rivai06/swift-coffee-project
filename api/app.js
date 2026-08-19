@@ -164,4 +164,6 @@ app.listen(PORT, () => {
   console.log(`Server Pelayan API aktif di port ${PORT}`);
 });
 
+module.exports = app;
+
 
