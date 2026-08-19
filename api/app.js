@@ -62,10 +62,10 @@ app.delete('/api/menu/:id', cekToken, async (req, res) => {
   }
 });
 
-app.post('/api/checkout', (req, res) => {
+app.post('/api/checkout', async (req, res) => {
   try {
     const dataPesanan = req.body;
-    const hasilWA = prosesPesanan(dataPesanan);
+    const hasilWA = await prosesPesanan(dataPesanan);
     res.json({ status: "sukses", linkWA: hasilWA });
   } catch (error) {
     console.error("Gagal memproses pesanan:", error);

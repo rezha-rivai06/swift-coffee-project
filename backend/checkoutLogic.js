@@ -1,14 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const Menu = require('./models/Menu');
 
-const prosesPesanan = (dataDariFrontend) => {
+const prosesPesanan = async (dataDariFrontend) => {
     const nama = dataDariFrontend.nama;
     const tipe = dataDariFrontend.tipe || "Takeaway";
     const daftarPesanan = dataDariFrontend.pesanan;
-
-    const jsonPath = path.join(__dirname, 'menu.json');
-    const rawData = fs.readFileSync(jsonPath, 'utf8');
-    const menuAsli = JSON.parse(rawData);
+    const menuAsli = await Menu.find();
 
     let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan pemesanan (${tipe}).\n————————————\nNama : ${nama}\n————————————\nPesanan:\n`;
 
@@ -18,7 +14,14 @@ const prosesPesanan = (dataDariFrontend) => {
         const barangAsli = menuAsli.find(menu => menu.nama === itemPesanan.nama);
 
         if (barangAsli) {
-            const subtotal = barangAsli.harga * itemPesanan.jumlah;
+            let hargaAngka = 0;
+            if (typeof barangAsli.harga === 'string') {
+                hargaAngka = parseInt(barangAsli.harga.replace(/[^0-9]/g, ''), 10);
+            } else {
+                hargaAngka = barangAsli.harga;
+            }
+
+            const subtotal = hargaAngka * itemPesanan.jumlah;
             totalHargaAman += subtotal;
 
             const hargaFormat = "IDR " + subtotal.toLocaleString('id-ID');
@@ -27,9 +30,12 @@ const prosesPesanan = (dataDariFrontend) => {
     });
 
     const totalFormat = "IDR " + totalHargaAman.toLocaleString('id-ID');
-    teksWA += `————————————\nTOTAL\n${totalFormat}\n————————————\nPayment method : Pay at pick up / cashier\n\nThank you!`;
+    teksWA += `————————————\n*Total : ${totalFormat}*\n\nTerima kasih!`;
 
-    return { sukses: true, linkWA: teksWA };
+    const encodedWA = encodeURIComponent(teksWA);
+    const linkWA = `https://api.whatsapp.com/send?phone=6282211603504&text=${encodedWA}`;
+
+    return linkWA;
 };
 
 module.exports = { prosesPesanan };
