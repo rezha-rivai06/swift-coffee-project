@@ -8,6 +8,7 @@
   <title>Swift Coffee</title>
   <link rel="preconnect" href="https://googleapis.com" />
   <link rel="preconnect" href="https://gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://res.cloudinary.com" />
   <link
     href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
     rel="stylesheet" />
@@ -416,9 +417,9 @@
    <span id="staff-login" style="cursor: pointer;"> SwiftCafe &copy; 2025. ☕</span>
   </footer>
 
-  <script src="config.js"></script>
-  <script src="script.js"></script>
-  <script src="reservasi.js"></script>
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="reservasi.js" defer></script>
   <script>
     document.getElementById('staff-login').addEventListener('click', async () => {
       const password = prompt("SwiftCafe Admin Password:");
