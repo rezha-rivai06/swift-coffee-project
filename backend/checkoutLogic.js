@@ -33,7 +33,7 @@ const prosesPesanan = async (dataDariFrontend) => {
     teksWA += `————————————\n*Total : ${totalFormat}*\n\nTerima kasih!`;
 
     const encodedWA = encodeURIComponent(teksWA);
-    const linkWA = `https://api.whatsapp.com/send?phone=6282211603504&text=${encodedWA}`;
+    const linkWA = `https://api.whatsapp.com/send?phone=6282190334112&text=${encodedWA}`;
 
     return linkWA;
 };
