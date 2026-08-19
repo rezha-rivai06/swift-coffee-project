@@ -1013,7 +1013,7 @@ if (btnCheckoutDinein) {
 const getDirectionBtn = document.getElementById('get-direction-btn');
 if (getDirectionBtn) {
   getDirectionBtn.addEventListener('click', () => {
-    window.open('https://maps.app.goo.gl/9Qd4H6nL2H4F3P5h7', '_blank');
+    window.open('https://maps.app.goo.gl/pU7ch1qAnYGzwHxu7', '_blank');
   });
 }
 
