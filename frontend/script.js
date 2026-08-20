@@ -107,6 +107,10 @@ semuaTombolSubMenu.forEach(function (tombol) {
     pesanKosong.style.display = "none";
    }
 
+   document.querySelectorAll(".best-seller-iced").forEach(element => {
+      element.style.display = "flex";
+   });
+
     const searchInput = document.getElementById("search");
     if (searchInput && searchInput.value.trim() !== "") {
       if (e.isTrusted) {
@@ -154,6 +158,10 @@ semuaKategoriUtama.forEach(function (kategori) {
     if (pesanKosong != null) {
       pesanKosong.style.display = "none";
     }
+
+    document.querySelectorAll(".best-seller-iced").forEach(element => {
+      element.style.display = "flex";
+    });
 
     const searchInput = document.getElementById("search");
     if (searchInput && searchInput.value.trim() !== "" && e.isTrusted) {
@@ -259,6 +267,10 @@ searchbox.addEventListener("input", function (teksketik) {
   if (input === "") {
     pesanKosong.style.display = "none";
 
+    document.querySelectorAll(".best-seller-iced").forEach(element => {
+      element.style.display = "flex";
+    });
+
     const lihatsemuabtn = document.getElementById("btn-lihat-semua");
     if (lihatsemuabtn) lihatsemuabtn.style.display = "block"; // Munculkan kembali
 
@@ -303,6 +315,10 @@ searchbox.addEventListener("keydown", function (e) {
       pesanKosong.style.display = "block";
       pesanKosong.querySelector("p").innerText = "Maaf, menu tidak ditemukan!";
 
+      document.querySelectorAll(".best-seller-iced").forEach(element => {
+        element.style.display = "none";
+      });
+      
       const lihatsemuabtn = document.getElementById("btn-lihat-semua");
       if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
 
@@ -319,6 +335,10 @@ searchbox.addEventListener("keydown", function (e) {
     } else {
       pesanKosong.style.display = "none";
 
+      document.querySelectorAll(".best-seller-iced").forEach(element => {
+        element.style.display = "flex";
+      });
+      
       const lihatsemuabtn = document.getElementById("btn-lihat-semua");
       if (lihatsemuabtn) lihatsemuabtn.style.display = "block";
       const tombolKategoriUtama = document.querySelector(`.kategori-wrapper a[data-target="${kategoriDitemukan}"]`);
