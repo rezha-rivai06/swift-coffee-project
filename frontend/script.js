@@ -339,8 +339,12 @@ searchbox.addEventListener("keydown", function (e) {
 // BEST SELLER FILTER
 const bestsellerbtn = document.getElementById("bs-btn");
 
-bestsellerbtn.addEventListener("click", function (e) {
+  bestsellerbtn.addEventListener("click", function (e) {
   e.preventDefault();
+
+    if (pesanKosong != null) {
+      pesanKosong.style.display = "none";
+    }
 
   const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
@@ -381,6 +385,11 @@ const icedbtn = document.getElementById("i-btn");
 
 icedbtn.addEventListener("click", function (e) {
   e.preventDefault();
+
+  if (pesanKosong != null) {
+      pesanKosong.style.display = "none";
+    }
+
   const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
   if (icedbtn.classList.contains("active")) {
