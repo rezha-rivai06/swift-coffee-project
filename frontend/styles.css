@@ -1140,12 +1140,12 @@ section.contact {
 .cart-drawer {
   position: fixed;
   top: 0;
+  bottom: 0; /* Menggantikan height 100vh agar pas di layar HP (tidak terpotong navbar browser) */
   right: 0;
   width: 400px;
   /* Ukuran standar di Laptop */
   max-width: 100%;
   /* Agar tidak jebol di HP (merespons layar kecil) */
-  height: 100vh;
   background-color: white;
   /* Warna dasar web-mu */
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
