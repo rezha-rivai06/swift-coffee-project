@@ -628,7 +628,7 @@ async function loadMenu() {
       const filteredKeranjang = isiKeranjang.filter(item => (item.tipe || "takeaway") === activeCartTab);
 
       if (filteredKeranjang.length === 0) {
-        wadahItems.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan untuk ${activeCartTab === 'takeaway' ? 'Takeaway' : 'Dine-In'}.</p>`;
+        wadahItems.innerHTML = `<p style="padding: 24px; text-align: center; color: #888;">Belum ada pesanan untuk ${activeCartTab === 'takeaway' ? 'Takeaway' : 'Reservasi'}.</p>`;
         wadahFooter.style.display = "none";
         return;
       }
