@@ -6,7 +6,7 @@ const prosesPesanan = async (dataDariFrontend) => {
     const daftarPesanan = dataDariFrontend.pesanan;
     const menuAsli = await Menu.find();
 
-    let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan pemesanan (${tipe}).\n————————————\nNama : ${nama}\n————————————\nPesanan:\n`;
+    let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan pemesanan (${tipe}).\n\n====================\n\nNama:\n${nama}\n\n====================\n\nPesanan:\n\n`;
 
     let totalHargaAman = 0;
 
@@ -25,12 +25,12 @@ const prosesPesanan = async (dataDariFrontend) => {
             totalHargaAman += subtotal;
 
             const hargaFormat = "IDR " + subtotal.toLocaleString('id-ID');
-            teksWA += `- ${itemPesanan.jumlah}x ${barangAsli.nama} | ${hargaFormat}\n`;
+            teksWA += `${itemPesanan.jumlah}x ${barangAsli.nama}\n${hargaFormat}\n\n`;
         }
     });
 
     const totalFormat = "IDR " + totalHargaAman.toLocaleString('id-ID');
-    teksWA += `————————————\n*Total : ${totalFormat}*\n\nTerima kasih!`;
+    teksWA += `====================\n\nTOTAL\n${totalFormat}\n\n====================\n\nPembayaran dilakukan di kasir saat pengambilan.\n\nTerima kasih.`;
 
     const encodedWA = encodeURIComponent(teksWA);
     const linkWA = `https://api.whatsapp.com/send?phone=6282190334112&text=${encodedWA}`;

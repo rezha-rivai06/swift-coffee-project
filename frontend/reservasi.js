@@ -56,6 +56,12 @@ const resKategoriUtama = document.querySelectorAll("#res-menu-area .kategori-wra
 resKategoriUtama.forEach(function (kategori) {
   kategori.addEventListener("click", function (e) {
     e.preventDefault();
+    if (pesanKosongRes != null) {
+      pesanKosongRes.style.display = "none";
+    }
+    document.querySelectorAll("#res-menu-area .best-seller-iced").forEach(element => {
+      element.style.display = "flex";
+    });
 
     const searchInput = document.getElementById("res-search");
     if (searchInput && searchInput.value.trim() !== "" && e.isTrusted) {
@@ -106,6 +112,12 @@ const resTombolSubMenu = document.querySelectorAll("#res-menu-area .pilihan-1");
 resTombolSubMenu.forEach(function (tombol) {
   tombol.addEventListener("click", function (e) {
     e.preventDefault();
+    if (pesanKosongRes != null) {
+      pesanKosongRes.style.display = "none";
+    }
+    document.querySelectorAll("#res-menu-area .best-seller-iced").forEach(element => {
+      element.style.display = "flex";
+    });
 
     const searchInput = document.getElementById("res-search");
     if (searchInput && searchInput.value.trim() !== "") {
@@ -178,6 +190,9 @@ if(resSearchbox) {
       if (menuTidakDitemukan === true) {
         pesanKosongRes.style.display = "block";
         pesanKosongRes.querySelector("p").innerText = "Maaf, menu reservasi tidak ditemukan!";
+        document.querySelectorAll("#res-menu-area .best-seller-iced").forEach(element => {
+          element.style.display = "none";
+        });
 
         const lihatsemuabtn = document.getElementById("res-btn-lihat-semua");
         if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
@@ -194,6 +209,9 @@ if(resSearchbox) {
         }
       } else {
         pesanKosongRes.style.display = "none";
+        document.querySelectorAll("#res-menu-area .best-seller-iced").forEach(element => {
+          element.style.display = "flex";
+        });
 
         const lihatsemuabtn = document.getElementById("res-btn-lihat-semua");
         if (lihatsemuabtn) lihatsemuabtn.style.display = "block";
@@ -218,6 +236,9 @@ if(resSearchbox) {
 
     if (input === "") {
       pesanKosongRes.style.display = "none";
+      document.querySelectorAll("#res-menu-area .best-seller-iced").forEach(element => {
+        element.style.display = "flex";
+      });
 
       const lihatsemuabtn = document.getElementById("res-btn-lihat-semua");
       if (lihatsemuabtn) lihatsemuabtn.style.display = "block";
@@ -244,6 +265,10 @@ if(resBestsellerbtn) {
     e.preventDefault();
 
     const targetkartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
+    
+    if (pesanKosongRes != null) {
+      pesanKosongRes.style.display = "none";
+    }
 
     if (resBestsellerbtn.classList.contains("active")) {
       resBestsellerbtn.classList.remove("active");
@@ -282,6 +307,10 @@ if(resIcedbtn) {
     e.preventDefault();
 
     const targetkartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
+
+    if (pesanKosongRes != null) {
+      pesanKosongRes.style.display = "none";
+    }
 
     if (resIcedbtn.classList.contains("active")) {
       resIcedbtn.classList.remove("active");

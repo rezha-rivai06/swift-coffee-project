@@ -51,20 +51,21 @@ const batalReservasi = async (id) => {
 };
 
 const buatPesanWhatsAppReservasi = (nama, tanggal, jam, jumlahTamu, idBooking, pesanan) => {
-  let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan Reservasi.\n————————————\nNama : ${nama}\nTanggal : ${tanggal}\nJam Datang : ${jam}\nJumlah Tamu : ${jumlahTamu} orang\nBooking ID : ${idBooking}\n————————————\n`;
+  let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan Reservasi.\n\n====================\n\nNama:\n${nama}\n\nTanggal:\n${tanggal}\n\nJam Datang:\n${jam}\n\nJumlah Tamu:\n${jumlahTamu} orang\n\nBooking ID:\n${idBooking}\n\n====================\n\n`;
   
   if (pesanan && pesanan.length > 0) {
-    teksWA += `*Pesanan Dine-In:*\n`;
+    teksWA += `Pesanan:\n\n`;
     let total = 0;
     pesanan.forEach(item => {
       const harga = item.harga || 0; 
-      teksWA += `- ${item.jumlah}x ${item.nama} (Rp ${harga.toLocaleString('id-ID')})\n`;
+      const hargaFormat = "IDR " + (item.jumlah * harga).toLocaleString('id-ID');
+      teksWA += `${item.jumlah}x ${item.nama}\n${hargaFormat}\n\n`;
       total += (item.jumlah * harga);
     });
-    teksWA += `\n*Total Tagihan: Rp ${total.toLocaleString('id-ID')}*\n————————————\n`;
+    teksWA += `====================\n\nTOTAL\nIDR ${total.toLocaleString('id-ID')}\n\n====================\n\n`;
   }
   
-  teksWA += `Terima kasih!`;
+  teksWA += `Pembayaran dilakukan di kasir saat kedatangan.\n\nTerima kasih.`;
   return "https://wa.me/6282190334112?text=" + encodeURIComponent(teksWA);
 };
 
