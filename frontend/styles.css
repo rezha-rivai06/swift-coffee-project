@@ -814,6 +814,29 @@ input::-webkit-search-cancel-button {
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease;
+  position: relative;
+  color: transparent; /* Sembunyikan teks '+' asli */
+}
+
+.kartu-btn::before,
+.kartu-btn::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+}
+
+.kartu-btn::before {
+  width: 40%;
+  height: 2px;
+}
+
+.kartu-btn::after {
+  width: 2px;
+  height: 40%;
 }
 
 .kartu-btn:hover {
@@ -2505,6 +2528,8 @@ section.contact {
     justify-content: center;
     align-items: center;
     padding: 0;
+    position: relative;
+    color: transparent;
   }
 
   .kartu-badge {
