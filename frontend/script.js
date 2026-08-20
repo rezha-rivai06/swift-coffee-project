@@ -103,12 +103,15 @@ semuaTombolSubMenu.forEach(function (tombol) {
   tombol.addEventListener("click", function (e) {
     e.preventDefault();
 
+   if (pesanKosong != null) {
+    pesanKosong.style.display = "none";
+   }
+
     const searchInput = document.getElementById("search");
     if (searchInput && searchInput.value.trim() !== "") {
       if (e.isTrusted) {
         searchInput.value = "";
       } else {
-        // Klik terprogram dari pencarian. Hanya perbarui UI, jangan jalankan saringKartuMenu (agar hasil cari tidak tertimpa)
         const subMenuInduk = tombol.closest(".sub-menu");
         const tombolLainnya = subMenuInduk.querySelectorAll(".pilihan-1");
         tombolLainnya.forEach(function (t) {
@@ -147,6 +150,10 @@ const semuaKategoriUtama = document.querySelectorAll("#menu .kategori-wrapper a"
 semuaKategoriUtama.forEach(function (kategori) {
   kategori.addEventListener("click", function (e) {
     e.preventDefault();
+
+    if (pesanKosong != null) {
+      pesanKosong.style.display = "none";
+    }
 
     const searchInput = document.getElementById("search");
     if (searchInput && searchInput.value.trim() !== "" && e.isTrusted) {
