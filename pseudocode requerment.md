@@ -19,6 +19,12 @@ you can direct put to my code and put to strategis place
 
 Berikut adalah Spesifikasi Fitur yang ingin saya buat saat ini:
 
-[ALUR BISNIS]: oke bro kita bisa melanjutkan apa yang sudah direncanakan sebelumnya kamu bisa membuat pseudocode dengan format seperti ini bro
-[TARGET ELEMEN / DOM]: 
-[STATE DATA]: 
+[ALUR BISNIS]: oke bro. next to fix bug, I found new bug, so when i click lihat semua menu button, the menu change and direct drink menu, so I wanna fix this, I think the problem is conflict code
+[TARGET ELEMEN / DOM]: Elemen link sub-kategori ('.pilihan-1.active') yang berada di dalam pembungkus sub-menu yang SEDANG AKTIF (':not(.hidden)').
+[STATE DATA]: Teks selector CSS untuk menemukan elemen tersebut.
+
+--- HASIL PSEUDOCODE ---
+
+// [ALUR BISNIS]:
+// [TARGET ELEMEN / DOM]:
+// [STATE DATA]:

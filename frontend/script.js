@@ -457,7 +457,7 @@ lihatsemuabtn.addEventListener("click", function (e) {
     batasTampil = batasTampil + 4;
   }
 
-  const tombolKategoriAktif = document.querySelector(".pilihan-1.active");
+  const tombolKategoriAktif = document.querySelector(".sub-menu:not(.hidden) .pilihan-1.active"); 
   let namaKategoriSaatIni = "";
 
   if (tombolKategoriAktif) {

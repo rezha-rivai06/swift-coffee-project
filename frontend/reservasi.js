@@ -357,7 +357,8 @@ if(resLihatsemuabtn) {
       batasTampilRes = batasTampilRes + 4;
     }
 
-    const tombolKategoriAktif = document.querySelector("#res-menu-area .pilihan-1.active");
+  
+    const tombolKategoriAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
     let namaKategoriSaatIni = "";
 
     if (tombolKategoriAktif) {
