@@ -19,9 +19,30 @@ you can direct put to my code and put to strategis place
 
 Berikut adalah Spesifikasi Fitur yang ingin saya buat saat ini:
 
-[ALUR BISNIS]: oke bro. next to fix bug, I found new bug, so when i click lihat semua menu button, the menu change and direct drink menu, so I wanna fix this, I think the problem is conflict code
-[TARGET ELEMEN / DOM]: Elemen link sub-kategori ('.pilihan-1.active') yang berada di dalam pembungkus sub-menu yang SEDANG AKTIF (':not(.hidden)').
-[STATE DATA]: Teks selector CSS untuk menemukan elemen tersebut.
+[ALUR BISNIS]: Membuat efek animasi hitungan (counter) dari angka 0 menuju total jumlah pengunjung yang didapat dari database. Angka akan bertambah berulang setiap sekian milidetik sampai mencapai target.
+[TARGET ELEMEN / DOM]: Elemen dengan id 'badge-pengunjung'.
+[STATE DATA]: Variabel target (dari DB), variabel counter saat ini (mulai dari 0), kecepatan tambah, dan variabel ID interval.
+
+--- HASIL PSEUDOCODE ---
+
+// [ALUR BISNIS]: Membuat animasi hitungan (counter) pengunjung dari 0 menuju angka total pengunjung.
+// [TARGET ELEMEN / DOM]: Elemen yang disimpan di 'badgePengunjung'.
+// [STATE DATA]: Variabel target maksimal, counter saat ini, nilai tambah (increment), dan penyimpan ID interval.
+
+// 1. (State) Buat 3 variabel: 
+// - 'target' (isinya data.totalPengunjung)
+// - 'sekarang' (isinya angka 0)
+// - 'tambah' (isinya Math.ceil(target / 30) agar animasinya proporsional)
+// TULIS KODEMU DI BAWAH INI:
+
+
+// 2. (Kondisi/Aksi) Buat sebuah let interval = setInterval(...) yang berjalan setiap 30 milidetik.
+// Di dalamnya lakukan:
+// a. 'sekarang' ditambah dengan 'tambah'
+// b. Jika 'sekarang' >= 'target', paksa 'sekarang' = 'target' lalu hentikan loop dengan clearInterval(interval)
+// c. Ubah isi teks 'badgePengunjung.innerHTML' menjadi nilai 'sekarang' ditambah "+".
+// TULIS KODEMU DI BAWAH INI:
+
 
 --- HASIL PSEUDOCODE ---
 

@@ -222,7 +222,22 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     const data = await res.json();
-    badgePengunjung.innerHTML = `${data.totalPengunjung}+`;
+    
+  
+  const target = data.totalPengunjung;
+  let sekarang = 0;
+  const tambah = Math.ceil(target / 30);
+
+  let interval = setInterval(() => {
+    sekarang += tambah;
+
+    if (sekarang >= target) {
+      sekarang = target;
+      clearInterval(interval);
+    }
+    badgePengunjung.innerHTML = `${sekarang}+`;
+  }, 30);
+
   }
 
   hitungPengunjung();
