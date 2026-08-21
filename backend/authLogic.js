@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const verifikasiPassword = (passwordInput) => {
-    if (passwordInput === process.env.ADMIN_PASSWORD){
+const verifikasiPassword = (password) => {
+    if (password === process.env.ADMIN_PASSWORD){
         return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '8h' });
     } else {
         return false;
