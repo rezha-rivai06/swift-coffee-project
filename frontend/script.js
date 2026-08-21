@@ -226,7 +226,7 @@ window.addEventListener("DOMContentLoaded", function () {
   
   const target = data.totalPengunjung;
   let sekarang = 0;
-  const tambah = Math.ceil(target / 100);
+  const tambah = Math.ceil(target / 200);
 
   let interval = setInterval(() => {
     sekarang += tambah;
