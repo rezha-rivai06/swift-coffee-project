@@ -236,7 +236,7 @@ window.addEventListener("DOMContentLoaded", function () {
       clearInterval(interval);
     }
     badgePengunjung.innerHTML = `${sekarang}+`;
-  }, 20);
+  }, 2);
 
   }
 
