@@ -226,7 +226,7 @@ window.addEventListener("DOMContentLoaded", function () {
   
   const target = data.totalPengunjung;
   let sekarang = 0;
-  const tambah = Math.ceil(target / 30);
+  const tambah = Math.ceil(target / 100);
 
   let interval = setInterval(() => {
     sekarang += tambah;
@@ -236,7 +236,7 @@ window.addEventListener("DOMContentLoaded", function () {
       clearInterval(interval);
     }
     badgePengunjung.innerHTML = `${sekarang}+`;
-  }, 30);
+  }, 20);
 
   }
 
