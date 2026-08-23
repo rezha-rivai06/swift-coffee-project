@@ -511,12 +511,11 @@ async function loadMenu() {
     const dataMenu = await respons.json();
 
     menuContainer.innerHTML = "";
-    if (resMenuContainer) resMenuContainer.innerHTML = "";
 
     dataMenu.forEach(function (menu) {
       const cardHTML = `
         <div class="kartu-gambar">
-          <img src="${menu.gambar}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" />
+          <img src="${menu.gambar}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.alt='Gambar tidak tersedia';" />
           ${menu.badge ? `<span class="kartu-badge ${menu.badgeClass}">${menu.badge}</span>` : ""}
         </div>
         <div class="kartu-info">
@@ -535,15 +534,6 @@ async function loadMenu() {
       divKartu.setAttribute("data-sub", menu.sub);
       divKartu.innerHTML = cardHTML;
       menuContainer.appendChild(divKartu);
-
-      if (resMenuContainer) {
-        const resKartu = document.createElement("div");
-        resKartu.className = "kartu-menu-1";
-        resKartu.setAttribute("data-kategori", menu.kategori);
-        resKartu.setAttribute("data-sub", menu.sub);
-        resKartu.innerHTML = cardHTML;
-        resMenuContainer.appendChild(resKartu);
-      }
     });
 
     const kategoriAktif = document.querySelector('#menu .kategori-wrapper a.active-kategori');

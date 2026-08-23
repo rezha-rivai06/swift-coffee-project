@@ -47,3 +47,5 @@ id_rsa
 dist/
 build/
 .cache/
+.vercel
+.env*

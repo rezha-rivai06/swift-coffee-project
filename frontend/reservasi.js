@@ -380,37 +380,18 @@ async function loadMenuDineInClone() {
     menuContainer.innerHTML = "";
 
     dataMenu.forEach(function (menu) {
-      const formatHarga = menu.harga.toLocaleString('id-ID');
-      
-      // Determine badge
-      let badgeHTML = "";
-      if (menu.is_bestseller) {
-        badgeHTML = `<span class="kartu-badge">Best Seller</span>`;
-      } else if (menu.sub === "non coffee") {
-        badgeHTML = `<span class="kartu-badge kartu-badge-2">New</span>`;
-      } else if (menu.is_iced) {
-        badgeHTML = `<span class="kartu-badge kartu-badge-3">Iced</span>`;
-      }
-
       const HTMLMenu = `
         <div class="kartu-menu-1" data-kategori="${menu.kategori}" data-sub="${menu.sub}">
           <div class="kartu-gambar">
-            <img src="${menu.gambar}" alt="${menu.nama}" />
-            ${badgeHTML}
+            <img src="${menu.gambar}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.alt='Gambar tidak tersedia';" />
+            ${menu.badge ? `<span class="kartu-badge ${menu.badgeClass}">${menu.badge}</span>` : ""}
           </div>
           <div class="kartu-info">
             <h3 class="kartu-nama">${menu.nama}</h3>
-            <p class="kartu-desk">
-              ${menu.deskripsi}
-            </p>
+            <p class="kartu-desk">${menu.deskripsi}</p>
             <div class="kartu-bawah">
-              <span class="kartu-harga">${formatHarga}</span>
-              <button class="kartu-btn btn-add-dinein" data-nama="${menu.nama}" data-harga="${menu.harga}" data-gambar="${menu.gambar}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5v14"></path>
-                </svg>
-              </button>
+              <span class="kartu-harga">${menu.harga}</span>
+              <button class="kartu-btn btn-add-dinein" type="button" data-nama="${menu.nama}" data-harga="${menu.harga}" data-gambar="${menu.gambar}">+</button>
             </div>
           </div>
         </div>

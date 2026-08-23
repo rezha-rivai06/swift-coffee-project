@@ -1,7 +1,5 @@
 /*halaman utama*/
 
-
-
 * {
   box-sizing: border-box;
 }
@@ -46,7 +44,7 @@ body::-webkit-scrollbar {
 
 .link {
   display: contents;
-  /* Menghilangkan pembungkus ini di Desktop agar kembali rapi */
+  
 }
 
 .link ul {
@@ -220,7 +218,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  /* Hilangkan garis bawah bawaan link */
+  
   background-color: black;
   color: white;
   width: 180px;
@@ -235,7 +233,6 @@ body::-webkit-scrollbar {
   transition: transform 0.2s ease;
 }
 
-/* Efek geser background saat di-hover (digabung biar irit kode) */
 .btn-hero::before {
   content: "";
   position: absolute;
@@ -255,13 +252,12 @@ body::-webkit-scrollbar {
 
 .btn-hero:hover {
   transform: translateY(-3px);
-  /* Tambahan efek mantul sedikit */
+  
 }
 
-/* Kalau mau dibedakan, bisa atur beda warnanya di sini */
 .button2-hero {
   background-color: #4e4540;
-  /* Coba jadikan warna kopi agar beda dengan Explore */
+  
 }
 
 .kunjungan {
@@ -565,20 +561,19 @@ input::-webkit-search-cancel-button {
   font-size: 13px;
   /* Dikecilkan sedikit */
   padding: 6px 18px;
-  /* Mengganti width & height fix dengan padding agar proporsional */
+  
   border-radius: 50px;
   border: 1px solid rgba(128, 117, 112, 0.3);
   background-color: transparent;
   transition: all 0.3s ease;
-  /* 'all' agar background dan text color bisa bertransisi halus */
+  
 }
 
-/* Hapus .best-seller yang redundant, langsung targetkan hover untuk semua <a> di dalamnya */
 .best-seller-iced a:hover {
   color: white;
   /* Teks jadi putih */
   background-color: #160e0a;
-  /* Background jadi gelap saat di-hover */
+  
   border-color: #160e0a;
 }
 
@@ -599,12 +594,11 @@ input::-webkit-search-cancel-button {
   z-index: 1;
 }
 
-/* Kotak hitam yang bisa meluncur */
 .sliding-highlight {
   position: absolute;
-  /* height akan diatur oleh Javascript */
+  
   width: 0;
-  /* Default 0, diubah JS nanti */
+  
   background-color: #160e0a;
   border-radius: 50px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -626,21 +620,19 @@ input::-webkit-search-cancel-button {
   white-space: nowrap;
 }
 
-/* Hilangkan border jika sedang disorot highlight hitam */
 .pilihan-1.active {
   border-color: transparent;
 }
 
 .pilihan-1 span {
   color: #4e4540;
-  /* Warna gelap untuk menu tidak aktif */
+  
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
-/* Teks jadi putih saat aktif karena backgroundnya jadi hitam (highlight) */
 .pilihan-1.active span {
   color: white;
 }
@@ -655,11 +647,11 @@ input::-webkit-search-cancel-button {
 
 .kartu-menu {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
   width: 100%;
   margin-top: 50px;
-  /* max-height dan overflow:hidden dihapus, logika ditangani oleh Javascript murni! */
+  align-items: stretch !important;
 }
 
 .kartu-menu-1 {
@@ -684,10 +676,9 @@ input::-webkit-search-cancel-button {
 .kartu-gambar {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4; 
   overflow: hidden;
-  
-  /* Skeleton Loading (Shimmer Effect) */
+
   background: #e5e7eb;
   background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
   background-size: 200px 100%;
@@ -749,17 +740,16 @@ input::-webkit-search-cancel-button {
 }
 
 .kartu-info {
-  padding: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex-grow: 1;
-  /* Membuat info mengambil semua sisa ruang vertikal */
+  flex-grow: 1 !important;
 }
 
 .kartu-nama {
   font-family: "Inter", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #160e0a;
   margin: 0;
@@ -773,10 +763,10 @@ input::-webkit-search-cancel-button {
 
 .kartu-desk {
   font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: rgba(78, 69, 64, 0.7);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -788,20 +778,22 @@ input::-webkit-search-cancel-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
-  /* Mendorong bagian bawah (harga & tombol) ke batas paling bawah card */
+  gap: 8px;
+  margin-top: auto !important;
 }
 
 .kartu-harga {
   font-family: "Inter", sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: #160e0a;
+  white-space: nowrap;
 }
 
 .kartu-btn {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
   border-radius: 50%;
   background-color: #160e0a;
   color: white;
@@ -815,7 +807,7 @@ input::-webkit-search-cancel-button {
     box-shadow 0.3s ease,
     transform 0.3s ease;
   position: relative;
-  color: transparent; /* Sembunyikan teks '+' asli */
+  color: transparent; 
 }
 
 .kartu-btn::before,
@@ -1011,7 +1003,6 @@ section.contact {
   align-items: center;
 }
 
-/* SVG Icon Box styling */
 .icon-box {
   width: 44px;
   height: 44px;
@@ -1021,7 +1012,6 @@ section.contact {
   margin-right: 16px;
   box-sizing: border-box;
 }
-
 
 .alamat p,
 .jam-operasional p {
@@ -1103,7 +1093,7 @@ section.contact {
   position: fixed;
   top: 0;
   left: 0; /* Muncul dari kiri */
-  width: 500px; /* Lebih lebar sedikit agar story lega dibaca */
+  width: 500px; 
   max-width: 100%;
   height: 100vh;
   background-color: #fcfbfa; /* Sedikit krem */
@@ -1138,7 +1128,6 @@ section.contact {
 /* KODE CSS KERANJANG (SLIDING DRAWER)       */
 /* ========================================= */
 
-/* 1. Latar Belakang Gelap (Overlay) */
 .cart-overlay {
   position: fixed;
   top: 0;
@@ -1159,31 +1148,27 @@ section.contact {
   visibility: visible;
 }
 
-/* 2. Ruangan Keranjang (Panel Meluncur) */
 .cart-drawer {
   position: fixed;
   top: 0;
-  bottom: 0; /* Menggantikan height 100vh agar pas di layar HP (tidak terpotong navbar browser) */
+  bottom: 0; 
   right: 0;
   width: 400px;
-  /* Ukuran standar di Laptop */
+  
   max-width: 100%;
-  /* Agar tidak jebol di HP (merespons layar kecil) */
+  
   background-color: white;
   /* Warna dasar web-mu */
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 999;
 
-  /* Sembunyikan di luar layar kanan */
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  /* Flexbox agar Header, Item, dan Footer tersusun rapi ke bawah */
   display: flex;
   flex-direction: column;
 }
 
-/* Saat class .active ditambahkan oleh Javascript, keranjang masuk layar */
 .cart-drawer.active {
   transform: translateX(0);
 }
@@ -1228,10 +1213,10 @@ section.contact {
 
 .cart-items {
   flex: 1;
-  /* Mengisi sisa ruang tengah */
+  
   padding: 24px;
   overflow-y: auto;
-  /* Bisa scroll jika item banyak */
+  
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1264,7 +1249,7 @@ section.contact {
 
 .cart-item-info {
   flex: 1;
-  /* Supaya teks mengambil sisa ruang */
+  
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1399,7 +1384,6 @@ section.contact {
   transform: translateX(4px);
 }
 
-
 .maps {
   flex: 1;
   background-size: cover;
@@ -1408,7 +1392,6 @@ section.contact {
   min-height: 450px;
 }
 
-/* Hapus .maps::after karena menutupi iframe peta sehingga tidak bisa diklik */
 .kotak-wrapper {
   width: 450px;
   height: 200px;
@@ -1537,7 +1520,7 @@ section.contact {
   /* Warna orange */
   border-radius: 50%;
   color: transparent;
-  /* Membuat angka transparan sesuai logika yang diminta */
+  
   font-size: 0px;
   /* Menyembunyikan text space */
 }
@@ -1719,10 +1702,11 @@ section.contact {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  height: 100%;
 }
 
 .res-kartu-mini .kartu-gambar {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
 }
 
 .res-kartu-mini .kartu-info {
@@ -1940,7 +1924,6 @@ section.contact {
     gap: 20px;
   }
 
-  /* Contact Tablet & HP */
   .kotak-besar {
     flex-direction: column;
     height: auto;
@@ -1961,7 +1944,6 @@ section.contact {
     min-height: 400px;
   }
 }
-
 
 .galeri {
   min-height: auto;
@@ -2153,12 +2135,11 @@ section.contact {
     justify-content: flex-start;
   }
 
-
   /* --- HORIZONTAL SCROLL KATEGORI --- */
   .sub-menu-wrapper {
     width: 100%;
     overflow: hidden;
-    /* Mencegah pelebaran layar (horizontal scroll issue) */
+    
   }
 
   .pilihan,
@@ -2168,14 +2149,13 @@ section.contact {
     overflow-x: auto;
     /* Bisa digeser */
     white-space: nowrap;
-    /* Mencegah anak turun ke bawah */
+    
     -webkit-overflow-scrolling: touch;
-    /* Biar licin di iOS */
+    
     padding-bottom: 5px;
     /* Ruang bernapas */
   }
 
-  /* Sembunyikan scrollbar bawaan agar mewah */
   .pilihan::-webkit-scrollbar,
   .kategori-wrapper::-webkit-scrollbar,
   .best-seller-iced::-webkit-scrollbar {
@@ -2188,7 +2168,6 @@ section.contact {
     gap: 20px;
   }
 
-  /* Gallery Tablet & HP (2x2 Grid) */
   .galeri-grid {
     grid-template-columns: repeat(2, 1fr);
     height: auto;
@@ -2203,7 +2182,6 @@ section.contact {
   .galeri-item {
     aspect-ratio: 1 / 1;
   }
-
 
 }
 
@@ -2263,7 +2241,6 @@ section.contact {
     box-shadow: none;
   }
 
-  /* Gradient gelap di bawah gambar agar teks putih terbaca */
   .hero-kanan .image-wrapper::after {
     content: "";
     position: absolute;
@@ -2275,7 +2252,6 @@ section.contact {
     z-index: 5;
   }
 
-  /* Hero-kiri: tarik naik ke dalam gradient gambar */
   .hero-kiri {
     order: 2;
     margin-top: -140px;
@@ -2290,7 +2266,6 @@ section.contact {
     text-align: center;
   }
 
-  /* EST Badge: di atas gradient, putih */
   .hero-kiri .thn {
     position: static;
     margin: 0 0 8px 0;
@@ -2321,7 +2296,6 @@ section.contact {
     font-weight: 500;
   }
 
-  /* Slogan: di atas gradient, putih, animasi dari bawah */
   .hero-kiri .slogan {
     position: static;
     font-family: "Playfair Display", serif;
@@ -2347,7 +2321,6 @@ section.contact {
     }
   }
 
-  /* Paragraf: di bawah gambar, pada background terang, rata tengah */
   .hero-kiri p {
     margin: 24px 0 16px;
     font-size: 14px;
@@ -2359,7 +2332,6 @@ section.contact {
     padding: 0;
   }
 
-  /* Tombol: full-width, rata tengah */
   .button {
     width: 100%;
     flex-direction: column;
@@ -2376,7 +2348,6 @@ section.contact {
     text-align: center;
   }
 
-  /* Animasi sentuhan (Touch) untuk mobile */
   .btn-hero:active {
     transform: scale(0.95);
   }
@@ -2469,7 +2440,7 @@ section.contact {
   .kategori-wrapper a {
     font-size: 15px;
     margin: 0px;
-    /* Hapus width dan height agar garis underline menyesuaikan panjang teks */
+    
   }
 
   .pilihan-1 {
@@ -2637,7 +2608,6 @@ section.contact {
 
 @media screen and (max-width: 479px) {
 
-  /* Menggunakan CSS Grid agar teks bisa ditumpuk (overlap) ke gambar dengan presisi */
   .hero {
     display: grid;
     grid-template-columns: 1fr;
@@ -2661,7 +2631,6 @@ section.contact {
     overflow: hidden;
   }
 
-  /* Gradient gelap di atas gambar agar teks putih terbaca jelas */
   .hero-kanan .image-wrapper::after {
     content: "";
     position: absolute;
@@ -2673,19 +2642,17 @@ section.contact {
     z-index: 5;
   }
 
-  /* `display: contents` membongkar hero-kiri agar anak-anaknya masuk langsung ke grid .hero */
   .hero-kiri {
     display: contents;
   }
 
-  /* EST Badge: Di dalam gambar, rata tengah */
   .hero-kiri .thn {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     align-self: end;
     justify-self: center;
     margin: 0 0 100px 0;
-    /* Memberi jarak lebih tinggi dari bawah */
+    
     z-index: 10;
     animation: munculDariBawah 0.8s ease-out forwards;
   }
@@ -2703,7 +2670,6 @@ section.contact {
     font-weight: 500;
   }
 
-  /* Slogan: Di dalam gambar, rata tengah */
   .hero-kiri .slogan {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
@@ -2711,7 +2677,7 @@ section.contact {
     justify-self: center;
     text-align: center;
     margin: 0 0 40px 0;
-    /* Memberi jarak lebih tinggi dari bawah */
+    
     z-index: 10;
     font-family: "Playfair Display", serif;
     font-size: 28px;
@@ -2723,7 +2689,6 @@ section.contact {
     animation-delay: 0.3s;
   }
 
-  /* Paragraf: Di bawah gambar (baris grid 2), rata tengah */
   .hero-kiri p {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
@@ -2734,7 +2699,6 @@ section.contact {
     line-height: 1.7;
   }
 
-  /* Tombol: Di bawah paragraf (baris grid 3), rata tengah, flex kolom */
   .button {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
@@ -2754,7 +2718,6 @@ section.contact {
     text-align: center;
   }
 
-  /* Kunjungan: Paling bawah (baris grid 4), rata tengah */
   .kunjungan {
     grid-column: 1 / 2;
     grid-row: 4 / 5;

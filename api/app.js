@@ -168,12 +168,6 @@ app.post('/api/statistik', limiterRequest, async (req, res) => {
   }   
 });
 
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server Pelayan API aktif di port ${PORT}`);
-});
-
 module.exports = app;
 
 

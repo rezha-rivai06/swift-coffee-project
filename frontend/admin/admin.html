@@ -48,7 +48,16 @@
         <main class="menu-container" id="section-menu" style="display: none;">
             <div class="menu-header">
                 <h2>Daftar Menu Tersedia</h2>
-                <button id="btn-tambah-menu" class="btn-tambah">+ Tambah Menu Baru</button>
+                <div class="menu-actions">
+                    <div class="search-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="input-search-menu" placeholder="Cari nama menu, kategori, atau harga...">
+                    </div>
+                    <button id="btn-tambah-menu" class="btn-tambah">+ Tambah Menu Baru</button>
+                </div>
             </div>
             
             <div id="grid-menu" class="menu-grid">

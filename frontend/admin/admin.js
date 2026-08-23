@@ -263,3 +263,45 @@ window.hapusDataMenu = async function(id) {
         alert("Error koneksi!");
     }
 };
+
+// --- SMART SEARCH MENU ---
+const inputSearchMenu = document.getElementById('input-search-menu');
+const gridMenuSearch = document.getElementById('grid-menu');
+
+if (inputSearchMenu && gridMenuSearch) {
+    inputSearchMenu.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const menuCards = gridMenuSearch.querySelectorAll('.menu-card');
+        let visibleCards = false;
+
+        menuCards.forEach(card => {
+            const textContent = card.textContent.toLowerCase();
+            
+            if (textContent.includes(searchTerm)) {
+                card.style.display = ''; 
+                visibleCards = true;
+            } else {
+                card.style.display = 'none'; 
+            }
+        });
+
+        
+        let inputKosong = document.getElementById('empty-search');
+        if (!visibleCards) {
+            if (!inputKosong) {
+                inputKosong = document.createElement('div');
+                inputKosong.id = 'empty-search';
+                inputKosong.className = 'empty-search-result';
+                inputKosong.innerHTML = `Menu <strong>"${e.target.value}"</strong> tidak ditemukan.`;
+                gridMenuSearch.appendChild(inputKosong);
+            } else {
+                inputKosong.innerHTML = `Menu <strong>"${e.target.value}"</strong> tidak ditemukan.`;
+                inputKosong.style.display = 'block';
+            }
+        } else {
+            if (inputKosong) {
+                inputKosong.style.display = 'none';
+            }
+        }
+    });
+}

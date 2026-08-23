@@ -186,7 +186,6 @@ body {
         font-size: 0.9rem;
     }
 
-    /* Ubah Tabel jadi Card biar nggak perlu di-scroll */
     .table-container {
         background: transparent;
         box-shadow: none;
@@ -199,7 +198,7 @@ body {
     }
 
     .custom-table thead {
-        display: none; /* Sembunyikan Header Tabel di HP */
+        display: none; 
     }
 
     .custom-table tr {
@@ -226,7 +225,6 @@ body {
         justify-content: flex-end;
     }
 
-    /* Bikin Label Palsu di HP */
     .custom-table td::before {
         content: attr(data-label);
         font-weight: 600;
@@ -236,7 +234,6 @@ body {
         margin-right: 15px;
     }
 
-    /* Bikin kolom Aksi jadi rapi (tanpa tulisan "Aksi") */
     .custom-table td[data-label="Aksi"]::before {
         display: none;
     }
@@ -246,7 +243,6 @@ body {
         justify-content: center;
     }
 
-    /* Bikin kolom ID Booking jadi Header Kartu */
     .custom-table td[data-label="ID Booking"] {
         background-color: #f8f9fa;
         margin: -15px -15px 10px -15px;
@@ -298,6 +294,61 @@ body {
     padding: 8px 16px;
     transition: all 0.3s;
     border-radius: 8px;
+}
+
+/* ========================================= */
+/* SEARCH BOX STYLING (ADMIN MENU)           */
+/* ========================================= */
+.menu-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-box svg {
+    color: #94a3b8;
+    margin-right: 8px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+    color: #334155;
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.empty-search-result {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    font-size: 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
 }
 .nav-btn:hover {
     color: var(--primary);
@@ -466,7 +517,7 @@ body {
    RESPONSIVE DESIGN KHUSUS ADMIN (MOBILE)
 ========================================= */
 @media screen and (max-width: 768px) {
-    /* Perbaikan Logo yang Nabrak */
+    
     .logo-text {
         font-size: 2.2rem;
         flex-wrap: wrap;
@@ -477,7 +528,6 @@ body {
         padding: 4px 10px;
     }
 
-    /* Perbaikan Tab Navigasi & Tombol */
     .admin-nav {
         flex-direction: column;
         gap: 10px;
@@ -486,7 +536,6 @@ body {
         width: 100%;
     }
 
-    /* Perbaikan Header Menu Biar Nggak Dempet */
     .menu-header {
         flex-direction: column;
         align-items: flex-start;
