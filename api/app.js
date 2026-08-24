@@ -105,9 +105,8 @@ app.post('/api/buat-reservasi', rateLimitReservasi, async (req, res) => {
   }
 });
 
-// =====================================================================
-// [KEAMANAN: LOKET LOGIN]
-// =====================================================================
+
+// LOGIN
 
 app.post('/api/login', (req, res) => {
   const { password } = req.body;

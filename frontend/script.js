@@ -371,93 +371,110 @@ searchbox.addEventListener("keydown", function (e) {
   }
 });
 
-// BEST SELLER FILTER
-const bestsellerbtn = document.getElementById("bs-btn");
 
-  bestsellerbtn.addEventListener("click", function (e) {
-  e.preventDefault();
+const btnBestseller = document.getElementById("bs-btn");
+const btnIced = document.getElementById("i-btn");
 
-    if (pesanKosong != null) {
+if (btnBestseller) {
+  btnBestseller.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const pesanKosong = document.getElementById("pesan-kosong");
+    if (pesanKosong) {
       pesanKosong.style.display = "none";
     }
 
-  const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
+    const semuaKartuMenu = document.querySelectorAll("#menu-container .kartu-menu-1");
 
-  if (bestsellerbtn.classList.contains("active")) {
-    bestsellerbtn.classList.remove("active");
+    if (btnBestseller.classList.contains("active")) {
+      btnBestseller.classList.remove("active");
 
-    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
-    if (tombolAktif) {
-      saringKartuMenu(tombolAktif.getAttribute("data-filter"));
-    }
-
-  } else {
-    icedbtn.classList.remove("active");
-    bestsellerbtn.classList.add("active");
-
-    const lihatsemuabtn = document.getElementById("btn-lihat-semua");
-    if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
-
-    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
-    const subAktif = tombolAktif ? tombolAktif.getAttribute("data-filter") : "";
-
-    targetkartu.forEach(function (kartu) {
-      const isiteks = kartu.innerText.toLowerCase();
-      const subKartu = kartu.getAttribute("data-sub");
-      const sesuaiSub = subAktif === "" || subKartu === subAktif;
-
-      if (isiteks.includes("best seller") && sesuaiSub) {
-        kartu.style.display = "block";
-      } else {
-        kartu.style.display = "none";
+      const PilihanAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
+      if (PilihanAktif) {
+        saringKartuMenu(PilihanAktif.getAttribute("data-filter"));
       }
-    });
-  }
-});
+    } else {
+      if (btnIced) btnIced.classList.remove("active");
+      btnBestseller.classList.add("active");
 
-// ICED COFFEE FILTER
-const icedbtn = document.getElementById("i-btn");
+      const btnLihatSemua = document.getElementById("btn-lihat-semua");
+      if (btnLihatSemua) {
+        btnLihatSemua.style.display = "none";
+      }
 
-icedbtn.addEventListener("click", function (e) {
-  e.preventDefault();
+      const KategoriAktif = document.querySelector(".kategori-wrapper a.active-kategori");
+      const targetKategori = KategoriAktif ? KategoriAktif.getAttribute("data-target") : "";
 
-  if (pesanKosong != null) {
-      pesanKosong.style.display = "none";
-    }
+      semuaKartuMenu.forEach(function (kartu) {
+        const teksKartu = kartu.innerText.toLowerCase();
+        const kategoriKartu = kartu.getAttribute("data-kategori");
+        
+        const isBestseller = teksKartu.includes("best seller");
+        const isSesuaiKategori = kategoriKartu === targetKategori;
 
-  const targetkartu = document.querySelectorAll("#menu-container .kartu-menu-1");
-
-  if (icedbtn.classList.contains("active")) {
-    icedbtn.classList.remove("active");
-
-    const tombolAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
-    if (tombolAktif) {
-      saringKartuMenu(tombolAktif.getAttribute("data-filter"));
-    }
-
-  } else {
-    document.querySelector('.kategori-wrapper a[data-target="minuman"]').click();
-
-    setTimeout(() => {
-      bestsellerbtn.classList.remove("active");
-      icedbtn.classList.add("active");
-
-      const lihatsemuabtn = document.getElementById("btn-lihat-semua");
-      if (lihatsemuabtn) lihatsemuabtn.style.display = "none";
-
-      targetkartu.forEach(function (kartu) {
-        const isiTeks = kartu.innerText.toLowerCase();
-
-        if (isiTeks.includes("iced")) {
+        if (isBestseller && isSesuaiKategori) {
           kartu.style.display = "block";
-
         } else {
           kartu.style.display = "none";
         }
       });
-    }, 20);
-  }
-});
+    }
+  });
+}
+
+// ICED COFFEE FILTER
+if (btnIced) {
+  btnIced.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const pesanKosong = document.getElementById("pesan-kosong");
+    if (pesanKosong) {
+      pesanKosong.style.display = "none";
+    }
+
+    const semuaKartuMenu = document.querySelectorAll("#menu-container .kartu-menu-1");
+
+    if (btnIced.classList.contains("active")) {
+      btnIced.classList.remove("active");
+
+      const tombolSubMenuAktif = document.querySelector("#menu .sub-menu:not(.hidden) .pilihan-1.active");
+      if (tombolSubMenuAktif) {
+        saringKartuMenu(tombolSubMenuAktif.getAttribute("data-filter"));
+      }
+    } else {
+      const kategoriUtamaAktif = document.querySelector(".kategori-wrapper a.active-kategori");
+      const targetKategori = kategoriUtamaAktif ? kategoriUtamaAktif.getAttribute("data-target") : "";
+
+      if (targetKategori !== "minuman") {
+        if (pesanKosong) {
+          pesanKosong.style.display = "block";
+          pesanKosong.innerHTML = "<p>Maaf, menu tidak ditemukan.</p>";
+        }
+        semuaKartuMenu.forEach(kartu => kartu.style.display = "none");
+      } else {
+        if (btnBestseller) btnBestseller.classList.remove("active");
+        btnIced.classList.add("active");
+
+        const btnLihatSemua = document.getElementById("btn-lihat-semua");
+        if (btnLihatSemua) {
+          btnLihatSemua.style.display = "none";
+        }
+
+        semuaKartuMenu.forEach(function (kartu) {
+          const teksKartu = kartu.innerText.toLowerCase();
+          
+          if (teksKartu.includes("iced")) {
+            kartu.style.display = "block";
+          } else {
+            kartu.style.display = "none";
+          }
+        });
+      }
+    }
+  });
+}
+
+
 
 // LOAD MORE PROGRESSIVE RENDER
 const lihatsemuabtn = document.getElementById("btn-lihat-semua");

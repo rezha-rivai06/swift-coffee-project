@@ -260,39 +260,45 @@ if(resSearchbox) {
 const resBestsellerbtn = document.getElementById("res-bs-btn");
 const resIcedbtn = document.getElementById("res-i-btn");
 
-if(resBestsellerbtn) {
+if (resBestsellerbtn) {
   resBestsellerbtn.addEventListener("click", function (e) {
     e.preventDefault();
 
-    const targetkartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
-    
-    if (pesanKosongRes != null) {
+    const pesanKosongRes = document.getElementById("pesan-kosong-res");
+    if (pesanKosongRes) {
       pesanKosongRes.style.display = "none";
     }
+
+    const semuaKartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
 
     if (resBestsellerbtn.classList.contains("active")) {
       resBestsellerbtn.classList.remove("active");
 
-      const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
-      if (tombolAktif) {
-        saringKartuMenuRes(tombolAktif.getAttribute("data-res-filter"));
+      const Pilihanaktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
+      if (Pilihanaktif) {
+        saringKartuMenuRes(Pilihanaktif.getAttribute("data-res-filter"));
       }
     } else {
-      if(resIcedbtn) resIcedbtn.classList.remove("active");
+    
+      if (resIcedbtn) resIcedbtn.classList.remove("active");
       resBestsellerbtn.classList.add("active");
 
       const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
-      if (resLihatsemuabtn) resLihatsemuabtn.style.display = "none";
+      if (resLihatsemuabtn) {
+        resLihatsemuabtn.style.display = "none";
+      }
 
-      const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
-      const subAktif = tombolAktif ? tombolAktif.getAttribute("data-res-filter") : "";
+      const kategoriUtamaAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
+      const targetKategori = kategoriUtamaAktif ? kategoriUtamaAktif.getAttribute("data-res-target") : "";
 
-      targetkartu.forEach(function (kartu) {
-        const isiteks = kartu.innerText.toLowerCase();
-        const subKartu = kartu.getAttribute("data-sub");
-        const sesuaiSub = subAktif === "" || subKartu === subAktif;
+      semuaKartu.forEach(function (kartu) {
+        const teksKartu = kartu.innerText.toLowerCase();
+        const kategoriKartu = kartu.getAttribute("data-kategori");
+        
+        const isBestseller = teksKartu.includes("best seller");
+        const isSesuaiKategori = kategoriKartu === targetKategori;
 
-        if (isiteks.includes("best seller") && sesuaiSub) {
+        if (isBestseller && isSesuaiKategori) {
           kartu.style.display = "block";
         } else {
           kartu.style.display = "none";
@@ -302,47 +308,59 @@ if(resBestsellerbtn) {
   });
 }
 
-if(resIcedbtn) {
+if (resIcedbtn) {
   resIcedbtn.addEventListener("click", function (e) {
     e.preventDefault();
 
-    const targetkartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
-
-    if (pesanKosongRes != null) {
+    const pesanKosongRes = document.getElementById("pesan-kosong-res");
+    if (pesanKosongRes) {
       pesanKosongRes.style.display = "none";
     }
 
+    const semuaKartu = document.querySelectorAll("#res-menu-container .kartu-menu-1");
+
     if (resIcedbtn.classList.contains("active")) {
+      // Nonaktifkan Iced
       resIcedbtn.classList.remove("active");
 
       const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
       if (tombolAktif) {
         saringKartuMenuRes(tombolAktif.getAttribute("data-res-filter"));
       }
-
     } else {
-      document.querySelector('#res-menu-area .kategori-wrapper a[data-res-target="minuman"]').click();
+      // Aktifkan Iced
+      const kategoriUtamaAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
+      const targetKategori = kategoriUtamaAktif ? kategoriUtamaAktif.getAttribute("data-res-target") : "";
 
-      setTimeout(() => {
-        if(resBestsellerbtn) resBestsellerbtn.classList.remove("active");
+      if (targetKategori !== "minuman") {
+        if (pesanKosongRes) {
+          pesanKosongRes.style.display = "block";
+          pesanKosongRes.innerHTML = "<p>Maaf, menu tidak ditemukan.</p>";
+        }
+        semuaKartu.forEach(kartu => kartu.style.display = "none");
+      } else {
+        if (resBestsellerbtn) resBestsellerbtn.classList.remove("active");
         resIcedbtn.classList.add("active");
 
         const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
-        if (resLihatsemuabtn) resLihatsemuabtn.style.display = "none";
+        if (resLihatsemuabtn) {
+          resLihatsemuabtn.style.display = "none";
+        }
 
-        targetkartu.forEach(function (kartu) {
-          const isiTeks = kartu.innerText.toLowerCase();
+        semuaKartu.forEach(function (kartu) {
+          const teksKartu = kartu.innerText.toLowerCase();
 
-          if (isiTeks.includes("iced")) {
+          if (teksKartu.includes("iced")) {
             kartu.style.display = "block";
           } else {
             kartu.style.display = "none";
           }
         });
-      }, 20);
+      }
     }
   });
 }
+
 
 // 5. Lihat Semua Menu
 const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
