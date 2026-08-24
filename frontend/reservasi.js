@@ -291,6 +291,8 @@ if (resBestsellerbtn) {
       const kategoriUtamaAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
       const targetKategori = kategoriUtamaAktif ? kategoriUtamaAktif.getAttribute("data-res-target") : "";
 
+      let menuDitampilkan = false;
+
       semuaKartu.forEach(function (kartu) {
         const teksKartu = kartu.innerText.toLowerCase();
         const kategoriKartu = kartu.getAttribute("data-kategori");
@@ -300,10 +302,18 @@ if (resBestsellerbtn) {
 
         if (isBestseller && isSesuaiKategori) {
           kartu.style.display = "block";
+          menuDitampilkan = true;
         } else {
           kartu.style.display = "none";
         }
       });
+
+      if (menuDitampilkan === false) {
+        if (pesanKosongRes) {
+          pesanKosongRes.style.display = "block";
+          pesanKosongRes.innerHTML = "<p>Maaf best seller tidak tersedia di kategori ini</p>";
+        }
+      }
     }
   });
 }
