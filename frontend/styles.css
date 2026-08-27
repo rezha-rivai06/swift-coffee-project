@@ -2332,7 +2332,6 @@ section.contact {
         margin: 0 0 8px 0;
         align-self: center;
         text-align: center;
-        animation: munculDariBawah 0.8s ease-out forwards;
     }
 
     .hero-kiri .thn .tahun {
@@ -2366,8 +2365,6 @@ section.contact {
         max-width: 280px;
         text-align: center;
         opacity: 0;
-        animation: munculDariBawah 0.8s ease-out forwards;
-        animation-delay: 0.3s;
     }
 
     @keyframes munculDariBawah {
@@ -2716,7 +2713,6 @@ section.contact {
         margin: 0 0 100px 0;
 
         z-index: 10;
-        animation: munculDariBawah 0.8s ease-out forwards;
     }
 
     .hero-kiri .thn .tahun {
@@ -2747,8 +2743,6 @@ section.contact {
         max-width: 260px;
         line-height: 1.2;
         opacity: 0;
-        animation: munculDariBawah 0.8s ease-out forwards;
-        animation-delay: 0.3s;
     }
 
     .hero-kiri p {
@@ -2916,3 +2910,28 @@ section.contact {
 #pesan-kosong-res {
     animation: fadeInSmooth 0.3s ease-out forwards;
 }
+/* --- ANIMATION UTILITY CLASSES --- */
+.anim-hidden {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth ease-out */
+}
+
+/* Initial States */
+.anim-slide-down { transform: translateY(-30px); }
+.anim-slide-up { transform: translateY(30px); }
+.anim-slide-right { transform: translateX(-40px); } /* Bergerak dari kiri ke kanan */
+.anim-slide-left { transform: translateX(40px); } /* Bergerak dari kanan ke kiri */
+.anim-fade { transform: scale(0.98); } /* Sedikit scale untuk ambient */
+
+/* Final State (Kelas Gaib) */
+.anim-hidden.show {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+/* Delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+

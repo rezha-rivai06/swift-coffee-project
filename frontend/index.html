@@ -53,20 +53,20 @@
     <!-- --- HERO SECTION --- -->
     <section class="hero" id="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('svg/bg-hero.webp');">
       <div class="hero-kiri">
-        <div class="thn">
+        <div class="thn anim-hidden anim-slide-down delay-1">
           <div class="tahun">
             <span class="tahun-berdiri">Est 2025</span>
           </div>
         </div>
-        <span class="slogan">Your Everyday Escape</span>
-        <p>
+        <span class="slogan anim-hidden anim-slide-down delay-2">Your Everyday Escape</span>
+        <p class="anim-hidden anim-slide-right delay-3">
           Ruang untuk bernapas, berpikir, dan menikmati kopi terbaik di setiap momenmu.
         </p>
-        <div class="button">
+        <div class="button anim-hidden anim-slide-down delay-4">
           <a href="#menu" class="btn-hero" type="button">Explore Menu</a>
           <a href="#reservasi" class="btn-hero" type="button">Reservasi</a>
         </div>
-        <div class="kunjungan" id="kunjungan">
+        <div class="kunjungan anim-hidden anim-slide-down delay-4" id="kunjungan">
           <span class="logo-1">☕</span>
           <span class="logo-2">🥐</span>
           <span class="logo-3">🥗</span>
@@ -75,7 +75,7 @@
         </div>
       </div>
 
-      <div class="hero-kanan">
+      <div class="hero-kanan anim-hidden anim-slide-left delay-3">
         <div class="image-frame">
           <div class="image-wrapper">
             <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786981019/Gemini_Generated_Image_16gp8z16gp8z16gp.jpg" alt="gambar kopi" />
@@ -87,17 +87,17 @@
     <!-- --- ABOUT SECTION --- -->
     <section class="about" id="about">
       <div class="about-kiri">
-        <img class="about-1" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
-        <img class="about-2" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
+        <img class="about-1 anim-hidden anim-slide-up" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
+        <img class="about-2 anim-hidden anim-slide-down delay-1" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
       </div>
 
       <div class="about-kanan">
-        <span class="teks-1">Tentang kami</span>
-        <span class="teks-2">Sejak 2025</span>
-        <p class="teks-3">
+        <span class="teks-1 anim-hidden anim-slide-down">Tentang kami</span>
+        <span class="teks-2 anim-hidden anim-slide-down delay-1">Sejak 2025</span>
+        <p class="teks-3 anim-hidden anim-slide-right delay-2">
           Berawal dari sebuah garasi kecil di sudut kota, impian kami sederhana: menyajikan secangkir kopi berkualitas yang bisa menyatukan berbagai lapisan masyarakat. Di tahun 2025, saat dunia sedang bergerak begitu cepat, kami ingin menciptakan sebuah ruang di mana waktu seakan berjalan lebih lambat.
         </p>
-        <a class="teks-4" href="#" id="btn-our-story">Read full story &nbsp; ➜</a>
+        <a class="teks-4 anim-hidden anim-fade delay-3" href="#" id="btn-our-story">Read full story &nbsp; ➜</a>
       </div>
     </section>
 
@@ -260,21 +260,21 @@
     <!-- --- GALLERY SECTION --- -->
     <section class="galeri" id="galeri">
       <div class="galeri-title">
-        <h2>Capture the Moment</h2>
-        <p>The ambiance that makes Swift Coffee your home away from home.</p>
+        <h2 class="anim-hidden anim-slide-down">Capture the Moment</h2>
+        <p class="anim-hidden anim-slide-down delay-1">The ambiance that makes Swift Coffee your home away from home.</p>
       </div>
       <div class="galeri-grid">
         <!-- BARIS 1 & 2 (Sudah Penuh 4 Kolom) -->
-        <div class="galeri-item besar">
+        <div class="galeri-item besar anim-hidden anim-slide-right delay-1">
           <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
-        <div class="galeri-item">
+        <div class="galeri-item anim-hidden anim-slide-down delay-1">
           <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
-        <div class="galeri-item">
+        <div class="galeri-item anim-hidden anim-slide-down delay-2">
           <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
-        <div class="galeri-item lebar">
+        <div class="galeri-item lebar anim-hidden anim-slide-left delay-3">
           <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
         </div>
 
@@ -291,22 +291,22 @@
             Molestiae vitae libero autem in, reiciendis saepe quas est maxime exercitationem soluta aperiam unde qui rem
             quis consequatur!</p>
           <span class="alamat">
-            <span><img src="/frontend/svg/location.svg" class="icon-box" alt="Location"> Alamat</span>
+            <span><img src="svg/location.svg" class="icon-box" alt="Location"> Alamat</span>
             <p>Jl. Pesantren Jl. Imam Bonjol, Nunukan Tim., Kec. Nunukan, Kabupaten Nunukan, Kalimantan Utara 77482</p>
           </span>
           <span class="jam-operasional">
-            <span><img src="/frontend/svg/clock.svg" class="icon-box" alt="Clock"> Jam operasional</span>
+            <span><img src="svg/clock.svg" class="icon-box" alt="Clock"> Jam operasional</span>
             <p>selasa - minggu 09.00 - 22.00
               sabtu 09.00 - 23.00
               Tutup senin</p>
           </span>
           <span class="contact">
-            <span class="contact-title"><img src="/frontend/svg/phone.svg" class="icon-box" alt="Phone"> Contact</span>
+            <span class="contact-title"><img src="svg/phone.svg" class="icon-box" alt="Phone"> Contact</span>
             <span class="contact-1">+62 821 9033 4112</span>
             <span class=contact-2>swftcoffee@gmail.com</span>
           </span>
 
-          <button id="get-direction-btn" class="get-direction">klik untuk melihat<img src="/frontend/svg/direction.svg" class="arrow-icon"
+          <button id="get-direction-btn" class="get-direction">klik untuk melihat<img src="svg/direction.svg" class="arrow-icon"
               alt="Arrow"></button>
         </div>
 
@@ -419,6 +419,7 @@
   <script src="config.js" defer></script>
   <script src="script.js" defer></script>
   <script src="reservasi.js" defer></script>
+  <script src="scroll-animation.js" defer></script>
   <script>
     document.getElementById('staff-login').addEventListener('click', async () => {
       const password = prompt("SwiftCafe Admin Password:");
