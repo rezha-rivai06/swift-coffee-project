@@ -26,7 +26,7 @@ async function runBuild() {
 
     const cssFiles = [
         path.join(distDir, 'styles.css'),
-        path.join(distDir, 'admin', 'admin.css')
+        path.join(distDir, 'admin', 'styles.css')
     ];
 
     const existingFiles = [...jsFiles, ...cssFiles].filter(file => fs.existsSync(file));
