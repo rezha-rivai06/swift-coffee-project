@@ -522,4 +522,3 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-

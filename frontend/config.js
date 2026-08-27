@@ -1,3 +1,3 @@
-const CONFIG = {
-    API_URL: ""
+const CONFIG={
+    API_URL:""
 };

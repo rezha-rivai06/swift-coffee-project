@@ -1085,9 +1085,8 @@ if (getDirectionBtn) {
   });
 }
 
-// =========================================
-// FITUR UX: AUTO-SAVE FORM RESERVASI
-// =========================================
+// AUTO-SAVE FORM RESERVASI
+
 document.addEventListener("DOMContentLoaded", function () {
   const inputNama = document.getElementById("res-nama");
   const inputTanggal = document.getElementById("res-tanggal");
