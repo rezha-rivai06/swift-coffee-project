@@ -562,7 +562,7 @@ async function loadMenu() {
     dataMenu.forEach(function (menu) {
       const cardHTML = `
         <div class="kartu-gambar">
-          <img src="${menu.gambar}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.alt='Gambar tidak tersedia';" />
+          <img src="${menu.gambar.replace('/upload/', '/upload/w_400,q_auto,f_auto/')}" alt="${menu.nama}" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded'); this.alt='Gambar tidak tersedia';" />
           ${menu.badge ? `<span class="kartu-badge ${menu.badgeClass}">${menu.badge}</span>` : ""}
         </div>
         <div class="kartu-info">

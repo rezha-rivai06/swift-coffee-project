@@ -1,4 +1,4 @@
-/*halaman utama*/
+/* Halaman Utama */
 
 * {
     box-sizing: border-box;
@@ -141,9 +141,9 @@ body::-webkit-scrollbar {
     right: -24px;
     bottom: -24px;
     background-color: rgba(255, 255, 255, 0.15);
-    /* Diubah agar terlihat di background gelap */
+    
     backdrop-filter: blur(8px);
-    /* Tambahan efek kaca premium */
+    
     border-radius: 64px;
     z-index: -1;
     transform: rotate(-2deg);
@@ -586,7 +586,7 @@ input::-webkit-search-cancel-button {
     font-family: "Inter", sans-serif;
     font-weight: 600;
     font-size: 13px;
-    /* Dikecilkan sedikit */
+    
     padding: 6px 18px;
 
     border-radius: 50px;
@@ -630,7 +630,7 @@ input::-webkit-search-cancel-button {
     border-radius: 50px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
-    /* Di bawah teks */
+    
     box-shadow: 0 4px 15px rgba(22, 14, 10, 0.1);
 }
 
@@ -710,24 +710,33 @@ input::-webkit-search-cancel-button {
     width: 100%;
     aspect-ratio: 3 / 4;
     overflow: hidden;
-
     background: #e5e7eb;
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
-    background-size: 200px 100%;
-    background-repeat: no-repeat;
-    background-position: left -200px top 0;
+}
+
+.kartu-gambar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
     animation: shine 1.5s ease infinite;
+    z-index: 1;
+}
+
+.kartu-gambar.loaded::before {
+    animation: none;
+    display: none;
 }
 
 @keyframes shine {
     to {
-        background-position: right -200px top 0;
+        transform: translateX(300%);
     }
 }
 
-.kartu-gambar.loaded {
-    animation: none;
-}
+
 
 .kartu-gambar img {
     width: 100%;
@@ -1106,9 +1115,9 @@ section.contact {
     transition: transform 0.3s ease-in-out;
 }
 
-/* ========================================= */
-/* OUR STORY DRAWER (LACI DARI KIRI)         */
-/* ========================================= */
+
+
+
 
 .story-overlay {
     position: fixed;
@@ -1133,18 +1142,18 @@ section.contact {
     position: fixed;
     top: 0;
     left: 0;
-    /* Muncul dari kiri */
+    
     width: 500px;
     max-width: 100%;
     height: 100vh;
     background-color: #fcfbfa;
-    /* Sedikit krem */
+    /* Sedikit Krem */
     box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
-    /* Shadow ke kanan */
+    
     z-index: 999;
 
     transform: translateX(-100%);
-    /* Sembunyi di kiri */
+    
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     display: flex;
@@ -1168,9 +1177,9 @@ section.contact {
     overflow-y: auto;
 }
 
-/* ========================================= */
-/* KODE CSS KERANJANG (SLIDING DRAWER)       */
-/* ========================================= */
+
+
+
 
 .cart-overlay {
     position: fixed;
@@ -1180,7 +1189,7 @@ section.contact {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
-    /* Efek blur kaca */
+    
     z-index: 998;
     opacity: 0;
     visibility: hidden;
@@ -1202,7 +1211,7 @@ section.contact {
     max-width: 100%;
 
     background-color: white;
-    /* Warna dasar web-mu */
+    
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     z-index: 999;
 
@@ -1217,9 +1226,9 @@ section.contact {
     transform: translateX(0);
 }
 
-/* ========================================= */
-/* ISI RUANGAN KERANJANG (MOCKUP UI)         */
-/* ========================================= */
+
+
+
 
 .cart-header {
     padding: 24px;
@@ -1264,7 +1273,7 @@ section.contact {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* Jarak antar pesanan */
+    
     background-color: #faf5f0;
 }
 
@@ -1447,9 +1456,9 @@ section.contact {
     font-size: 60px;
 }
 
-/* ========================================= */
-/* KODE CSS TOAST NOTIF & BADGE KERANJANG    */
-/* ========================================= */
+
+
+
 
 .toast-notif {
     position: fixed;
@@ -1562,12 +1571,12 @@ section.contact {
     width: 8px;
     height: 8px;
     background-color: #ff7300;
-    /* Warna orange */
+    /* Warna Orange */
     border-radius: 50%;
     color: transparent;
 
     font-size: 0px;
-    /* Menyembunyikan text space */
+    
 }
 
 .humberger-badge.hidden {
@@ -1597,9 +1606,7 @@ section.contact {
     transform: translateY(-6px) rotate(-45deg);
 }
 
-/* ==========================================
-   RESERVASI SECTION (TAMBAHAN)
-   ========================================== */
+
 .reservasi .res-kotak {
     background-color: white;
 }
@@ -1656,7 +1663,7 @@ section.contact {
     }
 }
 
-/* === DINE-IN MENU SLIDER & KATEGORI === */
+
 .res-kategori-wrapper {
     display: flex;
     gap: 24px;
@@ -1736,7 +1743,7 @@ section.contact {
     display: none;
 }
 
-/* === KARTU MINI (DINE-IN) === */
+
 .res-kartu-mini {
     min-width: 160px;
     max-width: 160px;
@@ -1774,7 +1781,7 @@ section.contact {
     font-size: 18px;
 }
 
-/* === CART TAB SWITCHER === */
+
 .cart-tab-switcher {
     display: flex;
     padding: 0 20px;
@@ -1835,7 +1842,7 @@ section.contact {
     }
 }
 
-/* Responsive - 1200px */
+
 
 @media screen and (max-width: 1280px) {
     .hero {
@@ -1903,7 +1910,7 @@ section.contact {
     }
 }
 
-/* Responsive - 1024px */
+
 
 @media screen and (max-width: 1024px) {
     .hero {
@@ -1990,7 +1997,7 @@ section.contact {
         align-items: center;
     }
 
-    /* --- MENU CARD GRID (3 COLUMNS for large tablets) --- */
+    
     .kartu-menu {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
@@ -2022,7 +2029,7 @@ section.contact {
     padding: 80px 40px;
 }
 
-/* Responsive - 768px */
+
 
 @media screen and (max-width: 768px) {
 
@@ -2193,11 +2200,11 @@ section.contact {
         font-size: 14px;
     }
 
-    /* --- KATEGORI & SUB-MENU LAYOUT --- */
+    
     .sub-menu-wrapper {
         flex-direction: column;
         align-items: flex-start;
-        /* Rata kiri */
+        /* Rata Kiri */
         gap: 16px;
         width: 100%;
     }
@@ -2207,7 +2214,7 @@ section.contact {
         justify-content: flex-start;
     }
 
-    /* --- HORIZONTAL SCROLL KATEGORI --- */
+    
     .sub-menu-wrapper {
         width: 100%;
         overflow: hidden;
@@ -2219,13 +2226,13 @@ section.contact {
     .best-seller-iced {
         width: 100%;
         overflow-x: auto;
-        /* Bisa digeser */
+        /* Bisa Digeser */
         white-space: nowrap;
 
         -webkit-overflow-scrolling: touch;
 
         padding-bottom: 5px;
-        /* Ruang bernapas */
+        /* Ruang Bernapas */
     }
 
     .pilihan::-webkit-scrollbar,
@@ -2234,7 +2241,7 @@ section.contact {
         display: none;
     }
 
-    /* --- MENU CARD GRID (2 COLUMNS) --- */
+    
     .kartu-menu {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -2257,7 +2264,7 @@ section.contact {
 
 }
 
-/* Responsive - 480px */
+
 
 @media screen and (max-width: 480px) {
 
@@ -2522,7 +2529,7 @@ section.contact {
         font-size: 10px;
     }
 
-    /* --- CARD ADJUSTMENTS FOR 2 COLUMNS ON SUPER SMALL SCREENS --- */
+    
     .kartu-info {
         padding: 16px 12px;
     }
@@ -2587,7 +2594,7 @@ section.contact {
         margin-bottom: 40px;
     }
 
-    /* --- GALLERY GRID MOBILE --- */
+    
     .galeri-title h2 {
         font-size: 28px;
     }
@@ -2612,7 +2619,7 @@ section.contact {
         grid-row: span 1;
     }
 
-    /* --- CONTACT MOBILE --- */
+    
 
     section.contact {
         padding: 40px 15px;
@@ -2675,7 +2682,7 @@ section.contact {
     }
 }
 
-/* Responsive - 479px */
+
 
 @media screen and (max-width: 479px) {
 
@@ -2795,7 +2802,7 @@ section.contact {
     }
 }
 
-/* Responsive - 360px */
+
 
 @media screen and (max-width: 360px) {
     .hero-kiri .slogan {
@@ -2819,7 +2826,7 @@ section.contact {
     }
 }
 
-/* === RINCIAN RESERVASI (DINE-IN) === */
+
 .rincian-reservasi-box {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -2849,9 +2856,7 @@ section.contact {
     display: none !important;
 }
 
-/* ==============================================
-   SKELETON LOADER
-============================================== */
+
 .skeleton-card {
     background-color: #faf9f6;
     border-radius: 32px;
@@ -2905,7 +2910,7 @@ section.contact {
     }
 }
 
-/* Animasi Muncul Smooth */
+
 @keyframes fadeInSmooth {
     0% {
         opacity: 0;
@@ -2922,20 +2927,20 @@ section.contact {
 #pesan-kosong-res {
     animation: fadeInSmooth 0.3s ease-out forwards;
 }
-/* --- ANIMATION UTILITY CLASSES --- */
+
 .anim-hidden {
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth ease-out */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
 /* Initial States */
 .anim-slide-down { transform: translateY(-30px); }
 .anim-slide-up { transform: translateY(30px); }
-.anim-slide-right { transform: translateX(-40px); } /* Bergerak dari kiri ke kanan */
-.anim-slide-left { transform: translateX(40px); } /* Bergerak dari kanan ke kiri */
-.anim-fade { transform: scale(0.98); } /* Sedikit scale untuk ambient */
+.anim-slide-right { transform: translateX(-40px); } 
+.anim-slide-left { transform: translateX(40px); } 
+.anim-fade { transform: scale(0.98); } 
 
-/* Final State (Kelas Gaib) */
+
 .anim-hidden.show {
     opacity: 1;
     transform: translate(0) scale(1);
