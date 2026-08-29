@@ -276,7 +276,10 @@ if (resBestsellerbtn) {
 
       const Pilihanaktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
       if (Pilihanaktif) {
-        saringKartuMenuRes(Pilihanaktif.getAttribute("data-res-filter"));
+        Pilihanaktif.click();
+      } else {
+        const KategoriAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
+        if (KategoriAktif) KategoriAktif.click();
       }
     } else {
     
@@ -335,37 +338,46 @@ if (resIcedbtn) {
 
       const tombolAktif = document.querySelector("#res-menu-area .sub-menu:not(.hidden) .pilihan-1.active");
       if (tombolAktif) {
-        saringKartuMenuRes(tombolAktif.getAttribute("data-res-filter"));
+        tombolAktif.click();
+      } else {
+        const KategoriAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
+        if (KategoriAktif) KategoriAktif.click();
       }
     } else {
       // Aktifkan Iced
+      if (resBestsellerbtn) resBestsellerbtn.classList.remove("active");
+      resIcedbtn.classList.add("active");
+
+      const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
+      if (resLihatsemuabtn) {
+        resLihatsemuabtn.style.display = "none";
+      }
+
       const kategoriUtamaAktif = document.querySelector("#res-menu-area .kategori-wrapper a.active-kategori");
       const targetKategori = kategoriUtamaAktif ? kategoriUtamaAktif.getAttribute("data-res-target") : "";
 
-      if (targetKategori !== "minuman") {
+      let menuDitampilkan = false;
+
+      semuaKartu.forEach(function (kartu) {
+        const teksKartu = kartu.innerText.toLowerCase();
+        const kategoriKartu = kartu.getAttribute("data-kategori");
+
+        const isIced = teksKartu.includes("iced") || teksKartu.includes("ice") || teksKartu.includes("dingin");
+        const isSesuaiKategori = kategoriKartu === targetKategori;
+
+        if (isIced && isSesuaiKategori) {
+          kartu.style.display = "block";
+          menuDitampilkan = true;
+        } else {
+          kartu.style.display = "none";
+        }
+      });
+
+      if (menuDitampilkan === false) {
         if (pesanKosongRes) {
           pesanKosongRes.style.display = "block";
-          pesanKosongRes.innerHTML = "<p>Maaf, menu tidak ditemukan.</p>";
+          pesanKosongRes.innerHTML = "<p>Maaf, menu iced tidak tersedia di kategori ini.</p>";
         }
-        semuaKartu.forEach(kartu => kartu.style.display = "none");
-      } else {
-        if (resBestsellerbtn) resBestsellerbtn.classList.remove("active");
-        resIcedbtn.classList.add("active");
-
-        const resLihatsemuabtn = document.getElementById("res-btn-lihat-semua");
-        if (resLihatsemuabtn) {
-          resLihatsemuabtn.style.display = "none";
-        }
-
-        semuaKartu.forEach(function (kartu) {
-          const teksKartu = kartu.innerText.toLowerCase();
-
-          if (teksKartu.includes("iced")) {
-            kartu.style.display = "block";
-          } else {
-            kartu.style.display = "none";
-          }
-        });
       }
     }
   });

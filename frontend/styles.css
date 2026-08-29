@@ -645,6 +645,7 @@ input::-webkit-search-cancel-button {
     transition: all 0.3s ease;
     border: 1px solid rgba(128, 117, 112, 0.3);
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .pilihan-1.active {
