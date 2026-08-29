@@ -94,7 +94,7 @@ const rateLimitReservasi = rateLimit({
 app.post('/api/buat-reservasi', rateLimitReservasi, async (req, res) => {
   try {
     const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
-    const idBooking = await tambahReservasi(tanggal, jam, jumlahTamu);
+    const idBooking = await buatReservasi(tanggal, jam, jumlahTamu);
     
  const linkWA = buatPesanWhatsAppReservasi(nama, tanggal, jam, jumlahTamu, idBooking, pesanan);   
     

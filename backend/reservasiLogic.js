@@ -33,7 +33,7 @@ const cekKetersediaan = async (tanggal, jamMasuk, jumlahTamuMasuk) => {
   return { tersedia: true };
 };
 
-const tambahReservasi = async (tanggal, jam, jumlahTamu) => {
+const buatReservasi = async (tanggal, jam, jumlahTamu) => {
   const idBaru = 'RES-' + Date.now().toString();
     await Reservasi.create({
     idBooking: idBaru,
@@ -81,7 +81,7 @@ const hapusReservasi = async (idBooking) => {
 };
 module.exports = {
   cekKetersediaan,
-  tambahReservasi,
+  buatReservasi,
   bersihkanDataLama,
   batalReservasi,
   buatPesanWhatsAppReservasi,

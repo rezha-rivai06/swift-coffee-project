@@ -223,22 +223,42 @@ window.addEventListener("DOMContentLoaded", function () {
 
     const data = await res.json();
     
-  
-  const target = data.totalPengunjung;
-  let sekarang = 0;
-  const tambah = Math.ceil(target / 200);
+    const target = data.totalPengunjung;
+    
+   const observerStatistik = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let sekarang = 0;
+          const tambah = Math.ceil(target / 100) || 1;
+          
+          if (badgePengunjung.animasiInterval) {
+            clearInterval(badgePengunjung.animasiInterval);
+          }
+          
+          badgePengunjung.animasiInterval = setInterval(() => {
+            sekarang += tambah;
+            if (sekarang >= target) {
+              sekarang = target;
+              clearInterval(badgePengunjung.animasiInterval);
+            }
+            badgePengunjung.innerHTML = `${sekarang}+`;
+          }, 15);
+          
+        } else {
+          // Ketika elemen keluar layar, hentikan hitungan dan reset kembali ke 0
+          if (badgePengunjung.animasiInterval) {
+            clearInterval(badgePengunjung.animasiInterval);
+          }
+          badgePengunjung.innerHTML = `0+`;
+        }
+      });
+    }, { threshold: 0.1 });
 
-  let interval = setInterval(() => {
-    sekarang += tambah;
-
-    if (sekarang >= target) {
-      sekarang = target;
-      clearInterval(interval);
+    // Pasang sensor pengamat ke elemen badge pengunjung
+    if (badgePengunjung) {
+      observerStatistik.observe(badgePengunjung);
     }
-    badgePengunjung.innerHTML = `${sekarang}+`;
-  }, 10);
-
-  }
+  } // <-- Penutup function hitungPengunjung()
 
   hitungPengunjung();
 
@@ -710,7 +730,6 @@ async function loadMenu() {
         if (dineininfo) dineininfo.classList.remove("hidden");
         if (takeawayInfo) takeawayInfo.classList.add("hidden");
 
-        // Sinkronisasi data form reservasi ke rincian keranjang
         const inputNama = document.getElementById("res-nama");
         const inputTanggal = document.getElementById("res-tanggal");
         const inputTamu = document.getElementById("res-tamu");
@@ -728,7 +747,7 @@ async function loadMenu() {
     }
     renderKeranjang();
 
-    // LOGIKA TOMBOL PLUS & MINUS DI KERANJANG
+    
     const wadahkeranjang = document.querySelector(".cart-items");
 
     wadahkeranjang.addEventListener("click", function (e) {
@@ -797,7 +816,7 @@ async function loadMenu() {
             const res = await fetch(CONFIG.API_URL + "/api/buat-reservasi", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ nama: resNama, tanggal: resTanggal, jam: resJam, jumlahTamu: resTamu, pesanan: pesananDineIn })
+              body: JSON.stringify({ nama: resNama, tanggal: resTanggal, jam: resJam, resTamu: resTamu, pesanan: pesananDineIn })
             });
             const dataBuat = await res.json();
             if (dataBuat.sukses) {
@@ -1094,7 +1113,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const inputTamu = document.getElementById("res-tamu");
 
   if (inputNama && inputTanggal && inputJam && inputTamu) {
-    // Muat data yang tersimpan sebelumnya (kalau ada)
     inputNama.value = localStorage.getItem("draft_nama") || "";
     inputTanggal.value = localStorage.getItem("draft_tanggal") || "";
     inputJam.value = localStorage.getItem("draft_jam") || "";

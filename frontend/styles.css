@@ -538,16 +538,18 @@ input::-webkit-search-cancel-button {
     transition: width 0.3s ease;
 }
 
-.kategori-3:hover,
-.kategori-4:hover,
-.kategori-5:hover {
-    color: #160e0a;
-}
+@media (hover: hover) {
+    .kategori-3:hover,
+    .kategori-4:hover,
+    .kategori-5:hover {
+        color: #160e0a;
+    }
 
-.kategori-3:hover::after,
-.kategori-4:hover::after,
-.kategori-5:hover::after {
-    width: 100%;
+    .kategori-3:hover::after,
+    .kategori-4:hover::after,
+    .kategori-5:hover::after {
+        width: 100%;
+    }
 }
 
 .active-kategori {
@@ -662,12 +664,14 @@ input::-webkit-search-cancel-button {
     color: white;
 }
 
-.pilihan-1:hover span {
-    color: #160e0a;
-}
+@media (hover: hover) {
+    .pilihan-1:hover span {
+        color: #160e0a;
+    }
 
-.pilihan-1.active:hover span {
-    color: white;
+    .pilihan-1.active:hover span {
+        color: white;
+    }
 }
 
 .kartu-menu {
@@ -694,9 +698,11 @@ input::-webkit-search-cancel-button {
     animation: fadeInSmooth 0.3s ease-out forwards;
 }
 
-.kartu-menu-1:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+@media (hover: hover) {
+    .kartu-menu-1:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    }
 }
 
 .kartu-gambar {
@@ -735,8 +741,10 @@ input::-webkit-search-cancel-button {
     opacity: 1;
 }
 
-.kartu-menu-1:hover .kartu-gambar img {
-    transform: scale(1.1);
+@media (hover: hover) {
+    .kartu-menu-1:hover .kartu-gambar img {
+        transform: scale(1.1);
+    }
 }
 
 .kartu-badge {
@@ -783,8 +791,10 @@ input::-webkit-search-cancel-button {
     transition: color 0.3s ease;
 }
 
-.kartu-menu-1:hover .kartu-nama {
-    color: #1d0b00;
+@media (hover: hover) {
+    .kartu-menu-1:hover .kartu-nama {
+        color: #1d0b00;
+    }
 }
 
 .kartu-desk {
@@ -857,8 +867,10 @@ input::-webkit-search-cancel-button {
     height: 40%;
 }
 
-.kartu-btn:hover {
-    box-shadow: 0 6px 20px rgba(22, 14, 10, 0.3);
+@media (hover: hover) {
+    .kartu-btn:hover {
+        box-shadow: 0 6px 20px rgba(22, 14, 10, 0.3);
+    }
 }
 
 .kartu-btn:active {
@@ -1467,12 +1479,12 @@ section.contact {
 
 @media (max-width: 768px) {
     .toast-notif {
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
+        top: 20px;
+        transform: translateX(-50%) translateY(-100px) scale(0.9);
     }
 
     .toast-notif.show {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translateX(-50%) translateY(0) scale(1);
     }
 }
 

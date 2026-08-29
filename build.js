@@ -21,7 +21,8 @@ async function runBuild() {
         path.join(distDir, 'script.js'),
         path.join(distDir, 'reservasi.js'),
         path.join(distDir, 'config.js'),
-        path.join(distDir, 'admin', 'admin.js')
+        path.join(distDir, 'admin', 'admin.js'),
+        path.join(distDir, 'scroll-animation.js')
     ];
 
     const cssFiles = [
