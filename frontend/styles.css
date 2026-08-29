@@ -596,12 +596,12 @@ input::-webkit-search-cancel-button {
 
 }
 
-.best-seller-iced a:hover {
-    color: white;
-    /* Teks jadi putih */
-    background-color: #160e0a;
-
-    border-color: #160e0a;
+@media (hover: hover) {
+    .best-seller-iced a:hover {
+        color: white;
+        background-color: #160e0a;
+        border-color: #160e0a;
+    }
 }
 
 .best-seller-iced a.active {

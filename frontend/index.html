@@ -36,7 +36,7 @@
         <li><a href="#galeri">Gallery</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button type="button" id="btn-keranjang">
+      <button type="button" id="btn-keranjang" aria-label="Keranjang Belanja">
         <svg width="800px" height="800px" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
@@ -48,7 +48,7 @@
   </nav>
 
   <!-- --- HALAMAN UTAMA --- -->
-  <div class="halaman-utama">
+  <main class="halaman-utama">
 
     <!-- --- HERO SECTION --- -->
     <section class="hero" id="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('svg/bg-hero.webp');">
@@ -87,8 +87,8 @@
     <!-- --- ABOUT SECTION --- -->
     <section class="about" id="about">
       <div class="about-kiri">
-        <img class="about-1 anim-hidden anim-slide-up" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
-        <img class="about-2 anim-hidden anim-slide-down delay-1" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar" />
+        <img class="about-1 anim-hidden anim-slide-up" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar" />
+        <img class="about-2 anim-hidden anim-slide-down delay-1" src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar" />
       </div>
 
       <div class="about-kanan">
@@ -124,34 +124,34 @@
           <!-- Sub-menu Minuman -->
           <div class="pilihan sub-menu hidden" id="sub-minuman">
             <div class="sliding-highlight"></div>
-            <a class="pilihan-1 active" data-filter="signature"><span>Signature</span></a>
-            <a class="pilihan-1" data-filter="non coffee"><span>Non Coffee</span></a>
-            <a class="pilihan-1" data-filter="iced coffee"><span>Iced Coffee</span></a>
-            <a class="pilihan-1" data-filter="hot coffee"><span>Hot Coffee</span></a>
-            <a class="pilihan-1" data-filter="tea"><span>Tea</span></a>
+            <a href="javascript:void(0)" class="pilihan-1 active" data-filter="signature"><span>Signature</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="non coffee"><span>Non Coffee</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="iced coffee"><span>Iced Coffee</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="hot coffee"><span>Hot Coffee</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="tea"><span>Tea</span></a>
           </div>
 
           <!-- Sub-menu Makanan -->
           <div class="pilihan sub-menu" id="sub-makanan">
             <div class="sliding-highlight"></div>
-            <a class="pilihan-1 active" data-filter="berat"><span>Makanan Berat</span></a>
-            <a class="pilihan-1" data-filter="pasta"><span>Pasta</span></a>
-            <a class="pilihan-1" data-filter="sampingan"><span>Sampingan</span></a>
+            <a href="javascript:void(0)" class="pilihan-1 active" data-filter="berat"><span>Makanan Berat</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="pasta"><span>Pasta</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="sampingan"><span>Sampingan</span></a>
           </div>
 
           <!-- Sub-menu Snack -->
           <div class="pilihan sub-menu hidden" id="sub-snack">
             <div class="sliding-highlight"></div>
-            <a class="pilihan-1 active" data-filter="gorengan"><span>Gorengan</span></a>
-            <a class="pilihan-1" data-filter="dimsum"><span>Dimsum</span></a>
-            <a class="pilihan-1" data-filter="manis"><span>Manis</span></a>
-            <a class="pilihan-1" data-filter="risoles"><span>Risoles</span></a>
+            <a href="javascript:void(0)" class="pilihan-1 active" data-filter="gorengan"><span>Gorengan</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="dimsum"><span>Dimsum</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="manis"><span>Manis</span></a>
+            <a href="javascript:void(0)" class="pilihan-1" data-filter="risoles"><span>Risoles</span></a>
           </div>
 
           <!-- Filter Buttons: Best Seller & Iced -->
           <div class="best-seller-iced">
-            <a class="best-seller" id="bs-btn">Best Seller</a>
-            <a class="iced" id="i-btn">Iced</a>
+            <a href="javascript:void(0)" class="best-seller" id="bs-btn">Best Seller</a>
+            <a href="javascript:void(0)" class="iced" id="i-btn">Iced</a>
           </div>
 
           <div class="kartu-menu" id="menu-container">
@@ -215,31 +215,31 @@
             <div class="sub-menu-wrapper">
               <div class="pilihan sub-menu hidden" id="res-sub-minuman">
                 <div class="sliding-highlight"></div>
-                <a class="pilihan-1 active" data-res-filter="signature"><span>Signature</span></a>
-                <a class="pilihan-1" data-res-filter="non coffee"><span>Non Coffee</span></a>
-                <a class="pilihan-1" data-res-filter="iced coffee"><span>Iced Coffee</span></a>
-                <a class="pilihan-1" data-res-filter="hot coffee"><span>Hot Coffee</span></a>
-                <a class="pilihan-1" data-res-filter="tea"><span>Tea</span></a>
+                <a href="javascript:void(0)" class="pilihan-1 active" data-res-filter="signature"><span>Signature</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="non coffee"><span>Non Coffee</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="iced coffee"><span>Iced Coffee</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="hot coffee"><span>Hot Coffee</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="tea"><span>Tea</span></a>
               </div>
 
               <div class="pilihan sub-menu" id="res-sub-makanan">
                 <div class="sliding-highlight"></div>
-                <a class="pilihan-1 active" data-res-filter="berat"><span>Makanan Berat</span></a>
-                <a class="pilihan-1" data-res-filter="pasta"><span>Pasta</span></a>
-                <a class="pilihan-1" data-res-filter="sampingan"><span>Sampingan</span></a>
+                <a href="javascript:void(0)" class="pilihan-1 active" data-res-filter="berat"><span>Makanan Berat</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="pasta"><span>Pasta</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="sampingan"><span>Sampingan</span></a>
               </div>
 
               <div class="pilihan sub-menu hidden" id="res-sub-snack">
                 <div class="sliding-highlight"></div>
-                <a class="pilihan-1 active" data-res-filter="gorengan"><span>Gorengan</span></a>
-                <a class="pilihan-1" data-res-filter="dimsum"><span>Dimsum</span></a>
-                <a class="pilihan-1" data-res-filter="manis"><span>Manis</span></a>
-                <a class="pilihan-1" data-res-filter="risoles"><span>Risoles</span></a>
+                <a href="javascript:void(0)" class="pilihan-1 active" data-res-filter="gorengan"><span>Gorengan</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="dimsum"><span>Dimsum</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="manis"><span>Manis</span></a>
+                <a href="javascript:void(0)" class="pilihan-1" data-res-filter="risoles"><span>Risoles</span></a>
               </div>
 
               <div class="best-seller-iced">
-                <a class="best-seller" id="res-bs-btn">Best Seller</a>
-                <a class="iced" id="res-i-btn">Iced</a>
+                <a href="javascript:void(0)" class="best-seller" id="res-bs-btn">Best Seller</a>
+                <a href="javascript:void(0)" class="iced" id="res-i-btn">Iced</a>
               </div>
 
               <div class="kartu-menu" id="res-menu-container"></div>
@@ -266,16 +266,16 @@
       <div class="galeri-grid">
         <!-- BARIS 1 & 2 (Sudah Penuh 4 Kolom) -->
         <div class="galeri-item besar anim-hidden anim-slide-right delay-1">
-          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar-kopi">
         </div>
         <div class="galeri-item anim-hidden anim-slide-down delay-1">
-          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar-kopi">
         </div>
         <div class="galeri-item anim-hidden anim-slide-down delay-2">
-          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar-kopi">
         </div>
         <div class="galeri-item lebar anim-hidden anim-slide-left delay-3">
-          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" alt="gambar-kopi">
+          <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/v1786831716/kopi2.jpg" loading="lazy" alt="gambar-kopi">
         </div>
 
       </div>
@@ -312,13 +312,13 @@
 
         <div class="maps">
           <iframe src="https://maps.google.com/maps?q=Swift%20Coffee%2C%20Nunukan&t=&z=16&ie=UTF8&iwloc=&output=embed"
-            width="100%" height="100%" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy"
+            width="100%" height="100%" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy" title="Lokasi Swift Coffee di Google Maps"
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
       </div>
     </section>
-  </div>
+  </main>
 
   
   <!-- SLIDING DRAWER CART -->
@@ -329,7 +329,7 @@
 
     <div class="cart-header">
       <h3>Keranjang Anda</h3>
-      <button id="close-cart-btn"
+      <button id="close-cart-btn" aria-label="Tutup Keranjang"
         style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
     </div>
 
@@ -391,7 +391,7 @@
   <div class="story-drawer" id="story-drawer">
     <div class="story-header">
       <h3 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #160e0a;">Tentang kami</h3>
-      <button id="close-story-btn"
+      <button id="close-story-btn" aria-label="Tutup Cerita"
         style="background:none; border:none; font-size:24px; cursor:pointer; color:#4e4540;">✕</button>
     </div>
 
@@ -412,7 +412,7 @@
     </div>
   </div>
  
-<footer style="text-align: center; padding: 20px; font-size: 10px; color: #b0a8a3;">
+<footer style="text-align: center; padding: 20px; font-size: 10px; color: #685f59;">
    <span id="staff-login" style="cursor: pointer;"> SwiftCafe &copy; 2025. ☕</span>
   </footer>
 
