@@ -908,7 +908,7 @@ async function loadMenu() {
 
         } catch (error) {
           console.error("Error:", error);
-          if (pesantoast) pesantoast.innerText = "Gagal";
+          if (pesantoast) pesantoast.innerText = "Gagal membuat pesanan";
           if (toastContainer) { toastContainer.classList.add("show"); setTimeout(() => toastContainer.classList.remove("show"), 3000); }
           btnCart.innerText = "Buat Pesanan";
           btnCart.disabled = false;
