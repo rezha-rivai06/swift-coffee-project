@@ -1,9 +1,9 @@
 const Menu = require('./models/Menu');
 
-const prosesPesanan = async (dataDariFrontend) => {
-    const nama = dataDariFrontend.nama;
-    const tipe = dataDariFrontend.tipe || "Takeaway";
-    const daftarPesanan = dataDariFrontend.pesanan;
+const prosesPesanan = async (dataPesanan) => {
+    const nama = dataPesanan.nama;
+    const tipe = dataPesanan.tipe || "Takeaway";
+    const daftarPesanan = dataPesanan.pesanan;
     const menuAsli = await Menu.find();
 
     let teksWA = `Halo Swift Coffee ☕\n\nSaya ingin melakukan pemesanan (${tipe}).\n\n====================\n\nNama:\n${nama}\n\n====================\n\nPesanan:\n\n`;

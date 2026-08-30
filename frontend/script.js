@@ -887,16 +887,16 @@ async function loadMenu() {
             })
           });
 
-          const data = await response.json();
+          const hasilData = await response.json();
 
-          if (data.status === "sukses" || data.sukses) {
+          if (hasilData.status === "sukses" || hasilData.sukses) {
             isiKeranjang = isiKeranjang.filter(item => (item.tipe || "takeaway") !== "takeaway");
             localStorage.setItem("keranjangCafe", JSON.stringify(isiKeranjang));
 
-            if (data.linkWA) {
-              window.open(data.linkWA, '_blank');
+            if (hasilData.linkWA) {
+              window.open(hasilData.linkWA, '_blank');
             } else {
-              window.open("https://wa.me/6281346851655?text=" + encodeURIComponent(data.pesan), '_blank');
+              window.open("https://wa.me/6281346851655?text=" + encodeURIComponent(hasilData.pesan), '_blank');
             }
             window.location.reload();
           } else {
@@ -908,7 +908,7 @@ async function loadMenu() {
 
         } catch (error) {
           console.error("Error:", error);
-          if (pesantoast) pesantoast.innerText = "Gagal menghubungi server.";
+          if (pesantoast) pesantoast.innerText = "Gagal";
           if (toastContainer) { toastContainer.classList.add("show"); setTimeout(() => toastContainer.classList.remove("show"), 3000); }
           btnCart.innerText = "Buat Pesanan";
           btnCart.disabled = false;
@@ -1206,3 +1206,27 @@ tutup.addEventListener("click", function () {
 overlay.addEventListener("click", function () {
   tutupStoryDrawer()
 });
+
+
+const skeletonLoading = document.getElementById('global-skeleton');
+
+window.addEventListener('load', function() {
+  skeletonLoading.classList.add('hide');
+});
+
+const offlineNetwork = document.getElementById('offline-toast');
+
+function cekStatusJaringan() {
+  if (navigator.onLine === false) {
+    offlineNetwork.classList.add('show');
+    skeletonLoading.classList.remove('hide');
+  } else {
+    offlineNetwork.classList.remove('show');
+    skeletonLoading.classList.add('hide');
+  }
+}
+
+window.addEventListener('online', cekStatusJaringan);
+window.addEventListener('offline', cekStatusJaringan);
+
+cekStatusJaringan();
