@@ -1,12 +1,12 @@
 const apiUrl = CONFIG.API_URL + '/api/reservasi';
 const tbodyReservasi = document.getElementById('tbodyReservasi');
-
 const token = localStorage.getItem('adminToken');
+
+
 if (!token) {
-    alert("Anda belum login sebagai Admin!");
+    alert('Anda belum login sebagai admin, silahkan login terlebih dahulu');
     window.location.href = '../index.html';
 }
-
 
 async function muatDataReservasi() {
     try {
