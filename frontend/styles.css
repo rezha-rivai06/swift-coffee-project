@@ -2957,7 +2957,7 @@ section.contact {
 /* --- OFFLINE TOAST --- */
 .offline-toast {
     position: fixed;
-    bottom: -100px;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #dc2626;
@@ -2970,12 +2970,23 @@ section.contact {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 9999;
 }
 
 .offline-toast.show {
-    bottom: 30px;
+    top: 30px;
+}
+
+@media (min-width: 768px) {
+    .offline-toast {
+        top: auto;
+        bottom: -100px;
+    }
+    .offline-toast.show {
+        bottom: 30px;
+        top: auto;
+    }
 }
 
 .offline-toast svg {
