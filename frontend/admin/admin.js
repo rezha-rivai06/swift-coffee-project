@@ -6,6 +6,21 @@ const token = localStorage.getItem('adminToken');
 if (!token) {
     alert('Anda belum login sebagai admin, silahkan login terlebih dahulu');
     window.location.href = '../index.html';
+} else {
+    fetch(apiUrl, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    }).then(response => {
+        if (response.ok) {
+            document.documentElement.style.display = 'block';
+        } else {
+            localStorage.removeItem('adminToken');
+            alert('Token tidak valid atau kedaluwarsa. Silakan login ulang.');
+            window.location.href = '../index.html';
+        }
+    }).catch(error => {
+        alert('Gagal menghubungi server.');
+        window.location.href = '../index.html';
+    });
 }
 
 async function muatDataReservasi() {
