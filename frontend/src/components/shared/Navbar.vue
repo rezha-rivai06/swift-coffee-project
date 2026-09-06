@@ -25,7 +25,7 @@ const isMenuOpen = ref(false)
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button type="button" id="btn-keranjang" aria-label="Keranjang Belanja" @click="openCart">
-        <img src="/svg/cart-shopping-svgrepo-com.svg" alt="Keranjang Belanja" class="cart-icon" />
+        <img src="../../assets/cart-shopping-svgrepo-com.svg" alt="Keranjang Belanja" class="cart-icon" />
         <span v-if="totalItemKeranjang > 0" id="cart-badge" class="cart-badge">{{ totalItemKeranjang }}</span>
       </button>
     </div>
