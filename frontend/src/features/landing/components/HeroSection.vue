@@ -52,7 +52,7 @@ onMounted(async () => {
 
 <template>
 
-    <section class="hero" id="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/svg/bg-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="hero" id="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/bg-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
       <div class="hero-kiri">
         <div class="thn anim-hidden anim-slide-down delay-1">
           <div class="tahun">
