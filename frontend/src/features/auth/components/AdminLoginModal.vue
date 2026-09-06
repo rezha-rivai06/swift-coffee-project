@@ -48,8 +48,8 @@ const handleLogin = async () => {
       
       <div class="google-modal-header">
         <h1 class="logo-text">Swift<span>Cafe</span></h1>
-        <h2>Sign in</h2>
-        <p>Use your Administrator account</p>
+        <h2>Login</h2>
+        <p>Admin Dashboard</p>
       </div>
 
       <form @submit.prevent="handleLogin" class="google-form">
@@ -57,7 +57,7 @@ const handleLogin = async () => {
           <input 
             type="password" 
             v-model="password" 
-            placeholder="Masukkan" 
+            placeholder="Masukkan Password" 
             required 
             autocomplete="new-password"
             :class="{ 'input-error': errorMessage }"
@@ -246,5 +246,29 @@ const handleLogin = async () => {
     background-color: #8ab4f8;
     cursor: not-allowed;
     box-shadow: none;
+}
+
+@media screen and (max-width: 480px) {
+    .google-modal-card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .logo-text {
+        font-size: 1.8rem;
+    }
+    
+    .google-modal-header h2 {
+        font-size: 20px;
+    }
+    
+    .google-modal-header p {
+        font-size: 14px;
+    }
+    
+    .btn-text, .btn-primary {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
 }
 </style>
