@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import bgHero from '../../../assets/bg-hero.webp';
 
 const pengunjungCount = ref(2000);
 
@@ -52,7 +53,7 @@ onMounted(async () => {
 
 <template>
 
-    <section class="hero" id="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../../assets/bg-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="hero" id="hero" :style="{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + bgHero + ')' }">
       <div class="hero-kiri">
         <div class="thn anim-hidden anim-slide-down delay-1">
           <div class="tahun">
