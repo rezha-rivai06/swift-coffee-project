@@ -88,14 +88,32 @@ const simpanMenu = async () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}` 
             },
-            body: JSON.stringify(formData.value)
+            body: JSON.stringify((() => { 
+                const kirimData = { ...formData.value }; 
+                if (!id) delete kirimData._id; 
+                return kirimData; 
+            })())
         });
 
         if (response.ok) {
             tutupModal();
             muatDataMenu();
         } else {
-            alert("Gagal menyimpan menu!");
+            let errorMsg = "Gagal menyimpan menu!";
+            try {
+                const errData = await response.json();
+                errorMsg = errData.message || errData.error || errorMsg;
+                if (response.status === 401 || response.status === 403) {
+                    alert("Sesi login kamu sudah habis (token kadaluarsa). Silakan login ulang!");
+                    localStorage.removeItem('adminToken');
+                    window.location.reload();
+                    return;
+                }
+            } catch(e) {
+                console.error("Non-JSON error:", e);
+                if (response.status === 413) errorMsg = "Ukuran gambar terlalu besar!";
+            }
+            alert(errorMsg);
         }
     } catch (error) {
         console.error(error);

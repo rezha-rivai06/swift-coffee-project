@@ -16,7 +16,7 @@ const createMenu = async (req, res) => {
     res.json({ sukses: true, menu: menuBaru });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Gagal menambah menu" });
+    res.status(500).json({ error: "Gagal menambah menu: " + error.message });
   }
 };
 

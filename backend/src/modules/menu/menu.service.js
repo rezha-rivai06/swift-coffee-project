@@ -18,6 +18,7 @@ const ambilDataMenu = async () => {
 };
 
 const tambahMenu = async (data) => {
+    if(data._id === "") delete data._id;
     if (data.gambar && data.gambar.startsWith('data:image')) {
         data.gambar = await uploadImage(data.gambar);
     }

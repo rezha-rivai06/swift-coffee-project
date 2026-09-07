@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import bgHero from '../../../assets/bg-hero.webp';
 
 
 const pengunjungCount = ref(2000);
