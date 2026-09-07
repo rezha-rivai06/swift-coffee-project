@@ -463,7 +463,7 @@ function klikCheckoutDinein() {
                 :data-sub="kartu.sub"
               >
                 <div class="kartu-gambar">
-                  <img :src="kartu.gambar" :alt="kartu.nama" class="loaded" />
+                  <img :src="kartu.gambar" :alt="kartu.nama" @load="$event.target.parentElement.classList.add('loaded')" />
                   <span v-if="kartu.badge" class="kartu-badge" :class="kartu.badgeClass">{{ kartu.badge }}</span>
                 </div>
                 <div class="kartu-info">
