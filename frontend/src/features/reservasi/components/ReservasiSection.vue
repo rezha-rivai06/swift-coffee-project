@@ -133,8 +133,17 @@ onMounted(async () => {
         const angka = parseInt(item.harga.replace(/[^0-9]/g, ''), 10) || 0;
         const teksFormat = angka.toLocaleString('id-ID');
         
+        let urlGambar = item.gambar;
+        if (urlGambar && urlGambar.includes('res.cloudinary.com')) {
+          const parts = urlGambar.split('/upload/');
+          if (parts.length === 2) {
+             urlGambar = `${parts[0]}/upload/w_400,q_auto,f_auto/${parts[1]}`;
+          }
+        }
+
         return {
           ...item,
+          gambar: urlGambar,
           hargaAngka: angka,
           hargaTeks: 'IDR ' + teksFormat
         };
