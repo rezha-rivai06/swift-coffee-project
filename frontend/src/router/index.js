@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Konektor from '../pages/Konektor.vue'
 import AdminDashboard from '../pages/admin/AdminDashboard.vue'
 
+
 const routes = [
   {
     path: '/',          

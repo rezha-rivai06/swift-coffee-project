@@ -46,7 +46,7 @@ onMounted(async () => {
       <!-- Bagian Header (Logo & Typography) -->
       <header class="admin-header">
           <h1 class="logo-text">Swift<span>Cafe</span> <span class="badge-admin">ADMIN</span></h1>
-          <p class="subtitle">Kelola Reservasi dan menu dengan mudah</p>
+          <p class="subtitle"></p>
           <button @click="logout" class="btn-batal" style="margin-top: 15px; font-size: 0.8rem; padding: 6px 12px;">Logout</button>
       </header>
       

@@ -57,10 +57,18 @@ const buatPesanWhatsAppReservasi = (nama, tanggal, jam, jumlahTamu, idBooking, p
     teksWA += `Pesanan:\n\n`;
     let total = 0;
     pesanan.forEach(item => {
-      const harga = item.harga || 0; 
-      const hargaFormat = "IDR " + (item.jumlah * harga).toLocaleString('id-ID');
+      let Hargalogic = item.hargaAngka || item.harga || 0;
+      let harga = 0;
+      if (typeof Hargalogic === 'string') {
+        harga = parseInt(Hargalogic.replace(/[^0-9]/g, ''), 10) || 0;
+      } else if (typeof Hargalogic === 'number') {
+        harga =  Hargalogic;
+      }
+
+      const subTotal = item.jumlah * harga;
+      const hargaFormat = "IDR " + subTotal.toLocaleString('id-ID');
       teksWA += `${item.jumlah}x ${item.nama}\n${hargaFormat}\n\n`;
-      total += (item.jumlah * harga);
+      total += subTotal;
     });
     teksWA += `====================\n\nTOTAL\nIDR ${total.toLocaleString('id-ID')}\n\n====================\n\n`;
   }

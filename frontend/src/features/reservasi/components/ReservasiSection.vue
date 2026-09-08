@@ -360,7 +360,7 @@ function klikCheckoutDinein() {
     <div class="kotak-besar res-kotak">
       <div class="k-kiri res-kiri">
         <span class="title-kiri">Reservasi</span>
-        <p class="penjelasan" style="margin-bottom: 24px;">Nikmati momen terbaik Anda bersama kami. Amankan tempat sekarang untuk kumpul bersama teman atau keluarga, terutama di waktu sibuk.</p>
+        <p class="penjelasan" style="margin-bottom: 24px;">Nikmati momen terbaik Anda bersama kami. Amankan tempat sekarang untuk kumpul bersama teman atau keluarga.</p>
         
         <div style="margin-bottom: 16px;">
           <label for="res-nama" style="display: block; font-size: 14px; margin-bottom: 8px; color: black; font-weight: 500;">Nama Pemesan</label>
@@ -394,7 +394,7 @@ function klikCheckoutDinein() {
         <!-- DINE-IN MENU AREA -->
         <div id="res-menu-area" v-show="resMenuAreaVisible" style="margin-top: 40px;">
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-bottom: 32px;">
-            <span class="title-kiri" style="font-size: 22px; margin-bottom: 8px;">Pilih Menu Dine-In</span>
+            <span class="title-kiri" style="font-size: 22px; margin-bottom: 8px;">Pilih Menu Reservasi</span>
             <p class="penjelasan" style="margin-bottom: 0;">Tambahkan pesanan untuk meja Anda sebelum konfirmasi.</p>
           </div>
 
