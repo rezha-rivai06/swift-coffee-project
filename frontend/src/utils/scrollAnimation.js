@@ -1,10 +1,4 @@
 export function initScrollAnimation() {
-  const semuaElemenAnimasi = document.querySelectorAll(".anim-hidden");
-  
-  if (!semuaElemenAnimasi || semuaElemenAnimasi.length === 0) {
-    return;
-  }
-
   const opsiObserver = { threshold: 0.1 };
 
   const animasi = new IntersectionObserver((entries) => {
@@ -17,7 +11,19 @@ export function initScrollAnimation() {
     });
   }, opsiObserver);
 
-  semuaElemenAnimasi.forEach((elemen) => {
-    animasi.observe(elemen);
+  const observeElements = () => {
+    const semuaElemenAnimasi = document.querySelectorAll(".anim-hidden:not(.observed)");
+    semuaElemenAnimasi.forEach((elemen) => {
+      animasi.observe(elemen);
+      elemen.classList.add('observed');
+    });
+  };
+
+  observeElements();
+
+  const observer = new MutationObserver(() => {
+    observeElements();
   });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
