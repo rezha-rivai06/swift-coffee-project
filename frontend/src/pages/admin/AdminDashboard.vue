@@ -65,8 +65,8 @@ onMounted(async () => {
           </button>
       </nav>
 
-      <ReservasiTable v-if="activeTab === 'reservasi'" />
-      <MenuManager v-if="activeTab === 'menu'" />
+      <ReservasiTable v-show="activeTab === 'reservasi'" />
+      <MenuManager v-show="activeTab === 'menu'" />
     </div>
   </div>
 </template>

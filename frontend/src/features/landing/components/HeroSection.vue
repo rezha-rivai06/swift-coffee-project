@@ -81,7 +81,7 @@ onMounted(async () => {
       <div class="hero-kanan anim-hidden anim-slide-left delay-3">
         <div class="image-frame">
           <div class="image-wrapper">
-            <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/w_800,q_auto,f_auto/v1786981019/Gemini_Generated_Image_16gp8z16gp8z16gp.jpg" alt="gambar kopi" />
+            <img src="https://res.cloudinary.com/rlkcdo3y/image/upload/w_800,q_auto,f_auto/v1786981019/Gemini_Generated_Image_16gp8z16gp8z16gp.jpg" alt="gambar kopi" fetchpriority="high" />
           </div>
         </div>
       </div>

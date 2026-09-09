@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import AdminLoginModal from '../../features/auth/components/AdminLoginModal.vue';
+import { ref, defineAsyncComponent } from 'vue';
+const AdminLoginModal = defineAsyncComponent(() => import('../../features/auth/components/AdminLoginModal.vue'));
 
 const showAdminLogin = ref(false);
 </script>

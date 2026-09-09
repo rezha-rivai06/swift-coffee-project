@@ -1,16 +1,17 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, defineAsyncComponent } from 'vue';
 import { initScrollAnimation } from '../utils/scrollAnimation.js';
 
 import Navbar from '../components/shared/Navbar.vue';
 import HeroSection from '../features/landing/components/HeroSection.vue';
-import AboutSection from '../features/landing/components/AboutSection.vue';
-import MenuSection from '../features/menu/components/MenuSection.vue';
-import ReservasiSection from '../features/reservasi/components/ReservasiSection.vue';
-import GallerySection from '../features/landing/components/GallerySection.vue';
-import ContactSection from '../features/landing/components/ContactSection.vue';
-import Footer from '../components/shared/Footer.vue';
-import KeranjangDrawerView from '../features/checkout/components/KeranjangDrawerView.vue';
+
+const AboutSection = defineAsyncComponent(() => import('../features/landing/components/AboutSection.vue'));
+const MenuSection = defineAsyncComponent(() => import('../features/menu/components/MenuSection.vue'));
+const ReservasiSection = defineAsyncComponent(() => import('../features/reservasi/components/ReservasiSection.vue'));
+const GallerySection = defineAsyncComponent(() => import('../features/landing/components/GallerySection.vue'));
+const ContactSection = defineAsyncComponent(() => import('../features/landing/components/ContactSection.vue'));
+const Footer = defineAsyncComponent(() => import('../components/shared/Footer.vue'));
+const KeranjangDrawerView = defineAsyncComponent(() => import('../features/checkout/components/KeranjangDrawerView.vue'));
 
 onMounted(() => {
   initScrollAnimation();
