@@ -6,8 +6,27 @@ const RESERVATION_STORAGE_KEY = 'swift_coffee_reservation';
 
 function loadFromStorage(key, defaultValue) {
   try {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : defaultValue;
+    const dataSaved = localStorage.getItem(key);
+
+    if (!dataSaved) {
+      return defaultValue;
+    }
+
+    const parsingData = JSON.parse(dataSaved);
+
+    if (!parsingData.timestamp) {
+      return defaultValue;
+    }
+
+    const timeNow = Date.now();
+
+    if (timeNow - parsingData.timestamp > 3600000) {
+      localStorage.removeItem(key);
+      return defaultValue;
+    }
+
+    return parsingData.data;
+
   } catch (error) {
     console.error(`Error loading ${key} dari localStorage`, error);
     return defaultValue;
@@ -24,15 +43,23 @@ export const reservasiInfo = reactive(loadFromStorage(RESERVATION_STORAGE_KEY, {
   tamu: ''
 }));
 
-
 watch(isiKeranjang, (item) => {
+  item = {
+    data: item,
+    timestamp: Date.now()
+  };
+  
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(item));
 }, { deep: true });
 
 watch(reservasiInfo, (info) => {
+  info = {
+    data: info,
+    timestamp: Date.now()
+  }
+  
   localStorage.setItem(RESERVATION_STORAGE_KEY, JSON.stringify(info));
 }, { deep: true });
-
 
 export function toggleCart() {
   isCartOpen.value = !isCartOpen.value;
@@ -59,7 +86,6 @@ export function tambahKeKeranjang(barang, tipe = 'takeaway') {
   }
 }
 
-
 export function kurangiItem(namaBarang, tipe) {
   const item = isiKeranjang.find(
     (item) => item.nama === namaBarang && (item.tipe || 'takeaway') === tipe
@@ -74,7 +100,6 @@ export function kurangiItem(namaBarang, tipe) {
   }
 }
 
-
 export function hapusItem(namaBarang, tipe) {
   const index = isiKeranjang.findIndex(
     (item) => item.nama === namaBarang && (item.tipe || 'takeaway') === tipe
@@ -83,7 +108,6 @@ export function hapusItem(namaBarang, tipe) {
     isiKeranjang.splice(index, 1);
   }
 }
-
 
 export function hitungTotalHarga(tipe) {
   const filteredKeranjang = isiKeranjang.filter((item) => (item.tipe || 'takeaway') === tipe);

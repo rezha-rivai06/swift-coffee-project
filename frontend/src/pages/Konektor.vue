@@ -16,6 +16,7 @@ const KeranjangDrawerView = defineAsyncComponent(() => import('../features/check
 onMounted(() => {
   initScrollAnimation();
 });
+
 </script>
 
 <template>

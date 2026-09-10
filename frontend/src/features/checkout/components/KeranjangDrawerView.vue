@@ -214,11 +214,6 @@ async function checkout() {
       }
       showToast("Pesanan berhasil dibuat (Checkout)!");
       
-      for(let i = isiKeranjang.length - 1; i >= 0; i--) {
-        if((isiKeranjang[i].tipe || 'takeaway') === activeTab.value) {
-          isiKeranjang.splice(i, 1);
-        }
-      }
       closeCart();
     } else {
       showToast(hasil.pesan || hasil.error || "Gagal membuat pesanan. Coba lagi.");
@@ -233,7 +228,6 @@ async function checkout() {
 </script>
 
 <style scoped>
-
 
 .cart-overlay {
     position: fixed;
