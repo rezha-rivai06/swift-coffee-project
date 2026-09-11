@@ -87,11 +87,9 @@ const kartuYangDitampilkan = computed(() => {
 
     if (kartu.kategori !== kategoriAktif.value) return false;
     
-    // Filter Best Seller & Iced
     if (btnBestseller.value && kartu.badge !== 'BEST SELLER') return false;
     if (btnIced.value && kartu.sub !== 'iced coffee') return false;
 
-    // Filter Sub Menu (jika tidak sedang klik Best Seller / Iced)
     if (!btnBestseller.value && !btnIced.value && subKategoriDitemukan.value !== '') {
       if (kartu.sub !== subKategoriDitemukan.value) return false;
     }
@@ -100,7 +98,7 @@ const kartuYangDitampilkan = computed(() => {
   });
 });
 
-// Menghitung jumlah relevan untuk tombol Lihat Semua
+
 const totalRelevan = computed(() => kartuYangDitampilkan.value.length);
 const menuTerpotong = computed(() => {
   if (btnBestseller.value || btnIced.value) {
@@ -125,7 +123,7 @@ watch(kartuYangDitampilkan, (baru) => {
   }
 });
 
-// Memperbarui posisi slider ketika kategori aktif berubah
+
 watch([kategoriAktif, subKategoriDitemukan], () => {
   nextTick(() => {
     geserKotakHitam(kategoriAktif.value);
