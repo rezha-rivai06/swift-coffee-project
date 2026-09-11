@@ -14,7 +14,7 @@ const postCekReservasi = async (req, res) => {
 const postBuatReservasi = async (req, res) => {
   try {
     const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
-    const idBooking = await buatReservasi(tanggal, jam, jumlahTamu);
+    const idBooking = await buatReservasi(nama, tanggal, jam, jumlahTamu);
     
     const linkWA = buatPesanWhatsAppReservasi(nama, tanggal, jam, jumlahTamu, idBooking, pesanan);   
     

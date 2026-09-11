@@ -5,6 +5,7 @@ const KAPASITAS_MAKSIMAL = 50;
 
 const ReservasiSchema = new mongoDb.Schema({
   idBooking: { type: String, required: true },
+  nama: { type: String, required: true },
   tanggal: { type: String, required: true },
   jam: { type: String, required: true },
   jumlahTamu: { type: Number, required: true },
@@ -33,10 +34,11 @@ const cekKetersediaan = async (tanggal, jamMasuk, jumlahTamuMasuk) => {
   return { tersedia: true };
 };
 
-const buatReservasi = async (tanggal, jam, jumlahTamu) => {
+const buatReservasi = async (nama, tanggal, jam, jumlahTamu) => {
   const idBaru = 'RES-' + Date.now().toString();
     await Reservasi.create({
     idBooking: idBaru,
+    nama: nama,
     tanggal: tanggal,
     jam: jam,
     jumlahTamu: parseInt(jumlahTamu)
