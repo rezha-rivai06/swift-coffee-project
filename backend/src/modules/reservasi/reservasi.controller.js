@@ -1,6 +1,6 @@
 const { cekKetersediaan, buatReservasi, buatPesanWhatsAppReservasi, ambilSemuaReservasi, hapusReservasi } = require('./reservasi.service');
 
-const postCekReservasi = async (req, res) => {
+const CekReservasi = async (req, res) => {
   try {
     const { tanggal, jam, jumlahTamu } = req.body;
     const hasilCek = await cekKetersediaan(tanggal, jam, jumlahTamu);
@@ -11,7 +11,7 @@ const postCekReservasi = async (req, res) => {
   }
 };
 
-const postBuatReservasi = async (req, res) => {
+const BuatReservasi = async (req, res) => {
   try {
     const { nama, tanggal, jam, jumlahTamu, pesanan } = req.body;
     const idBooking = await buatReservasi(nama, tanggal, jam, jumlahTamu);
@@ -44,4 +44,4 @@ const deleteReservasi = async (req, res) => {
   }  
 };
 
-module.exports = { postCekReservasi, postBuatReservasi, getReservasi, deleteReservasi };
+module.exports = { CekReservasi, BuatReservasi, getReservasi, deleteReservasi };
