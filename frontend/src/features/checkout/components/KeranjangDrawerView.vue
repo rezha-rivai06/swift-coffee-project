@@ -53,7 +53,7 @@
           <img :src="item.gambar" :alt="item.nama" class="cart-item-image" />
           <div class="cart-item-info">
             <h4 class="cart-item-name">{{ item.nama }}</h4>
-            <span class="cart-item-price">{{ formatRupiah(item.hargaAngka * item.jumlah) }}</span>
+            <span class="cart-item-price">{{ formatRupiah(item.hargaAngka) }}</span>
           </div>
             
           <div class="cart-item-actions">

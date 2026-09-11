@@ -8,11 +8,12 @@ import { showToast } from '../../components/shared/Toast.vue';
 const router = useRouter();
 const activeTab = ref('reservasi');
 
+const displayblank = ref(true);
+
 const logout = () => {
     localStorage.removeItem('adminToken');
     router.push('/');
 }
-
 
 onMounted(async () => {
     const token = localStorage.getItem('adminToken');
@@ -32,6 +33,8 @@ onMounted(async () => {
             localStorage.removeItem('adminToken');
             showToast('Token tidak valid atau kedaluwarsa. Silakan login ulang.');
             router.push('/');
+        } else {
+            displayblank.value = false;
         }
     } catch (error) {
         showToast('Gagal.');
@@ -41,7 +44,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="admin-wrapper">
+  <div class="admin-wrapper" v-show="!displayblank">
     <div class="admin-container">
       <!-- Bagian Header (Logo & Typography) -->
       <header class="admin-header">
