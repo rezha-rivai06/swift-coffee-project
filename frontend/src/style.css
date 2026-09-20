@@ -629,7 +629,7 @@ input::-webkit-search-cancel-button {
 
     background-color: #160e0a;
     border-radius: 50px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
     
     box-shadow: 0 4px 15px rgba(22, 14, 10, 0.1);

@@ -134,12 +134,15 @@ watch([kategoriAktif, subKategoriDitemukan], () => {
 onMounted(() => {
   window.isiKeranjang = window.isiKeranjang || [];
   
-  let resizeTimer;
+  let isTicking = false;
   window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      geserKotakHitam(kategoriAktif.value);
-    }, 100);
+    if (!isTicking) {
+      window.requestAnimationFrame(() => {
+        geserKotakHitam(kategoriAktif.value);
+        isTicking = false;
+      });
+      isTicking = true;
+    }
   });
 
   setTimeout(() => {
