@@ -293,7 +293,7 @@ onMounted(() => {
     border-radius: 8px;
     padding: 8px 12px;
     width: 300px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .search-box:focus-within { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
 .search-box svg { color: #94a3b8; margin-right: 8px; }

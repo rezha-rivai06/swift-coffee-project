@@ -241,7 +241,7 @@ async function checkout() {
     z-index: 998;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .cart-overlay.active {
@@ -446,7 +446,7 @@ async function checkout() {
     align-items: center;
     justify-content: center;
     color: #a59b95;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease;
     border-radius: 50%;
 }
 

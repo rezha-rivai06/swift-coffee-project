@@ -198,7 +198,7 @@ onUnmounted(() => {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn-selesai:hover {
@@ -219,7 +219,7 @@ onUnmounted(() => {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-batal:hover {

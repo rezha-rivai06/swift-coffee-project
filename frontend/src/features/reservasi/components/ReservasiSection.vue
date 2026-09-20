@@ -242,10 +242,14 @@ watch([kategoriAktif, subKategoriDitemukan], () => {
 
 onMounted(() => {
   window.isiKeranjang = window.isiKeranjang || [];
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    if (resMenuAreaVisible.value) {
-      geserKotakHitamRes(kategoriAktif.value);
-    }
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (resMenuAreaVisible.value) {
+        geserKotakHitamRes(kategoriAktif.value);
+      }
+    }, 100);
   });
 });
 

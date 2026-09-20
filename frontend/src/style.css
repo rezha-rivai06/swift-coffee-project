@@ -468,7 +468,7 @@ input[type="search"] {
     outline: none;
     font-family: "Inter", sans-serif;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* input[type="search"] */
 }
 
 input[type="search"]:focus {
@@ -593,7 +593,7 @@ input::-webkit-search-cancel-button {
     border-radius: 50px;
     border: 1px solid rgba(128, 117, 112, 0.3);
     background-color: transparent;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* .best-seller-iced a */
 
 }
 
@@ -629,7 +629,7 @@ input::-webkit-search-cancel-button {
 
     background-color: #160e0a;
     border-radius: 50px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
     
     box-shadow: 0 4px 15px rgba(22, 14, 10, 0.1);
@@ -643,7 +643,7 @@ input::-webkit-search-cancel-button {
     border-radius: 50px;
     background-color: transparent;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease; /* .pilihan-1 */
     border: 1px solid rgba(128, 117, 112, 0.3);
     white-space: nowrap;
     text-decoration: none;
@@ -899,7 +899,7 @@ input::-webkit-search-cancel-button {
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
     margin-bottom: 60px;
 }
 
@@ -1102,7 +1102,7 @@ section.contact {
     width: fit-content;
     margin-top: 16px;
     margin-left: 0;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* .get-direction */
 }
 
 .get-direction:hover,
@@ -1132,7 +1132,7 @@ section.contact {
     z-index: 998;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* .story-overlay */
 }
 
 .story-overlay.active {
@@ -1195,7 +1195,7 @@ section.contact {
     z-index: 998;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* .cart-overlay */
 }
 
 .cart-overlay.active {
@@ -1357,7 +1357,7 @@ section.contact {
     align-items: center;
     justify-content: center;
     color: #a59b95;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, background-color 0.2s ease; /* .trash-btn */
     border-radius: 50%;
     margin-left: auto;
 }
@@ -1591,7 +1591,7 @@ section.contact {
     height: 1px;
     background-color: #000;
     border-radius: 50px;
-    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6), opacity 0.4s ease;
     transform-origin: center;
 }
 
@@ -1642,7 +1642,7 @@ section.contact {
     font-family: inherit;
     font-size: 14px;
     outline: none;
-    transition: all 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
 }
 
@@ -1723,7 +1723,7 @@ section.contact {
     color: #4e4540;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease; /* .active-res-sub */
 }
 
 .active-res-sub {
@@ -2932,7 +2932,7 @@ section.contact {
 
 .anim-hidden {
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
 /* Initial States */

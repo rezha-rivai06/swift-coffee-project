@@ -134,8 +134,12 @@ watch([kategoriAktif, subKategoriDitemukan], () => {
 onMounted(() => {
   window.isiKeranjang = window.isiKeranjang || [];
   
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    geserKotakHitam(kategoriAktif.value);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      geserKotakHitam(kategoriAktif.value);
+    }, 100);
   });
 
   setTimeout(() => {

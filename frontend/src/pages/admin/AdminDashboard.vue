@@ -143,7 +143,7 @@ onMounted(async () => {
     color: #9ca3af;
     cursor: pointer;
     padding: 8px 16px;
-    transition: all 0.3s;
+    transition: color 0.3s, background-color 0.3s;
     border-radius: 8px;
 }
 .nav-btn:hover {
@@ -164,7 +164,7 @@ onMounted(async () => {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-batal:hover {
