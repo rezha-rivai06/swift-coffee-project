@@ -310,8 +310,8 @@ function klikTambahKeranjang(kartu) {
           <a href="#" class="iced" :class="{ active: btnIced }" @click.prevent="klikIced">Iced</a>
         </div>
 
-        <!-- Pesan Jika Kosong -->
-        <div class="empty-state" v-if="pesanKosong">
+
+        <div class="empty-state" v-if="pesanKosong" style="text-align: center; margin-top: 2rem; width: 100%;">
           <p>{{ pesanTeks }}</p>
         </div>
 
