@@ -457,7 +457,7 @@ function klikCheckoutDinein() {
               <a href="#" class="iced" :class="{ active: btnIced }" @click.prevent="klikIced">Iced</a>
             </div>
 
-            <div class="empty-state" v-if="pesanKosongRes">
+            <div class="empty-state" v-if="pesanKosongRes" style="text-align: center; margin-top: 2rem; width: 100%;">
               <p>{{ pesanTeks }}</p>
             </div>
 
