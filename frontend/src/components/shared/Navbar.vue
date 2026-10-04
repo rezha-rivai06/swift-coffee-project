@@ -2,21 +2,21 @@
 import { ref } from 'vue'
 import { totalItemKeranjang, openCart } from '../../stores/cartStore.js';
 
-const isMenuOpen = ref(false)
+const menuTerbuka = ref(false)
 </script>
 
 <template>
   <nav class="navbar" id="navbar">
     <span>Swift Coffee</span>
 
-    <div class="hamburger" id="hamburger" @click="isMenuOpen = !isMenuOpen" :class="{ active: isMenuOpen }">
+    <div class="hamburger" id="hamburger" @click="menuTerbuka = !menuTerbuka" :class="{ active: menuTerbuka }">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
       <span v-if="totalItemKeranjang > 0" id="humberger-badge" class="humberger-badge">{{ totalItemKeranjang }}</span>
     </div>
 
-    <div class="link" id="link" :class="{ active: isMenuOpen }">
+    <div class="link" id="link" :class="{ active: menuTerbuka }">
       <ul>
         <li><a href="#hero">Home</a></li>
         <li><a href="#about">About</a></li>
